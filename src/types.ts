@@ -13,6 +13,17 @@ export interface IPost {
 
 export type ICreatePostData = Omit<IPost, "id">;
 
+export type IUpdatePostData = Omit<IPost, "id" | "createdAt" | "author"> & {
+	updatedAt?: Date;
+};
+// {
+// 	title: string;
+// 	text: string;
+// 	categoryId: string;
+// 	categoryPath: string[];
+// 	updatedAt: any;
+// }
+
 export interface ICategory {
 	id: string;
 	name: string;

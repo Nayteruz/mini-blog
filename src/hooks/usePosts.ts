@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, where, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import type { ICreatePostData, IPost } from "../types";
+import type { ICreatePostData, IPost, IUpdatePostData } from "../types";
+import { useStore } from "../store";
 
 export const usePosts = () => {
-	const [posts, setPosts] = useState<IPost[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+	// Получаем действия из store
+	const { setAllPosts, setSearchQuery, setSortBy, setSelectedCategory, clearFilters } = useStore();
+	const store = useStore();
+
+	// Загрузка всех постов
 	// Загрузка всех постов
 	const loadPosts = async () => {
 		try {
@@ -22,7 +27,8 @@ export const usePosts = () => {
 				...doc.data(),
 			})) as IPost[];
 
-			setPosts(postsData);
+			// Сохраняем посты в store
+			setAllPosts(postsData);
 		} catch (err) {
 			console.error("Error loading posts:", err);
 			setError("Ошибка загрузки постов");
@@ -32,20 +38,12 @@ export const usePosts = () => {
 	};
 
 	// Создание нового поста
-	const createPost = async (
-		postData: Omit<ICreatePostData, "author" | "createdAt">,
-		userId: string,
-		userName: string | null
-	) => {
+	const createPost = async (postData: Omit<ICreatePostData, "createdAt">) => {
 		try {
 			setError(null);
 
 			const newPost: ICreatePostData = {
 				...postData,
-				author: {
-					name: userName || "",
-					id: userId,
-				},
 				createdAt: new Date(),
 			};
 
@@ -56,6 +54,20 @@ export const usePosts = () => {
 		} catch (err) {
 			console.error("Error creating post:", err);
 			setError("Ошибка создания поста");
+			throw err;
+		}
+	};
+
+	// УДАЛЕНИЕ ПОСТА
+	const deletePost = async (postId: string) => {
+		try {
+			setError(null);
+
+			await deleteDoc(doc(db, "posts", postId));
+			await loadPosts(); // Перезагружаем список постов
+		} catch (err) {
+			console.error("Error deleting post:", err);
+			setError("Ошибка удаления поста");
 			throw err;
 		}
 	};
@@ -76,16 +88,63 @@ export const usePosts = () => {
 		}
 	};
 
+	// Обновление поста
+	const updatePost = async (postId: string, updateData: IUpdatePostData) => {
+		try {
+			setError(null);
+
+			const postUpdate: IUpdatePostData = {
+				...updateData,
+				updatedAt: new Date(),
+			};
+
+			await updateDoc(doc(db, "posts", postId), postUpdate);
+			await loadPosts(); // Перезагружаем список постов
+		} catch (err) {
+			console.error("Error updating post:", err);
+			setError("Ошибка обновления поста");
+			throw err;
+		}
+	};
+
+	// Функции для управления фильтрами - ОБНОВЛЯЕМ ТРИГГЕР
+	const handleSearch = (query: string) => {
+		setSearchQuery(query);
+	};
+
+	const handleSortChange = (sort: "newest" | "oldest" | "title") => {
+		setSortBy(sort);
+	};
+
+	const handleCategoryFilter = (categoryId: string) => {
+		setSelectedCategory(categoryId);
+	};
+
 	useEffect(() => {
 		loadPosts();
 	}, []);
 
 	return {
-		posts,
+		// Данные из store
+		posts: store.filteredPosts,
+		allPosts: store.allPosts,
+		searchQuery: store.searchQuery,
+		sortBy: store.sortBy,
+		selectedCategory: store.selectedCategory,
+
+		// Состояние загрузки и ошибки
 		loading,
 		error,
+
+		// Действия
 		refreshPosts: loadPosts,
 		createPost,
+		updatePost,
+		deletePost,
 		getPostsByCategory,
+		handleSearch,
+		handleSortChange,
+		handleCategoryFilter,
+		clearFilters,
 	};
 };

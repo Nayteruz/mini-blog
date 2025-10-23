@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCategories } from '../hooks/useCategories';
 import { usePosts } from '../hooks/usePosts';
+import { AccordeonPostItem } from "./Accordeon/AccordeonPostItem";
 
 interface CategoryAccordionProps {
   category: any;
@@ -32,7 +33,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
         <div className="accordion-title">
           <span className="category-name">{category.name}</span>
           <span className="category-meta">
-            {hasPosts && ` (${categoryPosts.length} пост${categoryPosts.length > 1 ? 'а' : ''})`}
+            {`(${categoryPosts.length} постов)`}
           </span>
         </div>
 
@@ -48,20 +49,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
           {/* Посты этой категории */}
           {hasPosts && (
             <div className="category-posts">
-              {categoryPosts.map(post => (
-                <div key={post.id} className="post-item">
-                  <h4 className="post-item-title">{post.title}</h4>
-                  <div className="post-item-meta">
-                    <span className="post-author">Автор: {post.author.name || 'Аноним'}</span>
-                    <span className="post-date">
-                      {post.createdAt?.toDate?.()?.toLocaleDateString('ru-RU') || 'Неизвестно'}
-                    </span>
-                  </div>
-                  <p className="post-item-preview">
-                    {post.text.length > 150 ? `${post.text.substring(0, 150)}...` : post.text}
-                  </p>
-                </div>
-              ))}
+              {categoryPosts.map(post => <AccordeonPostItem key={post.id} post={post} />)}
             </div>
           )}
 

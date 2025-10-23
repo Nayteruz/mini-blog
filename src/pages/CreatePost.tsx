@@ -1,31 +1,18 @@
 import { useEffect, useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { db, auth } from "../firebase";
+import { auth } from "../firebase";
 import { TextEditor } from "../components/TextEditor";
 import { usePosts } from "../hooks/usePosts";
 import { useCategories } from "../hooks/useCategories";
 
 export const CreatePost = () => {
   const navigate = useNavigate();
-  const { createPost, loading } = usePosts();
+  const { createPost } = usePosts();
   const { categories } = useCategories();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("Напишите заметку...");
   const [categoryId, setCategoryId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const postCollectionRef = collection(db, "posts");
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!title || !text) {
-      return;
-    }
-
-    await addDoc(postCollectionRef, { title, text, author: { name: auth.currentUser?.displayName, id: auth.currentUser?.uid } });
-    navigate("/");
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,16 +36,18 @@ export const CreatePost = () => {
         throw new Error('Категория не найдена');
       }
 
-      await createPost(
-        {
-          title: title.trim(),
-          text: text.trim(),
-          categoryId,
-          categoryPath: selectedCategory.path
+      const newPostData = {
+        title: title.trim(),
+        text: text.trim(),
+        categoryId,
+        categoryPath: selectedCategory.path,
+        author: {
+          name: auth.currentUser.displayName || "",
+          id: auth.currentUser.uid,
         },
-        auth.currentUser.uid,
-        auth.currentUser.displayName
-      );
+      };
+
+      await createPost(newPostData);
 
       // Очистка формы и переход
       setTitle('');
@@ -81,26 +70,6 @@ export const CreatePost = () => {
 
   return (
     <div className="create-post-page">
-
-      {/* <div className="create-container">
-        <h1>Добавить заметку</h1>
-        <form className="create-post" onSubmit={onSubmit}>
-          <div className="row-item">
-            <label>
-              <div>Название</div>
-              <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" name="title" placeholder="Название заметки..." />
-            </label>
-          </div>
-          <div className="row-item">
-            <label>
-              <div>Текст</div>
-              {/* <textarea name="text" cols={30} rows={10} placeholder="Текст заметки..." value={text} onChange={(e) => setText(e.target.value)}></textarea>
-      <TextEditor content={text} setContent={setText} />
-    </label>
-          </div >
-  <button type="submit" className="create-poat-button">Добавить</button>
-        </form >
-      </div > */}
       <div className="categories-container">
         <h2 className="categories-title">Создать новый пост</h2>
 
@@ -151,7 +120,7 @@ export const CreatePost = () => {
               <label htmlFor="postText" className="form-label">
                 Текст поста *
               </label>
-              <textarea
+              {/* <textarea
                 id="postText"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -159,7 +128,8 @@ export const CreatePost = () => {
                 className="form-input"
                 rows={6}
                 disabled={isSubmitting}
-              />
+              /> */}
+              <TextEditor content={text} setContent={setText} />
             </div>
 
             <div className="form-actions">

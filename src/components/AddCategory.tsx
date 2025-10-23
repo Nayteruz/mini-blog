@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useCategories } from '../hooks/useCategories';
+import { useStore } from "../store";
 
 export const AddCategoryForm: React.FC = () => {
+  const { user } = useStore();
   const { categories, createCategory, loading, error, getCategoriesForSelect } = useCategories();
   const [categoryName, setCategoryName] = useState('');
   const [selectedParentId, setSelectedParentId] = useState<string | null>(null);
@@ -19,7 +21,7 @@ export const AddCategoryForm: React.FC = () => {
 
     try {
       setIsSubmitting(true);
-      await createCategory(categoryName.trim(), selectedParentId);
+      await createCategory(categoryName.trim(), selectedParentId, user?.uid || 'anonimus');
 
       // Сброс формы после успешного создания
       setCategoryName('');

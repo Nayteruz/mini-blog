@@ -598,7 +598,7 @@ textarea.form-input {
 
 /* Стили для постов внутри категории */
 .category-posts {
-	padding: 1rem 1.5rem 1rem 3rem;
+	padding: 10px 10px 10px 20px;
 	border-top: 1px solid #f3f4f6;
 }
 
@@ -624,6 +624,18 @@ textarea.form-input {
 	font-weight: 600;
 	color: #111827;
 	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+}
+
+.post-item-content {
+	display: none;
+
+	&.open {
+		display: block;
+	}
 }
 
 .post-item-meta {
@@ -682,5 +694,70 @@ textarea.form-input {
 }
 
 .accordion-item:hover::before {
+	opacity: 1;
+}
+
+.mantine-RichTextEditor-content > div {
+	min-height: 300px;
+}
+
+/* Стили для действий с постом */
+.post-actions {
+	display: flex;
+	gap: 0.75rem;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid #e5e7eb;
+}
+
+.edit-button {
+	background: #3b82f6;
+	color: white;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0.375rem;
+	cursor: pointer;
+	font-size: 0.875rem;
+	transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+	background: #2563eb;
+}
+
+.delete-button {
+	background: #ef4444;
+	color: white;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0.375rem;
+	cursor: pointer;
+	font-size: 0.875rem;
+	transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+	background: #dc2626;
+}
+
+/* Индикатор измененного поста */
+.post-date {
+	position: relative;
+}
+
+.post-date::after {
+	content: "";
+	position: absolute;
+	right: -8px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 6px;
+	height: 6px;
+	background: #3b82f6;
+	border-radius: 50%;
+	opacity: 0;
+}
+
+.post-date:contains("изменен")::after {
 	opacity: 1;
 }

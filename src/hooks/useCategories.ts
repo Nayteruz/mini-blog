@@ -32,7 +32,7 @@ export const useCategories = () => {
 	};
 
 	// Создание новой категории
-	const createCategory = async (name: string, parentId: string | null = null) => {
+	const createCategory = async (name: string, parentId: string | null = null, userId: string) => {
 		try {
 			setError(null);
 
@@ -55,7 +55,7 @@ export const useCategories = () => {
 				path,
 				depth,
 				createdAt: new Date(),
-				createdBy: "current_user",
+				createdBy: userId,
 			};
 
 			const docRef = await addDoc(collection(db, "categories"), newCategoryData);

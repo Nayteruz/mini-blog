@@ -34,7 +34,7 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
   });
 
   return (
-    <RichTextEditor editor={editor} style={{ minHeight: 400 }}>
+    <RichTextEditor editor={editor}>
       <RichTextEditor.Toolbar sticky stickyOffset="var(--docs-header-height)">
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />

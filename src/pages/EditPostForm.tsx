@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, type FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts';
 import { useCategories } from '../hooks/useCategories';
 // import '../styles/categories.css';
 import { useStore } from "../store";
 
-export const EditPostForm: React.FC = () => {
+export const EditPostForm: FC = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
   const { posts, updatePost, loading } = usePosts();

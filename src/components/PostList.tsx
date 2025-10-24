@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { type FC } from 'react';
 import { usePosts } from '../hooks/usePosts';
 import { useCategories } from '../hooks/useCategories';
 import { useStore } from "../store";

@@ -25,6 +25,9 @@ export const Header = () => {
           {isAuth ? (
             <>
               <li>
+                <Link className="link" to="/categories">Список категорий</Link>
+              </li>
+              <li>
                 <Link className="link" to="/create-post">Добавить заметку</Link>
               </li>
               <li>

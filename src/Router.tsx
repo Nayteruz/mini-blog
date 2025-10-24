@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { CreatePost, Home, NotFoundPage, SignIn, EditPostForm } from "./pages";
+import { CreatePost, Home, NotFoundPage, SignIn, EditPostForm, CategoriesPage } from "./pages";
 
 export const Router = () => {
   return (
@@ -8,6 +8,7 @@ export const Router = () => {
       <Route path="/create-post" element={<CreatePost />} />
       <Route path="/edit-post/:postId" element={<EditPostForm />} />
       <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/categories" element={<CategoriesPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

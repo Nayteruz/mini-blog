@@ -6,7 +6,7 @@ import { PostsList } from "../components/PostList";
 import { AccordeonList } from "@/components/Category";
 
 export const Home = () => {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const [, setPosts] = useState<IPost[]>([]);
 
   const getPosts = async () => {
     const postsCollectionRef = collection(db, "posts");

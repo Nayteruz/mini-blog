@@ -6,9 +6,10 @@ interface TreeNodeProps {
   category: ICategory & { children?: any[] };
   level: number;
   onDelete: (categoryId: string) => void;
+  onEdit: (category: ICategory) => void;
 }
 
-const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete }) => {
+const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete, onEdit }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const hasChildren = category.children && category.children.length > 0;
 
@@ -16,6 +17,10 @@ const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete }) => {
     if (window.confirm(`Удалить категорию "${category.name}"?`)) {
       onDelete(category.id);
     }
+  };
+
+  const handleEdit = () => {
+    onEdit(category);
   };
 
   return (
@@ -38,6 +43,12 @@ const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete }) => {
         <div className="tree-meta">
           <span className="tree-level">уровень {level}</span>
           <button
+            onClick={handleEdit}
+            className="edit-button"
+          >
+            Редактировать
+          </button>
+          <button
             onClick={handleDelete}
             className="delete-button"
           >
@@ -54,6 +65,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete }) => {
               category={child}
               level={level + 1}
               onDelete={onDelete}
+              onEdit={onEdit}
             />
           ))}
         </div>
@@ -64,9 +76,10 @@ const TreeNode: React.FC<TreeNodeProps> = ({ category, level, onDelete }) => {
 
 interface CategoryTreeProps {
   onAddSubcategory: (parentId: string) => void;
+  onEditCategory: (category: ICategory) => void;
 }
 
-export const CategoryTree: React.FC<CategoryTreeProps> = ({ onAddSubcategory }) => {
+export const CategoryTree: React.FC<CategoryTreeProps> = ({ onAddSubcategory, onEditCategory }) => {
   const { categoryTree, deleteCategory, loading, error } = useCategories();
 
   if (loading) {
@@ -101,6 +114,7 @@ export const CategoryTree: React.FC<CategoryTreeProps> = ({ onAddSubcategory }) 
               category={category}
               level={0}
               onDelete={deleteCategory}
+              onEdit={onEditCategory}
             />
           ))}
         </div>

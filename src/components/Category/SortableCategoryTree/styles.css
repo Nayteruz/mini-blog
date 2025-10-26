@@ -1,0 +1,77 @@
+/* Стили для Drag & Drop */
+.drag-handle {
+	background: none;
+	border: none;
+	cursor: grab;
+	color: #6b7280;
+	font-size: 1rem;
+	padding: 0.25rem;
+	margin-right: 0.5rem;
+	border-radius: 0.25rem;
+	transition: background-color 0.2s;
+}
+
+.drag-handle:hover {
+	background: #f3f4f6;
+	color: #374151;
+}
+
+.drag-handle:active {
+	cursor: grabbing;
+}
+
+.tree-node.dragging {
+	opacity: 0.5;
+	background: #f0f9ff;
+	border: 2px dashed #3b82f6;
+}
+
+.tree-item-content {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.sortable-hint {
+	font-size: 0.875rem;
+	color: #6b7280;
+	font-weight: normal;
+	margin-left: 1rem;
+	font-style: italic;
+}
+
+.tree-order {
+	color: #8b5cf6;
+	font-weight: 500;
+	font-size: 0.8rem;
+}
+
+/* Анимация для перетаскивания */
+.tree-node {
+	transition: transform 0.2s ease;
+}
+
+/* Улучшенные стили для мета-информации */
+.tree-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-size: 0.8rem;
+}
+
+.tree-level {
+	color: #059669;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+	.tree-meta {
+		flex-direction: column;
+		gap: 0.25rem;
+		align-items: flex-start;
+	}
+
+	.drag-handle {
+		margin-right: 0.25rem;
+	}
+}

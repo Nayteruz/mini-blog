@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useCategories } from '../hooks/useCategories';
-import { AddCategoryForm } from "./AddCategory";
-import { CategoryTree } from "./CategoryTree";
+import { useCategories } from '@hooks/useCategories';
+import { AddCategoryForm, EditCategoryForm, SortableCategoryTree } from "..";
+import type { ICategory } from "@/types";
 
 
 export const CategoriesList: React.FC = () => {
   const { categories, loading } = useCategories();
   const [activeTab, setActiveTab] = useState<'tree' | 'list'>('tree');
+  const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
 
   if (loading) {
     return (
@@ -16,11 +17,24 @@ export const CategoriesList: React.FC = () => {
     );
   }
 
+  // Если редактируем категорию, показываем форму редактирования
+  if (editingCategory) {
+    return (
+      <div className="categories-container">
+        <EditCategoryForm
+          category={editingCategory}
+          onCancel={() => setEditingCategory(null)}
+          onSuccess={() => setEditingCategory(null)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="categories-container">
       <h2 className="categories-title">Управление категориями</h2>
 
-      <AddCategoryForm />
+      <AddCategoryForm title="Добавить новую категорию" />
 
       <div className="tabs-container">
         <div className="tabs-header">
@@ -40,9 +54,9 @@ export const CategoriesList: React.FC = () => {
       </div>
 
       {activeTab === 'tree' ? (
-        <CategoryTree onAddSubcategory={(parentId) => {
-          console.log('Add subcategory for:', parentId);
-        }} />
+        <SortableCategoryTree
+          onEditCategory={setEditingCategory}
+        />
       ) : (
         <div className="card">
           <h3 className="card-title">Простой список всех категорий</h3>
@@ -57,7 +71,7 @@ export const CategoriesList: React.FC = () => {
                 <div
                   key={category.id}
                   className="simple-item"
-                  style={{ marginLeft: `${category.depth * 20}px` }}
+                  style={{ marginLeft: `${category.depth * 10}px` }}
                 >
                   <div className="item-info">
                     <span className="item-name">{category.name}</span>
@@ -66,6 +80,12 @@ export const CategoriesList: React.FC = () => {
                       Родитель: {category.parentId || 'корневая'}
                     </div>
                   </div>
+                  <button
+                    onClick={() => setEditingCategory(category)}
+                    className="edit-button"
+                  >
+                    Редактировать
+                  </button>
                 </div>
               ))}
             </div>

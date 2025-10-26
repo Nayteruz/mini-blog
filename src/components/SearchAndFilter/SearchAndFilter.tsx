@@ -1,4 +1,4 @@
-import React from 'react';
+import { type ChangeEvent, type FC } from 'react';
 import { usePosts } from '../../hooks/usePosts';
 import { useCategories } from '../../hooks/useCategories';
 import './index.css';
@@ -7,7 +7,7 @@ interface SearchAndFilterProps {
   onFiltersChange?: () => void;
 }
 
-export const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ onFiltersChange }) => {
+export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange }) => {
   const {
     searchQuery,
     sortBy,
@@ -21,17 +21,17 @@ export const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ onFiltersChang
 
   const { categories } = useCategories();
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleSearch(e.target.value);
     onFiltersChange?.();
   };
 
-  const onSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
     handleSortChange(e.target.value as 'newest' | 'oldest' | 'title');
     onFiltersChange?.();
   };
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     handleCategoryFilter(e.target.value);
     onFiltersChange?.();
   };

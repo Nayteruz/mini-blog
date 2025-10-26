@@ -4,6 +4,7 @@ import { useCategories } from '../hooks/useCategories';
 import { useStore } from "../store";
 import { useNavigate } from "react-router-dom";
 import { SearchAndFilter } from "./SearchAndFilter";
+import { PostCard } from "./PostCard";
 
 
 export const PostsList: FC = () => {
@@ -72,45 +73,11 @@ export const PostsList: FC = () => {
       ) : (
         <div className="posts-list">
           {posts.map(post => (
-            <div key={post.id} className="post-card">
-              <div className="post-header">
-                <h3 className="post-title">{post.title}</h3>
-                <div className="post-meta">
-                  <span className="post-category">
-                    Категория: {getCategoryName(post.categoryId)}
-                  </span>
-                  <span className="post-author">
-                    Автор: {post.author.name || 'Аноним'}
-                  </span>
-                  <span className="post-date">
-                    {post.createdAt?.toDate?.()?.toLocaleDateString('ru-RU') || 'Неизвестно'}
-                  </span>
-                </div>
-              </div>
-              <div className="post-content">
-                {post.text}
-              </div>
-              {/* Кнопки управления для автора */}
-              {canEditPost(post.author.id) && (
-                <div className="post-actions">
-                  <button
-                    onClick={() => handleEdit(post.id)}
-                    className="edit-button"
-                  >
-                    Редактировать
-                  </button>
-                  <button
-                    onClick={() => handleDelete(post.id, post.title)}
-                    className="delete-button"
-                  >
-                    Удалить
-                  </button>
-                </div>
-              )}
-            </div>
+            <PostCard key={post.id} post={post} parts={['meta', 'footer', 'header', "category"]} category={getCategoryName(post.categoryId)} />
           ))}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };

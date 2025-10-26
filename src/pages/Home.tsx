@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import type { IPost } from "../types";
-import { PostItem } from "../components/PostItem";
 import { PostsList } from "../components/PostList";
-import { CategoriesAccordion } from "../components/CategoriesAccordion";
+import { AccordeonList } from "@/components/Category";
 
 export const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -20,19 +19,10 @@ export const Home = () => {
     getPosts();
   }, []);
 
-  const deletePost = async (id: string) => {
-    await deleteDoc(doc(db, "posts", id));
-    await getPosts();
-  };
-
   return (
     <div className="home-page">
-      <h1>Список постов</h1>
-      <CategoriesAccordion />
+      <AccordeonList title="Категории с постами" />
       <PostsList />
-      <div className="post-list">
-        {posts.length > 0 && posts.map((post) => <PostItem key={post.id} post={post} deletePost={deletePost} />)}
-      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { CategoriesList } from "../components/CategoryList";
+import { CategoriesList } from "@components/Category";
 
 export const CategoriesPage: FC = () => {
   return (

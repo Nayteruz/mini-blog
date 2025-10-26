@@ -4,18 +4,22 @@ import { usePosts } from '../hooks/usePosts';
 import { useCategories } from '../hooks/useCategories';
 // import '../styles/categories.css';
 import { useStore } from "../store";
+import { SelectCategory } from "@/components/Category/SelectCategory/SelectCategory";
+import { TextEditor } from "@/components/TextEditor";
 
 export const EditPostForm: FC = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
   const { posts, updatePost, loading } = usePosts();
-  const { categories } = useCategories();
+  const { categories, getCategoriesForSelect } = useCategories();
   const { user } = useStore();
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const orderedCategories = getCategoriesForSelect();
 
   // Находим редактируемый пост
   const post = posts.find(p => p.id === postId);
@@ -110,41 +114,19 @@ export const EditPostForm: FC = () => {
               disabled={isSubmitting}
             />
           </div>
-
-          <div className="form-group">
-            <label htmlFor="editPostCategory" className="form-label">
-              Категория *
-            </label>
-            <select
-              id="editPostCategory"
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
-              className="form-select"
-              disabled={isSubmitting || categories.length === 0}
-              required
-            >
-              <option value="">-- Выберите категорию --</option>
-              {categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {'→ '.repeat(category.depth)} {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
+          <SelectCategory
+            classWrapper="form-group"
+            label="Категория(если не выбирать то пост будет создан в корневой категории)"
+            value={categoryId}
+            onChange={setCategoryId}
+            categories={orderedCategories}
+            rootTextSelect="Выберите категорию"
+          />
           <div className="form-group">
             <label htmlFor="editPostText" className="form-label">
               Текст поста *
             </label>
-            <textarea
-              id="editPostText"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="Введите текст поста"
-              className="form-input"
-              rows={8}
-              disabled={isSubmitting}
-            />
+            <TextEditor content={text} setContent={setText} />
           </div>
 
           <div className="form-actions">

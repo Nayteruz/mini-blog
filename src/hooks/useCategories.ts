@@ -220,6 +220,7 @@ export const useCategories = () => {
 
 	// СОРТИРОВКА КАТЕГОРИЙ
 	const reorderCategories = async (parentId: string | null, reorderedCategories: ICategory[]) => {
+		console.warn("потом удалить", parentId, reorderedCategories);
 		try {
 			setError(null);
 

@@ -79,7 +79,7 @@ interface CategoryTreeProps {
   onEditCategory: (category: ICategory) => void;
 }
 
-export const CategoryTree: React.FC<CategoryTreeProps> = ({ onAddSubcategory, onEditCategory }) => {
+export const CategoryTree: React.FC<CategoryTreeProps> = ({ onEditCategory }) => {
   const { categoryTree, deleteCategory, loading, error } = useCategories();
 
   if (loading) {

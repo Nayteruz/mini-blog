@@ -9,9 +9,9 @@ import { PostCard } from "./PostCard";
 
 export const PostsList: FC = () => {
   const navigate = useNavigate();
-  const { posts, deletePost, loading, error } = usePosts();
+  const { posts, loading, error } = usePosts();
   const { categories } = useCategories();
-  const { user } = useStore();
+  // const { user } = useStore();
 
   // Функция для получения названия категории по ID
   const getCategoryName = (categoryId: string) => {
@@ -19,24 +19,24 @@ export const PostsList: FC = () => {
     return category ? category.name : 'Неизвестная категория';
   };
 
-  const handleEdit = (postId: string) => {
-    navigate(`/edit-post/${postId}`);
-  };
+  // const handleEdit = (postId: string) => {
+  //   navigate(`/edit-post/${postId}`);
+  // };
 
-  const handleDelete = async (postId: string, postTitle: string) => {
-    if (window.confirm(`Вы уверены, что хотите удалить пост "${postTitle}"?`)) {
-      try {
-        await deletePost(postId);
-        alert('Пост успешно удален!');
-      } catch (err) {
-        alert('Ошибка при удалении поста');
-      }
-    }
-  };
+  // const handleDelete = async (postId: string, postTitle: string) => {
+  //   if (window.confirm(`Вы уверены, что хотите удалить пост "${postTitle}"?`)) {
+  //     try {
+  //       await deletePost(postId);
+  //       alert('Пост успешно удален!');
+  //     } catch (err) {
+  //       alert('Ошибка при удалении поста' + err);
+  //     }
+  //   }
+  // };
 
-  const canEditPost = (postAuthorId: string) => {
-    return user && user.uid === postAuthorId;
-  };
+  // const canEditPost = (postAuthorId: string) => {
+  //   return user && user.uid === postAuthorId;
+  // };
 
   if (loading) {
     return (

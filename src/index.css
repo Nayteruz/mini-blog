@@ -590,7 +590,3 @@ textarea.form-input {
 	border-radius: 50%;
 	opacity: 0;
 }
-
-.post-date:contains("изменен")::after {
-	opacity: 1;
-}

@@ -13,7 +13,7 @@ function App() {
 
   return (
     <MantineProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename="/mini-blog/">
         <Header />
         <article className="container-pages">
           <div className="content">

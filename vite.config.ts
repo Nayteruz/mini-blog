@@ -5,6 +5,7 @@ import { resolve } from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+	base: "/mini-blog/",
 	plugins: [
 		react({
 			babel: {

@@ -23,7 +23,6 @@ interface ISimpleItemProps extends ISimple {
 }
 
 const SimpleItem: FC<ISimpleItemProps> = ({ category, changeEdit, level }) => {
-  console.log(level);
   return (
     <>
       <div className="simple-item" style={{ marginLeft: `${level * 15}px` }}>
@@ -49,8 +48,6 @@ const SimpleItems: FC<ISimpleItemsProps> = ({ categories, changeEdit, level }) =
 
 
 export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({ categories, changeEdit }) => {
-  console.log(categories);
-
   return (
     <div className="card">
       <h3 className="card-title">Простой список всех категорий</h3>

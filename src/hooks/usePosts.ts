@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, query, orderBy, where, updateDoc, doc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import type { ICreatePostData, IPost, IUpdatePostData } from "../types";
+import { db } from "../firebase";
 import { useStore } from "../store";
 
 export const usePosts = () => {
@@ -12,7 +12,6 @@ export const usePosts = () => {
 	const { setAllPosts, setSearchQuery, setSortBy, setSelectedCategory, clearFilters } = useStore();
 	const store = useStore();
 
-	// Загрузка всех постов
 	// Загрузка всех постов
 	const loadPosts = async () => {
 		try {

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface IPost {
 	id: string;
 	title: string;
@@ -28,6 +30,10 @@ export interface ICategory {
 	order: number;
 }
 
+export interface ICategoryTree extends ICategory {
+	children?: ICategoryTree[];
+}
+
 export interface ICreateCategoryData {
 	name: string;
 	parentId: string | null;
@@ -45,4 +51,10 @@ export interface IUpdateCategoryData {
 	depth: number;
 	updatedAt: any;
 	order: number;
+}
+
+export interface ITabItem {
+	key: string;
+	name: string;
+	content: ReactNode;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, writeBatch } from "firebase/firestore";
 import { db } from "../firebase";
-import type { ICategory, ICreateCategoryData, IUpdateCategoryData } from "../types";
+import type { ICategory, ICategoryTree, ICreateCategoryData, IUpdateCategoryData } from "../types";
 
 export const useCategories = () => {
 	const [categories, setCategories] = useState<ICategory[]>([]);
@@ -108,7 +108,7 @@ export const useCategories = () => {
 	};
 
 	// ПОСТРОЕНИЕ ДЕРЕВА КАТЕГОРИЙ
-	const buildCategoryTree = (parentId: string | null = null): any[] => {
+	const buildCategoryTree = (parentId: string | null = null): ICategoryTree[] => {
 		const children = getChildCategories(parentId);
 		return children.map((category) => ({
 			...category,
@@ -219,8 +219,7 @@ export const useCategories = () => {
 	};
 
 	// СОРТИРОВКА КАТЕГОРИЙ
-	const reorderCategories = async (parentId: string | null, reorderedCategories: ICategory[]) => {
-		console.warn("потом удалить", parentId, reorderedCategories);
+	const reorderCategories = async (reorderedCategories: ICategory[]) => {
 		try {
 			setError(null);
 

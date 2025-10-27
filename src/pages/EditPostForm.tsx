@@ -1,11 +1,11 @@
 import React, { useState, useEffect, type FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePosts } from '../hooks/usePosts';
-import { useCategories } from '../hooks/useCategories';
-// import '../styles/categories.css';
-import { useStore } from "../store";
+import { usePosts } from '@hooks/usePosts';
+import { useCategories } from '@hooks/useCategories';
+import { useStore } from "@/store";
 import { SelectCategory } from "@/components/Category/SelectCategory/SelectCategory";
-import { TextEditor } from "@/components/TextEditor";
+import { TextEditor } from "@components/TextEditor";
+import { Input } from "@components/Input";
 
 export const EditPostForm: FC = () => {
   const navigate = useNavigate();
@@ -100,20 +100,13 @@ export const EditPostForm: FC = () => {
 
       <div className="category-form">
         <form onSubmit={handleSubmit} className="form-fields">
-          <div className="form-group">
-            <label htmlFor="editPostTitle" className="form-label">
-              Заголовок поста *
-            </label>
-            <input
-              id="editPostTitle"
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Введите заголовок поста"
-              className="form-input"
-              disabled={isSubmitting}
-            />
-          </div>
+          <Input
+            value={title}
+            setValue={setTitle}
+            label="Заголовок поста"
+            placeholder="Введите заголовок поста"
+            required
+          />
           <SelectCategory
             classWrapper="form-group"
             label="Категория(если не выбирать то пост будет создан в корневой категории)"

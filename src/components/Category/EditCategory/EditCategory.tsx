@@ -3,6 +3,7 @@ import { useCategories } from '@hooks/useCategories';
 import type { ICategory } from "@/types";
 import './categories.css';
 import { SelectCategory } from "../SelectCategory/SelectCategory";
+import { Input } from "@/components/Input";
 
 interface IEditCategoryProps {
   category: ICategory;
@@ -46,7 +47,7 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
       onSuccess();
       alert('Категория успешно обновлена!');
     } catch (err) {
-      // Ошибка уже обработана в хуке
+      console.error('Error updating category:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,20 +77,13 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
       </div>
 
       <form onSubmit={handleSubmit} className="form-fields">
-        <div className="form-group">
-          <label htmlFor="editCategoryName" className="form-label">
-            Новое название категории *
-          </label>
-          <input
-            id="editCategoryName"
-            type="text"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            placeholder="Введите новое название категории"
-            className="form-input"
-            disabled={isSubmitting}
-          />
-        </div>
+        <Input
+          value={categoryName}
+          setValue={setCategoryName}
+          label="Новое название категории"
+          placeholder="Введите новое название категории"
+          required
+        />
         <SelectCategory
           label="Новый родитель (необязательно)"
           note="Если не выбрать, категория станет корневой"

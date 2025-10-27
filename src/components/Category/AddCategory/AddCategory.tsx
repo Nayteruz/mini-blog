@@ -4,6 +4,7 @@ import { useStore } from "@store/index";
 import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Button } from "@/components/Button";
 import styles from "./AddCategory.module.css";
+import { Input } from "@/components/Input";
 
 interface IAddCategoryProps {
   title?: string
@@ -36,7 +37,7 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
 
       alert('Категория успешно создана!');
     } catch (err) {
-      // Ошибка уже обработана в хуке
+      console.error('Error creating category:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -47,20 +48,13 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
       <h3 className={styles.title}>{title || 'Добавление категории'}</h3>
 
       <form onSubmit={handleSubmit} className="form-fields">
-        <div className="form-group">
-          <label htmlFor="categoryName" className="form-label">
-            Название категории *
-          </label>
-          <input
-            id="categoryName"
-            type="text"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            placeholder="Введите название категории"
-            className="form-input"
-            disabled={isSubmitting}
-          />
-        </div>
+        <Input
+          value={categoryName}
+          setValue={setCategoryName}
+          label="Название категории"
+          placeholder="Введите название категории"
+          required
+        />
         <SelectCategory
           value={selectedParentId || ''}
           onChange={setSelectedParentId}

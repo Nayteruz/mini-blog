@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import { useState, type FC } from 'react';
 import { useCategories } from '@hooks/useCategories';
-import { AddCategoryForm, EditCategoryForm, SortableCategoryTree } from "..";
+import { AddCategoryForm, EditCategoryForm } from "..";
+import { SortableList } from "../SortableCategoryList/SortableList";
 import type { ICategory } from "@/types";
+import { Spinner } from "@/components/Spinner";
+import { Tabs } from "@/components/Tabs";
+import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
+import styles from "./CategoriesList.module.css";
 
 
-export const CategoriesList: React.FC = () => {
-  const { categories, loading } = useCategories();
-  const [activeTab, setActiveTab] = useState<'tree' | 'list'>('tree');
+export const CategoriesList: FC = () => {
+  const { categoryTree, loading } = useCategories();
+  const [activeTab, setActiveTab] = useState<string>('tree');
   const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
+
+  const views = [
+    { key: 'tree', name: 'Древовидный вид', content: <SortableList changeEdit={setEditingCategory} /> },
+    { key: 'list', name: 'Простой список', content: <SimpleCategoryList categories={categoryTree} changeEdit={setEditingCategory} /> }
+  ]
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-text">Загрузка категорий...</div>
+      <div className={styles.loaderWrapper}>
+        <Spinner />
       </div>
     );
   }
@@ -20,78 +30,19 @@ export const CategoriesList: React.FC = () => {
   // Если редактируем категорию, показываем форму редактирования
   if (editingCategory) {
     return (
-      <div className="categories-container">
-        <EditCategoryForm
-          category={editingCategory}
-          onCancel={() => setEditingCategory(null)}
-          onSuccess={() => setEditingCategory(null)}
-        />
-      </div>
+      <EditCategoryForm
+        category={editingCategory}
+        onCancel={() => setEditingCategory(null)}
+        onSuccess={() => setEditingCategory(null)}
+      />
     );
   }
 
   return (
-    <div className="categories-container">
+    <>
       <h2 className="categories-title">Управление категориями</h2>
-
       <AddCategoryForm title="Добавить новую категорию" />
-
-      <div className="tabs-container">
-        <div className="tabs-header">
-          <button
-            className={`tab-button ${activeTab === 'tree' ? 'active' : ''}`}
-            onClick={() => setActiveTab('tree')}
-          >
-            Древовидный вид
-          </button>
-          <button
-            className={`tab-button ${activeTab === 'list' ? 'active' : ''}`}
-            onClick={() => setActiveTab('list')}
-          >
-            Простой список
-          </button>
-        </div>
-      </div>
-
-      {activeTab === 'tree' ? (
-        <SortableCategoryTree
-          onEditCategory={setEditingCategory}
-        />
-      ) : (
-        <div className="card">
-          <h3 className="card-title">Простой список всех категорий</h3>
-
-          {categories.length === 0 ? (
-            <div className="empty-state">
-              Категорий пока нет
-            </div>
-          ) : (
-            <div className="simple-list">
-              {categories.map(category => (
-                <div
-                  key={category.id}
-                  className="simple-item"
-                  style={{ marginLeft: `${category.depth * 10}px` }}
-                >
-                  <div className="item-info">
-                    <span className="item-name">{category.name}</span>
-                    <div className="item-details">
-                      ID: {category.id} | Уровень: {category.depth} |
-                      Родитель: {category.parentId || 'корневая'}
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setEditingCategory(category)}
-                    className="edit-button"
-                  >
-                    Редактировать
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} list={views} />
+    </>
   );
 };

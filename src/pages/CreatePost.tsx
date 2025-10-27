@@ -5,6 +5,7 @@ import { TextEditor } from "../components/TextEditor";
 import { usePosts } from "../hooks/usePosts";
 import { useCategories } from "../hooks/useCategories";
 import { SelectCategory } from "@/components/Category/SelectCategory/SelectCategory";
+import { Input } from "@/components/Input";
 
 export const CreatePost = () => {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ export const CreatePost = () => {
     if (!auth.currentUser) {
       navigate("/sign-in");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="create-post-page">
@@ -78,20 +79,13 @@ export const CreatePost = () => {
 
         <div className="category-form">
           <form onSubmit={handleSubmit} className="form-fields">
-            <div className="form-group">
-              <label htmlFor="postTitle" className="form-label">
-                Заголовок поста *
-              </label>
-              <input
-                id="postTitle"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Введите заголовок поста"
-                className="form-input"
-                disabled={isSubmitting}
-              />
-            </div>
+            <Input
+              value={title}
+              setValue={setTitle}
+              label="Заголовок поста"
+              placeholder="Введите заголовок поста"
+              required
+            />
             <SelectCategory
               classWrapper="form-group"
               label="Категория(если не выбирать то пост будет создан в корневой категории)"

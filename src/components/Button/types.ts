@@ -6,4 +6,5 @@ export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	variant?: "primary" | "secondary";
 	type?: "button" | "submit" | "reset";
 	disabled?: boolean;
+	className?: string;
 }

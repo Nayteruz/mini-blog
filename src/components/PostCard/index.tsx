@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import type { IPostCardProps } from "./types";
 import { ArrowToggle } from "../ArrowToggle";
 import { Button } from "../Button";
-import { usePosts } from "../../hooks/usePosts";
-import DeleteIcon from '../../assets/icons/deleteIcon.svg?react';
-import EditIcon from '../../assets/icons/penToSquare.svg?react';
+import { usePosts } from "@hooks/usePosts";
+import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
+import EditIcon from '@assets/icons/penToSquare.svg?react';
 import styles from './PostCard.module.css';
 
 export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle, parts, category }) => {
@@ -28,7 +28,7 @@ export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle,
   }
 
   const classes = {
-    wrap: `${styles.card}${className ? ` ${className}` : ''}`,
+    wrap: `${styles.Card}${className ? ` ${className}` : ''}`,
     content: `${styles.cardContent}${!isToggle ? ` ${styles.open}` : ''}${isToggle && isOpen ? ` ${styles.open}` : ''}`,
     footer: `${styles.cardFooter}${!isToggle ? ` ${styles.open}` : ''}${isToggle && isOpen ? ` ${styles.open}` : ''}`
   };

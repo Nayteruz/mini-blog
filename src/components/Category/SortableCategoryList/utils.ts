@@ -1,8 +1,8 @@
-import type { ICategory, ICategoryTree } from "@/types";
+import type { ICategoryTree } from "@/types";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 
-export const findCategoryById = (tree: ICategoryTree[], id: string): ICategory | null => {
+export const findCategoryById = (tree: ICategoryTree[], id: string): ICategoryTree | null => {
 	for (const item of tree) {
 		if (item.id === id) return item;
 		if (item.children) {
@@ -14,12 +14,12 @@ export const findCategoryById = (tree: ICategoryTree[], id: string): ICategory |
 };
 
 // Вспомогательная функция для получения соседних категорий
-export const getSiblings = (tree: ICategoryTree[], parentId: string | null): ICategory[] => {
+export const getSiblings = (tree: ICategoryTree[], parentId: string | null): ICategoryTree[] => {
 	if (parentId === null) {
 		return tree;
 	}
 
-	const findSiblings = (nodes: ICategoryTree[]): ICategory[] => {
+	const findSiblings = (nodes: ICategoryTree[]): ICategoryTree[] => {
 		for (const node of nodes) {
 			if (node.id === parentId) {
 				return node.children || [];
@@ -35,11 +35,7 @@ export const getSiblings = (tree: ICategoryTree[], parentId: string | null): ICa
 	return findSiblings(tree);
 };
 
-export const onDragEnd = async (
-	event: DragEndEvent,
-	categoryTree: ICategoryTree[],
-	reorderCategories: (reorderedCategories: ICategory[]) => Promise<void>
-) => {
+export const onDragEnd = (event: DragEndEvent, categoryTree: ICategoryTree[]) => {
 	const { active, over } = event;
 
 	if (!over || active.id === over.id) {
@@ -67,12 +63,8 @@ export const onDragEnd = async (
 	const newIndex = siblings.findIndex((item) => item.id === over.id);
 
 	if (oldIndex !== -1 && newIndex !== -1) {
-		const reordered = arrayMove(siblings, oldIndex, newIndex);
-
-		try {
-			await reorderCategories(reordered);
-		} catch (err) {
-			console.error("Error reordering:", err);
-		}
+		return arrayMove(siblings, oldIndex, newIndex);
 	}
+
+	return categoryTree;
 };

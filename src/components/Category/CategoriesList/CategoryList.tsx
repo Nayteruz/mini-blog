@@ -1,25 +1,43 @@
-import { useState, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { useCategories } from '@hooks/useCategories';
 import { AddCategoryForm, EditCategoryForm } from "..";
 import { SortableList } from "../SortableCategoryList/SortableList";
+import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
 import type { ICategory } from "@/types";
 import { Spinner } from "@/components/Spinner";
 import { Tabs } from "@/components/Tabs";
-import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
 import styles from "./CategoriesList.module.css";
+import type { DragEndEvent } from "@dnd-kit/core";
+import { onDragEnd } from "../SortableCategoryList/utils";
 
 
 export const CategoriesList: FC = () => {
-  const { categoryTree, loading } = useCategories();
+  const { categoryTree, loading, reorderCategories } = useCategories();
   const [activeTab, setActiveTab] = useState<string>('tree');
   const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
+  const [isFirstLoad, setIsFirstLoad] = useState(false);
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const newOrder = onDragEnd(event, categoryTree);
+    try {
+      await reorderCategories(newOrder || []);
+    } catch (error) {
+      console.error("Error reordering:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!isFirstLoad) {
+      setIsFirstLoad(true);
+    }
+  }, [loading]);
 
   const views = [
-    { key: 'tree', name: 'Древовидный вид', content: <SortableList changeEdit={setEditingCategory} /> },
-    { key: 'list', name: 'Простой список', content: <SimpleCategoryList categories={categoryTree} changeEdit={setEditingCategory} /> }
+    { key: 'tree', name: 'Древовидный вид', content: <SortableList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} /> },
+    { key: 'list', name: 'Простой список', content: <SimpleCategoryList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} /> }
   ]
 
-  if (loading) {
+  if (loading && !isFirstLoad) {
     return (
       <div className={styles.loaderWrapper}>
         <Spinner />

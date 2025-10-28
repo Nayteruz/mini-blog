@@ -1,66 +1,78 @@
-import type { ICategoryTree } from "@/types";
-import type { FC } from "react";
-import EditIcon from '@assets/icons/penToSquare.svg?react';
+import { type FC } from "react";
 import { Button } from "@/components/Button";
+import EditIcon from '@assets/icons/penToSquare.svg?react';
+import type { ISimpleCategoryListProps, ISimpleItemProps, ISimpleItemsProps } from "./types";
+import { DnDWrapper } from "@/components/DnDWrapper";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { Spinner } from "@/components/Spinner";
 import styles from "./SimpleCategoryList.module.css";
 
-interface ISimple {
-  changeEdit: (category: ICategoryTree | null) => void;
-}
 
-interface ISimpleCategoryListProps extends ISimple {
-  categories: ICategoryTree[];
-}
+const SimpleItem: FC<ISimpleItemProps> = ({ category, changeEdit, level, handleDragEnd }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
 
-interface ISimpleItemsProps extends ISimple {
-  categories: ICategoryTree[];
-  level: number
-}
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
-interface ISimpleItemProps extends ISimple {
-  category: ICategoryTree;
-  level: number
-}
-
-const SimpleItem: FC<ISimpleItemProps> = ({ category, changeEdit, level }) => {
   return (
-    <>
-      <div className="simple-item" style={{ marginLeft: `${level * 15}px` }}>
-        <div className="item-info">
-          <span className="item-name">{category.name}</span>
-          {/* <div className="item-details">
-            ID: {category.id} | Уровень: {category.depth} |
-            Родитель: {category.parentId || 'корневая'}
-          </div> */}
+    <div ref={setNodeRef} style={style} className={`${styles.simpleItemRef} ${isDragging ? styles.dragging : ''}`}>
+      <div style={{ marginLeft: `${level * 15}px` }} className={`${styles.simpleItem}`}>
+        <div className={styles.info}>
+          <button {...attributes} {...listeners} className={styles.dragHandle} title="Перетащите для изменения порядка">⋮⋮</button>
+          <span className={styles.name}>{category.name}</span>
         </div>
-        <Button className={styles.button} variant="primary" onClick={() => changeEdit(category)}><EditIcon className={styles.icon} /></Button>
+        <div className={styles.buttons}>
+          <Button className={styles.button} variant="primary" onClick={() => changeEdit(category)}><EditIcon className={styles.icon} /></Button>
+        </div>
       </div>
-      {category?.children && category?.children?.length > 0 && <SimpleItems categories={category.children} changeEdit={changeEdit} level={level + 1} />}
-    </>
+      {category?.children && category?.children?.length > 0 && <SimpleItems categories={category.children} changeEdit={changeEdit} level={level + 1} handleDragEnd={handleDragEnd} />}
+    </div>
   )
 }
 
-const SimpleItems: FC<ISimpleItemsProps> = ({ categories, changeEdit, level }) => {
+const SimpleItems: FC<ISimpleItemsProps> = ({ categories, changeEdit, level, handleDragEnd }) => {
   return (
-    categories.map(category => (<SimpleItem key={category.id} category={category} changeEdit={changeEdit} level={level} />))
+    <DnDWrapper items={categories} onDragEnd={handleDragEnd}>
+      <div className={styles.list}>
+        {categories.map(category => (
+          <SimpleItem key={category.id} category={category} changeEdit={changeEdit} level={level} handleDragEnd={handleDragEnd} />
+        ))}
+      </div>
+    </DnDWrapper>
   )
 }
 
 
-export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({ categories, changeEdit }) => {
-  return (
-    <div className="card">
-      <h3 className="card-title">Простой список всех категорий</h3>
-
-      {categories.length === 0 ? (
-        <div className="empty-state">
+export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({ changeEdit, categories, isLoading, handleDragEnd }) => {
+  if (categories.length === 0) {
+    return (
+      <div className={styles.SimpleCategoryList}>
+        <h3 className={styles.title}>Простой список всех категорий</h3>
+        <div className={styles.emptyList}>
           Категорий пока нет
         </div>
-      ) : (
-        <div className="simple-list">
-          <SimpleItems categories={categories} changeEdit={changeEdit} level={0} />
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.SimpleCategoryList}>
+      <h3 className={styles.title}>Простой список всех категорий</h3>
+      <DnDWrapper items={categories} onDragEnd={handleDragEnd}>
+        <div className={`${styles.list} ${isLoading ? styles.loading : ''}`}>
+          {isLoading && (
+            <div className={styles.loaderWrapper}>
+              <Spinner />
+            </div>
+          )}
+          {categories.map(category => (
+            <SimpleItem key={category.id} category={category} changeEdit={changeEdit} level={0} handleDragEnd={handleDragEnd} />
+          ))}
         </div>
-      )}
-    </div>
+      </DnDWrapper>
+    </div >
   );
 };

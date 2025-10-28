@@ -1,33 +1,13 @@
 import { type FC } from 'react';
-import { type DragEndEvent } from '@dnd-kit/core';
 import { useCategories } from '@hooks/useCategories';
-import './styles.css';
-import type { ICategory } from "@/types";
 import { Spinner } from "@/components/Spinner";
-import styles from "./styles.module.css";
 import { SortableItem } from "./SortableItem";
 import { DnDWrapper } from "@/components/DnDWrapper";
-import { onDragEnd } from "./utils";
+import styles from "./styles.module.css";
+import type { ISortableListProps } from "./types";
 
-interface ISortableListProps {
-  changeEdit: (category: ICategory) => void;
-}
-
-export const SortableList: FC<ISortableListProps> = ({ changeEdit }) => {
-  const { categoryTree, deleteCategory, reorderCategories, loading, error } = useCategories();
-
-  const handleDragEnd = async (event: DragEndEvent) => {
-    onDragEnd(event, categoryTree, reorderCategories);
-  };
-
-
-  if (loading) {
-    return (
-      <div className={styles.loaderWrapper}>
-        <Spinner />
-      </div>
-    );
-  }
+export const SortableList: FC<ISortableListProps> = ({ changeEdit, categories, handleDragEnd, isLoading }) => {
+  const { deleteCategory, error } = useCategories();
 
   if (error) {
     return (
@@ -37,30 +17,34 @@ export const SortableList: FC<ISortableListProps> = ({ changeEdit }) => {
     );
   }
 
-  if (categoryTree.length === 0) {
+  if (categories.length === 0) {
     return (
-      <div className="empty-state">
+      <div className={styles.emptyList}>
         Категорий пока нет
       </div>
     );
   }
 
   return (
-    <div className="card">
-      <h3 className="card-title">
+    <div className={styles.SortableCategoryList}>
+      <h3 className={styles.title}>
         Древовидная структура категорий
-        <span className="sortable-hint">(перетаскивайте для изменения порядка)</span>
+        <span className={styles.hint}>(перетаскивайте для изменения порядка)</span>
       </h3>
 
-      <DnDWrapper items={categoryTree} onDragEnd={handleDragEnd}>
-        <div className="tree-container">
-          {categoryTree.map(category => (
+      <DnDWrapper items={categories} onDragEnd={handleDragEnd}>
+        <div className={`${styles.treeContainer} ${isLoading ? styles.loading : ''}`}>
+          {isLoading && <div className={styles.loaderWrapper}>
+            <Spinner />
+          </div>}
+          {categories.map(category => (
             <SortableItem
               key={category.id}
               category={category}
               level={0}
               onDelete={deleteCategory}
               onEdit={changeEdit}
+              handleDragEnd={handleDragEnd}
             />
           ))}
         </div>

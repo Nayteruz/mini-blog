@@ -5,8 +5,10 @@ import type { ICategory, ICategoryTree, ICreateCategoryData, IUpdateCategoryData
 
 export const useCategories = () => {
 	const [categories, setCategories] = useState<ICategory[]>([]);
+	const [categoryTree, setCategoryTree] = useState<ICategoryTree[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [isReordering, setIsReordering] = useState(false);
 
 	// Загрузка всех категорий
 	const loadCategories = async () => {
@@ -103,21 +105,26 @@ export const useCategories = () => {
 	};
 
 	// ПОЛУЧЕНИЕ ДОЧЕРНИХ КАТЕГОРИЙ
-	const getChildCategories = (parentId: string | null): ICategory[] => {
-		return categories.filter((category) => category.parentId === parentId).sort((a, b) => a.order - b.order); // ← СОРТИРУЕМ ПО ПОРЯДКУ
+	const getChildCategories = (parentId: string | null, list?: ICategory[]): ICategory[] => {
+		const mapList = list || categories;
+		return mapList.filter((category) => category.parentId === parentId).sort((a, b) => a.order - b.order); // ← СОРТИРУЕМ ПО ПОРЯДКУ
 	};
 
 	// ПОСТРОЕНИЕ ДЕРЕВА КАТЕГОРИЙ
-	const buildCategoryTree = (parentId: string | null = null): ICategoryTree[] => {
-		const children = getChildCategories(parentId);
+	const buildCategoryTree = (parentId: string | null = null, list?: ICategory[]): ICategoryTree[] => {
+		const children = getChildCategories(parentId, list);
 		return children.map((category) => ({
 			...category,
 			children: buildCategoryTree(category.id),
 		}));
 	};
 
+	useEffect(() => {
+		setCategoryTree(buildCategoryTree());
+	}, [categories]);
+
 	// Получение дерева категорий (вычисляемое свойство)
-	const categoryTree = buildCategoryTree();
+	// const categoryTree = buildCategoryTree();
 
 	const getCategoriesForSelect = (): ICategory[] => {
 		const result: ICategory[] = [];
@@ -136,6 +143,8 @@ export const useCategories = () => {
 
 	// РЕДАКТИРОВАНИЕ КАТЕГОРИИ (название и родитель)
 	const updateCategory = async (categoryId: string, name: string, newParentId: string | null) => {
+		const originalCategories = [...categories];
+
 		try {
 			setError(null);
 
@@ -173,6 +182,20 @@ export const useCategories = () => {
 				newDepth = categoryToUpdate.depth;
 			}
 
+			// OPTIMISTIC UPDATE: сразу обновляем локальное состояние
+			const updatedCategories = categories.map((cat) =>
+				cat.id === categoryId
+					? {
+							...cat,
+							name,
+							parentId: newParentId,
+							path: newPath,
+							depth: newDepth,
+					  }
+					: cat
+			);
+			setCategories(updatedCategories);
+
 			// Определяем порядок в новой родительской категории
 			const newSiblings = categories.filter((cat) => cat.parentId === newParentId && cat.id !== categoryId);
 			const maxOrder = newSiblings.length > 0 ? Math.max(...newSiblings.map((cat) => cat.order)) : -1;
@@ -196,6 +219,7 @@ export const useCategories = () => {
 
 			await loadCategories(); // Перезагружаем список
 		} catch (err) {
+			setCategories(originalCategories);
 			console.error("Error updating category:", err);
 			setError("Ошибка обновления категории");
 			throw err;
@@ -220,8 +244,33 @@ export const useCategories = () => {
 
 	// СОРТИРОВКА КАТЕГОРИЙ
 	const reorderCategories = async (reorderedCategories: ICategory[]) => {
+		const originalCategories = [...categories];
+
 		try {
+			setIsReordering(true);
 			setError(null);
+
+			// 1. OPTIMISTIC UPDATE: сразу обновляем локальное состояние
+			const updatedCategories = categories
+				.map((cat) => {
+					const reorderedCat = reorderedCategories.find((rc) => rc.id === cat.id);
+					if (reorderedCat) {
+						return {
+							...cat,
+							order: reorderedCat.order,
+						};
+					}
+					return cat;
+				})
+				.sort((a, b) => {
+					// Сортируем сначала по parentId, потом по order
+					if (a.parentId !== b.parentId) {
+						return (a.parentId || "").localeCompare(b.parentId || "");
+					}
+					return a.order - b.order;
+				});
+
+			// setCategories(updatedCategories); ////
 
 			const batch = writeBatch(db);
 
@@ -238,7 +287,10 @@ export const useCategories = () => {
 		} catch (err) {
 			console.error("Error reordering categories:", err);
 			setError("Ошибка изменения порядка категорий");
+			setCategories(originalCategories);
 			throw err;
+		} finally {
+			setIsReordering(false);
 		}
 	};
 
@@ -258,5 +310,6 @@ export const useCategories = () => {
 		getCategoriesForSelect,
 		updateCategory,
 		reorderCategories,
+		isReordering,
 	};
 };

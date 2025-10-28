@@ -7,6 +7,7 @@ import { ArrowToggle } from "@/components/ArrowToggle";
 import { Button } from "@/components/Button";
 import EditIcon from '@assets/icons/penToSquare.svg?react';
 import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
+import { DnDWrapper } from "@/components/DnDWrapper";
 
 const sizes: Record<number, number> = {
   0: 18,
@@ -19,7 +20,7 @@ const sizes: Record<number, number> = {
   7: 10,
 }
 
-export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete, onEdit }) => {
+export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete, onEdit, handleDragEnd }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
 
   const style = {
@@ -55,9 +56,7 @@ export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete
           <span className={styles.name} style={{ fontSize: sizes[level] }}>{category.name}</span>
         </div>
 
-        <div className="tree-meta">
-          <span className="tree-order">порядок: {category.order + 1}</span>
-          <span className="tree-level">уровень: {level}</span>
+        <div className={styles.details}>
           <Button className={styles.button} variant="primary" onClick={handleEdit}><EditIcon className={styles.icon} /></Button>
           <Button className={styles.button} variant="secondary" onClick={handleDelete}><DeleteIcon className={styles.icon} /></Button>
         </div>
@@ -65,9 +64,20 @@ export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete
 
       {hasChildren && isExpanded && (
         <div className={styles.subList}>
-          {category.children!.map(child => (
-            <SortableItem key={child.id} category={child} level={level + 1} onDelete={onDelete} onEdit={onEdit} />
-          ))}
+          <DnDWrapper items={category.children!} onDragEnd={handleDragEnd}>
+            <div className={styles.subList}>
+              {category.children!.map(category => (
+                <SortableItem
+                  key={category.id}
+                  category={category}
+                  level={level + 1}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                  handleDragEnd={handleDragEnd}
+                />
+              ))}
+            </div>
+          </DnDWrapper>
         </div>
       )}
     </div>

@@ -259,44 +259,12 @@ h1 {
 }
 
 /* Стили для дерева категорий */
-.tree-node {
-	margin-left: 1rem;
-}
-
-.tree-toggle {
-	width: 1.5rem;
-	height: 1.5rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #6b7280;
-	background: none;
-	border: none;
-	cursor: pointer;
-}
-
-.tree-toggle:hover {
-	color: #374151;
-}
-
-.tree-spacer {
-	width: 1.5rem;
-	height: 1.5rem;
-}
-
-.tree-name {
-	font-weight: 500;
-}
 
 .tree-meta {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 	font-size: 0.875rem;
-}
-
-.tree-level {
-	color: #6b7280;
 }
 
 .delete-button {
@@ -314,11 +282,6 @@ h1 {
 }
 
 /* Стили для простого списка */
-.simple-list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
 
 .simple-item {
 	display: flex;
@@ -326,8 +289,12 @@ h1 {
 	align-items: center;
 	padding: 5px 5px 5px 15px;
 	border: 1px solid #e5e7eb;
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+	&:hover {
+		background: #f9fafb;
+	}
 }
 
 .item-info {

@@ -33,7 +33,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({ category, changeEdit, level }) => {
             Родитель: {category.parentId || 'корневая'}
           </div> */}
         </div>
-        <Button className={styles.button} text={<EditIcon className={styles.icon} />} variant="primary" onClick={() => changeEdit(category)} />
+        <Button className={styles.button} variant="primary" onClick={() => changeEdit(category)}><EditIcon className={styles.icon} /></Button>
       </div>
       {category?.children && category?.children?.length > 0 && <SimpleItems categories={category.children} changeEdit={changeEdit} level={level + 1} />}
     </>

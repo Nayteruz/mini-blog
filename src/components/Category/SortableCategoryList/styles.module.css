@@ -3,3 +3,78 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.treeNode {
+	transition: transform 0.2s ease;
+}
+
+.item {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	gap: 15px;
+	padding: 7px;
+	border-bottom: 1px solid #e5e7eb;
+
+	&:hover {
+		background: #f9fafb;
+	}
+}
+
+.content {
+	display: grid;
+	grid-template-columns: 20px 20px auto;
+	gap: 5px;
+	align-items: center;
+}
+
+.dragging {
+	opacity: 0.5;
+	background: #f0f9ff;
+	border: 2px dashed #3b82f6;
+}
+
+.dragHandle {
+	cursor: grab;
+	color: #6b7280;
+	transition: background-color 0.2s;
+	font-size: 20px;
+
+	&:hover {
+		background: #859ac3;
+		color: #fff;
+	}
+
+	&:active {
+		cursor: grabbing;
+	}
+}
+
+.button {
+	padding: 8px;
+}
+
+.icon {
+	width: 14px;
+}
+
+.arrow {
+	width: 20px;
+	height: 20px;
+}
+
+.spacer {
+	width: 20px;
+	height: 20px;
+}
+
+.name {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.3;
+}
+
+.subList {
+	margin-left: 15px;
+	border-left: 2px solid #e5e7eb;
+}

@@ -2,6 +2,22 @@ import { useState, type FC } from "react";
 import { CSS } from '@dnd-kit/utilities';
 import type { ISortableItemProps } from "./types";
 import { useSortable } from "@dnd-kit/sortable";
+import styles from "./styles.module.css";
+import { ArrowToggle } from "@/components/ArrowToggle";
+import { Button } from "@/components/Button";
+import EditIcon from '@assets/icons/penToSquare.svg?react';
+import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
+
+const sizes: Record<number, number> = {
+  0: 18,
+  1: 16,
+  2: 14,
+  3: 12,
+  4: 10,
+  5: 10,
+  6: 10,
+  7: 10,
+}
 
 export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete, onEdit }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
@@ -28,61 +44,29 @@ export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete
     <div
       ref={setNodeRef}
       style={style}
-      className={`tree-node ${isDragging ? 'dragging' : ''}`}
+      className={`${styles.treeNode} ${isDragging ? styles.dragging : ''}`}
     >
-      <div className="tree-item">
-        <div className="tree-item-content">
+      <div className={styles.item}>
+        <div className={styles.content}>
           {/* Drag Handle */}
-          <button
-            {...attributes}
-            {...listeners}
-            className="drag-handle"
-            title="Перетащите для изменения порядка"
-          >
-            ⋮⋮
-          </button>
-
-          {hasChildren && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="tree-toggle"
-            >
-              {isExpanded ? '▼' : '►'}
-            </button>
-          )}
-          {!hasChildren && <div className="tree-spacer"></div>}
-
-          <span className="tree-name">{category.name}</span>
+          <button {...attributes} {...listeners} className={styles.dragHandle} title="Перетащите для изменения порядка">⋮⋮</button>
+          {hasChildren && (<ArrowToggle className={styles.arrow} isOpen={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />)}
+          {!hasChildren && <div className={styles.spacer}></div>}
+          <span className={styles.name} style={{ fontSize: sizes[level] }}>{category.name}</span>
         </div>
 
         <div className="tree-meta">
           <span className="tree-order">порядок: {category.order + 1}</span>
           <span className="tree-level">уровень: {level}</span>
-          <button
-            onClick={handleEdit}
-            className="edit-button"
-          >
-            Редактировать
-          </button>
-          <button
-            onClick={handleDelete}
-            className="delete-button"
-          >
-            Удалить
-          </button>
+          <Button className={styles.button} variant="primary" onClick={handleEdit}><EditIcon className={styles.icon} /></Button>
+          <Button className={styles.button} variant="secondary" onClick={handleDelete}><DeleteIcon className={styles.icon} /></Button>
         </div>
       </div>
 
       {hasChildren && isExpanded && (
-        <div className="tree-children">
+        <div className={styles.subList}>
           {category.children!.map(child => (
-            <SortableItem
-              key={child.id}
-              category={child}
-              level={level + 1}
-              onDelete={onDelete}
-              onEdit={onEdit}
-            />
+            <SortableItem key={child.id} category={child} level={level + 1} onDelete={onDelete} onEdit={onEdit} />
           ))}
         </div>
       )}

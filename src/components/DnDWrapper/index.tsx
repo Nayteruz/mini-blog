@@ -1,7 +1,6 @@
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import type { ICategoryTree } from "@/types";
 
 interface IDnDWrapperProps<T> {
   children: ReactNode
@@ -9,7 +8,7 @@ interface IDnDWrapperProps<T> {
   items: T[]
 }
 
-export const DnDWrapper: FC<IDnDWrapperProps<ICategoryTree>> = ({ children, onDragEnd, items }) => {
+export const DnDWrapper = <T extends { id: string }>({ children, onDragEnd, items }: IDnDWrapperProps<T>) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {

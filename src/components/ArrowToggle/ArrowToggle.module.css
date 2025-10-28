@@ -2,4 +2,5 @@
 	color: #6b7280;
 	font-size: 0.875rem;
 	transition: transform 0.2s;
+	cursor: pointer;
 }

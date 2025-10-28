@@ -55,8 +55,8 @@ export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle,
       </div>
       {parts.includes('footer') && <div className={classes.footer}>
         <div className={styles.buttons}>
-          <Button text={<EditIcon className={styles.icon} />} variant="primary" onClick={onEdit} />
-          <Button text={<DeleteIcon className={styles.icon} />} variant="secondary" onClick={onDelete} />
+          <Button variant="primary" onClick={onEdit}><EditIcon className={styles.icon} /></Button>
+          <Button variant="secondary" onClick={onDelete}><DeleteIcon className={styles.icon} /></Button>
         </div>
       </div>}
     </div>

@@ -263,24 +263,6 @@ h1 {
 	margin-left: 1rem;
 }
 
-.tree-item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0.75rem;
-	border-bottom: 1px solid #e5e7eb;
-}
-
-.tree-item:hover {
-	background: #f9fafb;
-}
-
-.tree-item-content {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-}
-
 .tree-toggle {
 	width: 1.5rem;
 	height: 1.5rem;
@@ -329,11 +311,6 @@ h1 {
 
 .delete-button:hover {
 	background: #b91c1c;
-}
-
-.tree-children {
-	border-left: 2px solid #e5e7eb;
-	margin-left: 0.75rem;
 }
 
 /* Стили для простого списка */
@@ -574,4 +551,8 @@ textarea.form-input {
 	background: #3b82f6;
 	border-radius: 50%;
 	opacity: 0;
+}
+
+svg {
+	width: 10px;
 }

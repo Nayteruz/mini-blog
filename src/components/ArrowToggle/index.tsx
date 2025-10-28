@@ -1,16 +1,17 @@
-import type { CSSProperties, FC } from "react"
+import type { FC } from "react"
 import styles from "./ArrowToggle.module.css";
 
-interface IArrowToggleProps {
+interface IArrowToggleProps extends React.HTMLAttributes<HTMLButtonElement> {
   isOpen: boolean
   className?: string;
-  style?: CSSProperties
 }
 
-export const ArrowToggle: FC<IArrowToggleProps> = ({ isOpen, className, style }) => {
+export const ArrowToggle: FC<IArrowToggleProps> = ({ isOpen, className, ...props }) => {
+  const classes = `${styles.arrow}${className ? ` ${className}` : ''}`
+
   return (
-    <div className={`${styles.arrow}${className ? ` ${className}` : ''}`} style={style}>
+    <button {...props} className={classes}>
       {isOpen ? '▲' : '▼'}
-    </div>
+    </button>
   )
 }

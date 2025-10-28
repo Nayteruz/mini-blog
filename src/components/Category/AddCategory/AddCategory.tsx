@@ -68,7 +68,9 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
             {error}
           </div>
         )}
-        <Button className="form-button" type="submit" disabled={!categoryName.trim() || isSubmitting || loading} text={isSubmitting ? 'Создание...' : 'Создать категорию'} />
+        <Button className="form-button" type="submit" disabled={!categoryName.trim() || isSubmitting || loading}>
+          {isSubmitting ? 'Создание...' : 'Создать категорию'}
+        </Button>
       </form>
     </div>
   );

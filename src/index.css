@@ -592,7 +592,7 @@ svg {
 }
 
 .prose pre {
-	background: #f5f5f5;
+	background: #222;
 	border-radius: 8px;
 	padding: 16px;
 	overflow-x: auto;
@@ -600,10 +600,11 @@ svg {
 }
 
 .prose code {
-	background: #f5f5f5;
+	background: #222;
 	padding: 2px 4px;
 	border-radius: 4px;
 	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+	color: #fff;
 }
 
 .prose pre code {
@@ -616,11 +617,15 @@ svg {
 	color: #d73a49;
 }
 .prose .hljs-string {
-	color: #032f62;
+	color: #528fd5;
 }
 .prose .hljs-function {
-	color: #6f42c1;
+	color: #5b34a5;
 }
 .prose .hljs-comment {
 	color: #6a737d;
+}
+
+.prose .hljs-attr {
+	color: #4287d7;
 }

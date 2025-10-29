@@ -6,13 +6,28 @@ import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
 import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { common, createLowlight } from 'lowlight'
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import css from 'highlight.js/lib/languages/css';
+import html from 'highlight.js/lib/languages/xml';
 
 interface ITextEditorProps {
   content: string;
   setContent: (content: string) => void;
 }
+
+const lowlight = createLowlight(common)
+
+lowlight.register('javascript', javascript)
+lowlight.register('typescript', typescript);
+lowlight.register('css', css);
+lowlight.register('html', html);
+lowlight.register('typescriptreact', typescript); // Регистрируем псевдоним
+lowlight.register('tsx', typescript); // TSX как TypeScript
 
 
 export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
@@ -20,12 +35,16 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
   const editor = useEditor({
     shouldRerenderOnTransaction: true,
     extensions: [
-      StarterKit.configure({ link: false }),
+      StarterKit.configure({ link: false, codeBlock: false, }),
       Link,
       Superscript,
       SubScript,
       Highlight,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        defaultLanguage: 'plaintext',
+      }),
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -44,6 +63,7 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
           <RichTextEditor.ClearFormatting />
           <RichTextEditor.Highlight />
           <RichTextEditor.Code />
+          <RichTextEditor.CodeBlock />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
@@ -58,8 +78,6 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
           <RichTextEditor.Hr />
           <RichTextEditor.BulletList />
           <RichTextEditor.OrderedList />
-          <RichTextEditor.Subscript />
-          <RichTextEditor.Superscript />
         </RichTextEditor.ControlsGroup>
 
         <RichTextEditor.ControlsGroup>
@@ -72,11 +90,6 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
           <RichTextEditor.AlignCenter />
           <RichTextEditor.AlignJustify />
           <RichTextEditor.AlignRight />
-        </RichTextEditor.ControlsGroup>
-
-        <RichTextEditor.ControlsGroup>
-          <RichTextEditor.Undo />
-          <RichTextEditor.Redo />
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 

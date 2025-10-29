@@ -1,21 +1,18 @@
 import { ArrowToggle } from "@/components/ArrowToggle";
 import { PostCard } from "@/components/PostCard";
-import { useCategories } from "@/hooks/useCategories";
-import type { IPost } from "@/types";
+import type { ICategoryTree, IPost } from "@/types";
 import { useState, type FC } from "react";
 import styles from "./AccordeonItem.module.css";
 
 interface IAccordeonItemProps {
-  category: any;
+  category: ICategoryTree;
   level: number;
   posts: IPost[];
 }
 
 export const AccordeonItem: FC<IAccordeonItemProps> = ({ category, level, posts }) => {
   const [isExpanded, setIsExpanded] = useState(level === 0); // Корневые категории раскрыты по умолчанию
-  const { getChildCategories } = useCategories();
-
-  const childCategories = getChildCategories(category.id);
+  const childCategories = category?.children || [];
   const categoryPosts = posts.filter(post => post.categoryId === category.id);
 
   const hasChildren = childCategories.length > 0;

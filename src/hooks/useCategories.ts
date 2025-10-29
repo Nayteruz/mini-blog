@@ -105,22 +105,22 @@ export const useCategories = () => {
 	};
 
 	// ПОЛУЧЕНИЕ ДОЧЕРНИХ КАТЕГОРИЙ
-	const getChildCategories = (parentId: string | null, list?: ICategory[]): ICategory[] => {
-		const mapList = list || categories;
-		return mapList.filter((category) => category.parentId === parentId).sort((a, b) => a.order - b.order); // ← СОРТИРУЕМ ПО ПОРЯДКУ
+	const getChildCategories = (parentId: string | null, list: ICategory[] = []): ICategory[] => {
+		const items = list.length > 0 ? list : categories;
+		return items.filter((category) => category.parentId === parentId).sort((a, b) => a.order - b.order);
 	};
 
 	// ПОСТРОЕНИЕ ДЕРЕВА КАТЕГОРИЙ
-	const buildCategoryTree = (parentId: string | null = null, list?: ICategory[]): ICategoryTree[] => {
+	const buildCategoryTree = (parentId: string | null = null, list: ICategory[]): ICategoryTree[] => {
 		const children = getChildCategories(parentId, list);
 		return children.map((category) => ({
 			...category,
-			children: buildCategoryTree(category.id),
+			children: buildCategoryTree(category.id, list),
 		}));
 	};
 
 	useEffect(() => {
-		setCategoryTree(buildCategoryTree());
+		setCategoryTree(buildCategoryTree(null, categories));
 	}, [categories]);
 
 	// Получение дерева категорий (вычисляемое свойство)
@@ -246,31 +246,36 @@ export const useCategories = () => {
 	const reorderCategories = async (reorderedCategories: ICategory[]) => {
 		const originalCategories = [...categories];
 
+		const newOrderMap = new Map();
+		reorderedCategories.forEach((category, index) => {
+			newOrderMap.set(category.id, index);
+		});
+
+		// 2. Обновляем локальное состояние
+		const updatedCategories = categories
+			.map((category) => {
+				const newOrder = newOrderMap.get(category.id);
+				if (newOrder !== undefined) {
+					return {
+						...category,
+						order: newOrder,
+					};
+				}
+				return category;
+			})
+			.sort((a, b) => {
+				// Сортируем сначала по родителю, потом по порядку
+				if (a.parentId !== b.parentId) {
+					return (a.parentId || "").localeCompare(b.parentId || "");
+				}
+				return a.order - b.order;
+			});
+
+		setCategoryTree(buildCategoryTree(null, updatedCategories));
+
 		try {
 			setIsReordering(true);
 			setError(null);
-
-			// 1. OPTIMISTIC UPDATE: сразу обновляем локальное состояние
-			const updatedCategories = categories
-				.map((cat) => {
-					const reorderedCat = reorderedCategories.find((rc) => rc.id === cat.id);
-					if (reorderedCat) {
-						return {
-							...cat,
-							order: reorderedCat.order,
-						};
-					}
-					return cat;
-				})
-				.sort((a, b) => {
-					// Сортируем сначала по parentId, потом по order
-					if (a.parentId !== b.parentId) {
-						return (a.parentId || "").localeCompare(b.parentId || "");
-					}
-					return a.order - b.order;
-				});
-
-			// setCategories(updatedCategories); ////
 
 			const batch = writeBatch(db);
 
@@ -283,7 +288,7 @@ export const useCategories = () => {
 			});
 
 			await batch.commit();
-			await loadCategories(); // Перезагружаем для обновления состояния
+			await loadCategories();
 		} catch (err) {
 			console.error("Error reordering categories:", err);
 			setError("Ошибка изменения порядка категорий");

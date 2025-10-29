@@ -12,7 +12,25 @@ export const CreatePost = () => {
   const { createPost } = usePosts();
   const { categories, getCategoriesForSelect } = useCategories();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("Напишите заметку...");
+  const [text, setText] = useState(`<p>Попробуйте разные языки программирования:</p>
+      
+      <pre><code class="language-javascript">// JavaScript
+const message = "Hello World";
+console.log(message);</code></pre>
+      
+      <pre><code class="language-css">/* CSS */
+          
+            <h2>Заголовок</h2>
+            <p>Текст</p>
+          
+        </code>
+      </pre>
+      
+      <pre><code class="language-css">/* CSS */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}</code></pre>`);
   const [categoryId, setCategoryId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 

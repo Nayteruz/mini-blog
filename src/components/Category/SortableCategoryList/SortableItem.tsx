@@ -1,12 +1,13 @@
 import { useState, type FC } from "react";
-import { CSS } from '@dnd-kit/utilities';
+import { CSS } from "@dnd-kit/utilities";
 import type { ISortableItemProps } from "./types";
 import { useSortable } from "@dnd-kit/sortable";
 import styles from "./styles.module.css";
 import { ArrowToggle } from "@/components/ArrowToggle";
 import { Button } from "@/components/Button";
-import EditIcon from '@assets/icons/penToSquare.svg?react';
-import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
+import EditIcon from "@assets/icons/penToSquare.svg?react";
+import DeleteIcon from "@assets/icons/deleteIcon.svg?react";
+import ArrowMove from "@assets/icons/arrowUpDown.svg?react";
 import { DnDWrapper } from "@/components/DnDWrapper";
 
 const sizes: Record<number, number> = {
@@ -18,10 +19,23 @@ const sizes: Record<number, number> = {
   5: 10,
   6: 10,
   7: 10,
-}
+};
 
-export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete, onEdit, handleDragEnd }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
+export const SortableItem: FC<ISortableItemProps> = ({
+  category,
+  level,
+  onDelete,
+  onEdit,
+  handleDragEnd,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: category.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -45,20 +59,47 @@ export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete
     <div
       ref={setNodeRef}
       style={style}
-      className={`${styles.treeNode} ${isDragging ? styles.dragging : ''}`}
+      className={`${styles.treeNode} ${isDragging ? styles.dragging : ""}`}
     >
       <div className={styles.item}>
         <div className={styles.content}>
           {/* Drag Handle */}
-          <button {...attributes} {...listeners} className={styles.dragHandle} title="Перетащите для изменения порядка">⋮⋮</button>
-          {hasChildren && (<ArrowToggle className={styles.arrow} isOpen={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />)}
+          <button
+            {...attributes}
+            {...listeners}
+            className={styles.dragHandle}
+            title="Перетащите для изменения порядка"
+          >
+            <ArrowMove className={styles.dragHandleIcon} />
+          </button>
+          {hasChildren && (
+            <ArrowToggle
+              className={styles.arrow}
+              isOpen={isExpanded}
+              onClick={() => setIsExpanded(!isExpanded)}
+            />
+          )}
           {!hasChildren && <div className={styles.spacer}></div>}
-          <span className={styles.name} style={{ fontSize: sizes[level] }}>{category.name}</span>
+          <span className={styles.name} style={{ fontSize: sizes[level] }}>
+            {category.name}
+          </span>
         </div>
 
         <div className={styles.details}>
-          <Button className={styles.button} variant="primary" onClick={handleEdit}><EditIcon className={styles.icon} /></Button>
-          <Button className={styles.button} variant="secondary" onClick={handleDelete}><DeleteIcon className={styles.icon} /></Button>
+          <Button
+            className={styles.button}
+            variant="primary"
+            onClick={handleEdit}
+          >
+            <EditIcon className={styles.icon} />
+          </Button>
+          <Button
+            className={styles.button}
+            variant="secondary"
+            onClick={handleDelete}
+          >
+            <DeleteIcon className={styles.icon} />
+          </Button>
         </div>
       </div>
 
@@ -66,7 +107,7 @@ export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete
         <div className={styles.subList}>
           <DnDWrapper items={category.children!} onDragEnd={handleDragEnd}>
             <div className={styles.subList}>
-              {category.children!.map(category => (
+              {category.children!.map((category) => (
                 <SortableItem
                   key={category.id}
                   category={category}

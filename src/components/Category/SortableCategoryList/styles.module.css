@@ -1,139 +1,153 @@
 .SortableCategoryList {
-	padding: 20px;
+  padding: 20px;
 }
 
 .title {
-	font-size: 22px;
-	margin-bottom: 20px;
-	font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .hint {
-	font-size: 14px;
-	color: #6b7280;
-	font-weight: normal;
-	margin-left: 10px;
-	font-style: italic;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: normal;
+  margin-left: 10px;
+  font-style: italic;
 }
 
 .loaderWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
 }
 
 .treeNode {
-	transition: transform 0.2s ease;
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	transform: scaleY(1);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transform: scaleY(1);
 }
 
 .item {
-	display: grid;
-	grid-template-columns: 1fr auto;
-	align-items: center;
-	gap: 15px;
-	padding: 5px;
-	border: 1px solid #e5e7eb;
-	border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 15px;
+  padding: 5px;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
 
-	&:hover {
-		background: #f9fafb;
-	}
+  &:hover {
+    background: #f9fafb;
+  }
 }
 
 .content {
-	display: grid;
-	grid-template-columns: 20px 20px auto;
-	gap: 5px;
-	align-items: center;
+  display: grid;
+  grid-template-columns: 20px 20px auto;
+  gap: 5px;
+  align-items: center;
 }
 
 .dragging {
-	opacity: 0.5;
-	background: #f0f9ff;
-	border: 2px dashed #3b82f6;
+  opacity: 0.5;
+  background: #f0f9ff;
+  border: 2px dashed #3b82f6;
 }
 
 .dragHandle {
-	cursor: grab;
-	color: #6b7280;
-	transition: background-color 0.2s;
-	font-size: 20px;
+  cursor: grab;
+  color: #6b7280;
+  transition: background-color 0.2s;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 30px;
 
-	&:hover {
-		background: #859ac3;
-		color: #fff;
-	}
+  &:hover {
+    background: #859ac3;
+    color: #fff;
+  }
 
-	&:active {
-		cursor: grabbing;
-	}
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.dragHandleIcon {
+  width: 20px;
+  color: #c1c1c1;
+}
+
+.dragHandle:hover .dragHandleIcon {
+  color: #fff;
 }
 
 .button {
-	padding: 8px;
+  padding: 8px;
 }
 
 .icon {
-	width: 14px;
+  width: 14px;
 }
 
 .arrow {
-	width: 20px;
-	height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .spacer {
-	width: 20px;
-	height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .name {
-	font-size: 18px;
-	font-weight: 500;
-	line-height: 1.3;
-	display: flex;
-	gap: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  display: flex;
+  gap: 5px;
 }
 
 .details {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
 .level {
-	/* font-size: 18px; */
-	font-weight: bold;
-	color: #8b5cf6;
+  /* font-size: 18px; */
+  font-weight: bold;
+  color: #8b5cf6;
 }
 
 .subList {
-	margin-left: 15px;
-	/* border-left: 2px solid #e5e7eb; */
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
+  margin-left: 15px;
+  /* border-left: 2px solid #e5e7eb; */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .treeContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
 }
 
 .treeContainer.loading {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 
 .emptyList {
-	padding: 10px;
-	font-size: 16px;
+  padding: 10px;
+  font-size: 16px;
 }

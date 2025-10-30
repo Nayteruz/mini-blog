@@ -1,7 +1,6 @@
 import { type FC } from 'react';
 import { usePosts } from '../hooks/usePosts';
 import { useCategories } from '../hooks/useCategories';
-// import { useStore } from "../store";
 import { useNavigate } from "react-router-dom";
 import { SearchAndFilter } from "./SearchAndFilter";
 import { PostCard } from "./PostCard";

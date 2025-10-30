@@ -5,6 +5,7 @@ import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Button } from "@/components/Button";
 import styles from "./AddCategory.module.css";
 import { Input } from "@/components/Input";
+import { ListRow } from "@/components/ListRow/ListRow";
 
 interface IAddCategoryProps {
   title?: string
@@ -48,13 +49,17 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
       <h3 className={styles.title}>{title || 'Добавление категории'}</h3>
 
       <form onSubmit={handleSubmit} className="form-fields">
-        <Input
-          value={categoryName}
-          setValue={setCategoryName}
+        <ListRow
           label="Название категории"
-          placeholder="Введите название категории"
           required
-        />
+        >
+          <Input
+            value={categoryName}
+            setValue={setCategoryName}
+            placeholder="Название категории..."
+            required
+          />
+        </ListRow>
         <SelectCategory
           value={selectedParentId || ''}
           onChange={setSelectedParentId}

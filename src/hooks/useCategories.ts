@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, writeBatch } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../configDb";
 import type { ICategory, ICategoryTree, ICreateCategoryData, IUpdateCategoryData } from "../types";
 
 export const useCategories = () => {

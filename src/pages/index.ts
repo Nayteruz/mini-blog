@@ -1,6 +1,7 @@
 export { Home } from "./Home";
 export { SignIn } from "./SignIn";
-export { CreatePost } from "./CreatePost";
+export { PostCreate } from "./PostCreate/PostCreate";
 export { NotFoundPage } from "./NotFoundPage";
-export { EditPostForm } from "./EditPostForm";
-export { CategoriesPage } from "./Categories";
+export { PostEdit } from "./PostEdit/PostEdit";
+export { CategoriesPage } from "./Categories/Categories";
+export { PostList } from "./PostList/PostList";

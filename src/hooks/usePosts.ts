@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, query, orderBy, where, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import type { ICreatePostData, IPost, IUpdatePostData } from "../types";
-import { db } from "../firebase";
+import { db } from "../configDb";
 import { useStore } from "../store";
 
 export const usePosts = () => {

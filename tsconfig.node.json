@@ -30,7 +30,8 @@
 			"@assets/*": ["src/assets/*"],
 			"@pages/*": ["src/pages/*"],
 			"@hooks/*": ["src/hooks/*"],
-			"@store/*": ["src/store/*"]
+			"@store/*": ["src/store/*"],
+			"@db/*": ["src/configDb/*"]
 		}
 	},
 	"include": ["vite.config.ts"]

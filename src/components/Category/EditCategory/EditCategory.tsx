@@ -4,6 +4,7 @@ import type { ICategory } from "@/types";
 import './categories.css';
 import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Input } from "@/components/Input";
+import { ListRow } from "@/components/ListRow/ListRow";
 
 interface IEditCategoryProps {
   category: ICategory;
@@ -77,13 +78,17 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
       </div>
 
       <form onSubmit={handleSubmit} className="form-fields">
-        <Input
-          value={categoryName}
-          setValue={setCategoryName}
+        <ListRow
           label="Новое название категории"
-          placeholder="Введите новое название категории"
           required
-        />
+        >
+          <Input
+            value={categoryName}
+            setValue={setCategoryName}
+            placeholder="Новое название категории..."
+            required
+          />
+        </ListRow>
         <SelectCategory
           label="Новый родитель (необязательно)"
           note="Если не выбрать, категория станет корневой"

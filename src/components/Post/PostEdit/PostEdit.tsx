@@ -3,11 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { usePosts } from '@hooks/usePosts';
 import { useCategories } from '@hooks/useCategories';
 import { useStore } from "@/store";
-import { SelectCategory } from "@/components/Category/SelectCategory/SelectCategory";
-import { TextEditor } from "@components/TextEditor";
-import { Input } from "@components/Input";
+import { PostForm } from "@/components/Post/PostForm/PostForm";
 
-export const EditPostForm: FC = () => {
+export const PostEditForm: FC = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
   const { posts, updatePost, loading } = usePosts();
@@ -20,6 +18,7 @@ export const EditPostForm: FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const orderedCategories = getCategoriesForSelect();
+  const isSendDisabled = !title.trim() || !text.trim() || !categoryId || isSubmitting;
 
   // Находим редактируемый пост
   const post = posts.find(p => p.id === postId);
@@ -68,7 +67,6 @@ export const EditPostForm: FC = () => {
         categoryPath: selectedCategory.path
       });
 
-      alert('Пост успешно обновлен!');
       navigate('/');
     } catch (err) {
       console.error('Error updating post:', err);
@@ -95,52 +93,19 @@ export const EditPostForm: FC = () => {
   }
 
   return (
-    <div className="categories-container">
-      <h2 className="categories-title">Редактировать пост</h2>
-
-      <div className="category-form">
-        <form onSubmit={handleSubmit} className="form-fields">
-          <Input
-            value={title}
-            setValue={setTitle}
-            label="Заголовок поста"
-            placeholder="Введите заголовок поста"
-            required
-          />
-          <SelectCategory
-            classWrapper="form-group"
-            label="Категория(если не выбирать то пост будет создан в корневой категории)"
-            value={categoryId}
-            onChange={setCategoryId}
-            categories={orderedCategories}
-            rootTextSelect="Выберите категорию"
-          />
-          <div className="form-group">
-            <label htmlFor="editPostText" className="form-label">
-              Текст поста *
-            </label>
-            <TextEditor content={text} setContent={setText} />
-          </div>
-
-          <div className="form-actions">
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              className="secondary-button"
-              disabled={isSubmitting}
-            >
-              Отмена
-            </button>
-            <button
-              type="submit"
-              disabled={!title.trim() || !text.trim() || !categoryId || isSubmitting}
-              className="form-button"
-            >
-              {isSubmitting ? 'Обновление...' : 'Обновить пост'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <PostForm
+      onSubmit={handleSubmit}
+      title={title}
+      setTitle={setTitle}
+      categories={categories}
+      orderedCategories={orderedCategories}
+      categoryId={categoryId}
+      setCategoryId={setCategoryId}
+      text={text}
+      setText={setText}
+      isSubmitting={isSubmitting}
+      isDisabled={isSendDisabled}
+      sendButtonText="Редактировать заметку"
+    />
   );
 };

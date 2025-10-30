@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "../../store";
-import { auth, signOut } from "../../firebase";
+import { auth, signOut } from "../../configDb";
 import { PAGES } from "../../contants";
 import styles from "./Header.module.css";
 
@@ -28,6 +28,9 @@ export const Header = () => {
             <>
               <li>
                 <Link className={styles.link} to={PAGES.CATEGORIES.path}>{PAGES.CATEGORIES.title}</Link>
+              </li>
+              <li>
+                <Link className={styles.link} to={PAGES.POST_LIST.path}>{PAGES.POST_LIST.title}</Link>
               </li>
               <li>
                 <Link className={styles.link} to={PAGES.CREATE_NOTE.path}>{PAGES.CREATE_NOTE.title}</Link>

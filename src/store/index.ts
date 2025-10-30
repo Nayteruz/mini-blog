@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { auth } from "../firebase";
+import { auth } from "@/configDb";
 import { type User } from "firebase/auth";
 import type { IPost } from "../types";
 

@@ -7,6 +7,10 @@ export const PAGES = {
 		title: "Категории",
 		path: "/categories",
 	},
+	POST_LIST: {
+		title: "Все заметки",
+		path: "/post-list",
+	},
 	CREATE_NOTE: {
 		title: "Добавить заметку",
 		path: "/create-post",

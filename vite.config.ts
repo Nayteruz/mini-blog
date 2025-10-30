@@ -26,6 +26,7 @@ export default defineConfig({
 			"@pages": resolve(__dirname, "src/pages"),
 			"@hooks": resolve(__dirname, "src/hooks"),
 			"@store": resolve(__dirname, "src/store"),
+			"@db": resolve(__dirname, "src/configDb"),
 			// добавьте свои алиасы
 		},
 	},

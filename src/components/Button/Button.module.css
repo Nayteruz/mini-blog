@@ -3,15 +3,16 @@
 	color: white;
 	border: none;
 	padding: 5px 10px;
-	border-radius: 0.375rem;
+	border-radius: 5px;
 	cursor: pointer;
-	font-size: 0.875rem;
+	font-size: 18px;
 	transition: background-color 0.2s;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
+/* variants */
 .primary {
 	background: #3b82f6;
 
@@ -26,4 +27,26 @@
 	&:hover {
 		background-color: #dc2626;
 	}
+}
+
+.Button:disabled {
+	cursor: default;
+	background-color: #939393;
+	opacity: 0.5;
+}
+
+/* sizes */
+
+.small {
+	font-size: 13px;
+	padding: 3px 7px;
+}
+
+.medium {
+	padding: 5px 10px;
+}
+
+.large {
+	font-size: 22px;
+	padding: 8px 16px;
 }

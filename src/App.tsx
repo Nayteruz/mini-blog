@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "./components/Header";
-import { Router } from "./Router";
+import { Router } from "./Router/Router";
 import { useAuth } from "./hooks/useAuth";
 import { MantineProvider } from '@mantine/core';
 

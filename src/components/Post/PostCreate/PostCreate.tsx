@@ -4,6 +4,7 @@ import { useState, type FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "@/configDb";
 import { PostForm } from "@/components/Post/PostForm/PostForm";
+import { PAGES } from "@/contants";
 
 export const PostCreateForm: FC = () => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const PostCreateForm: FC = () => {
       setTitle('');
       setText('');
       setCategoryId('');
-      navigate('/');
+      navigate(PAGES.MAIN.path);
     } catch (err) {
       console.error('Error creating post:', err);
       alert('Ошибка при создании поста');

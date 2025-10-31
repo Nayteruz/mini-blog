@@ -58,3 +58,10 @@ export interface ITabItem {
 	name: string;
 	content: ReactNode;
 }
+
+export interface IMenuItem {
+	title: string;
+	path: string;
+	isAuth: boolean;
+	pathOrigin?: string;
+}

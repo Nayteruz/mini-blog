@@ -1,26 +1,74 @@
-export const PAGES = {
+import type { IMenuItem } from "./types";
+
+export const PAGES: Record<string, IMenuItem> = {
 	MAIN: {
 		title: "Главная",
 		path: "/",
+		isAuth: false,
 	},
 	CATEGORIES: {
 		title: "Категории",
 		path: "/categories",
+		isAuth: true,
 	},
 	POST_LIST: {
 		title: "Все заметки",
-		path: "/post-list",
+		path: "/posts",
+		isAuth: false,
 	},
-	CREATE_NOTE: {
+	POST_CREATE: {
 		title: "Добавить заметку",
-		path: "/create-post",
+		path: "/post/create",
+		isAuth: true,
+	},
+	POST_EDIT: {
+		title: "Редактировать заметку",
+		path: "/post/edit/:postId",
+		pathOrigin: "/post/edit",
+		isAuth: true,
 	},
 	SIGN_IN: {
 		title: "Авторизация",
 		path: "/sign-in",
+		isAuth: false,
 	},
 	SIGN_OUT: {
 		title: "Выйти",
 		path: "*",
+		isAuth: true,
 	},
 };
+
+export const DEFAULT_TOP_MENU = [
+	{
+		label: PAGES.MAIN.title,
+		path: PAGES.MAIN.path,
+	},
+	{
+		label: PAGES.POST_LIST.title,
+		path: PAGES.POST_LIST.path,
+	},
+	{
+		label: PAGES.SIGN_IN.title,
+		path: PAGES.SIGN_IN.path,
+	},
+];
+
+export const USER_TOP_MENU = [
+	{
+		label: PAGES.MAIN.title,
+		path: PAGES.MAIN.path,
+	},
+	{
+		label: PAGES.CATEGORIES.title,
+		path: PAGES.CATEGORIES.path,
+	},
+	{
+		label: PAGES.POST_LIST.title,
+		path: PAGES.POST_LIST.path,
+	},
+	{
+		label: PAGES.POST_CREATE.title,
+		path: PAGES.POST_CREATE.path,
+	},
+];

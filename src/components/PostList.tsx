@@ -3,9 +3,10 @@ import { usePosts } from '../hooks/usePosts';
 import { useCategories } from '../hooks/useCategories';
 import { useNavigate } from "react-router-dom";
 import { SearchAndFilter } from "./SearchAndFilter";
-import { PostCard } from "./PostCard";
+import { PostCard } from "./Post";
 import { Heading } from "./Heading";
 import { Button } from "./Button";
+import { PAGES } from "@/contants";
 
 
 export const PostsList: FC = () => {
@@ -19,25 +20,6 @@ export const PostsList: FC = () => {
     const category = categories.find(cat => cat.id === categoryId);
     return category ? category.name : 'Неизвестная категория';
   };
-
-  // const handleEdit = (postId: string) => {
-  //   navigate(`/edit-post/${postId}`);
-  // };
-
-  // const handleDelete = async (postId: string, postTitle: string) => {
-  //   if (window.confirm(`Вы уверены, что хотите удалить пост "${postTitle}"?`)) {
-  //     try {
-  //       await deletePost(postId);
-  //       alert('Пост успешно удален!');
-  //     } catch (err) {
-  //       alert('Ошибка при удалении поста' + err);
-  //     }
-  //   }
-  // };
-
-  // const canEditPost = (postAuthorId: string) => {
-  //   return user && user.uid === postAuthorId;
-  // };
 
   if (loading) {
     return (
@@ -59,7 +41,7 @@ export const PostsList: FC = () => {
     <div className="categories-container">
       <div className="posts-header">
         <Heading as="h3">Все посты</Heading>
-        <Button onClick={() => navigate('/create-post')}>+ Создать пост</Button>
+        <Button onClick={() => navigate(PAGES.POST_CREATE.path)}>+ Создать пост</Button>
       </div>
       <SearchAndFilter />
       {posts.length === 0 ? (

@@ -1,4 +1,5 @@
 import { useState, type FC } from "react";
+import { auth } from "@/configDb";
 import { CSS } from "@dnd-kit/utilities";
 import type { ISortableItemProps } from "./types";
 import { useSortable } from "@dnd-kit/sortable";
@@ -44,6 +45,7 @@ export const SortableItem: FC<ISortableItemProps> = ({
 
   const [isExpanded, setIsExpanded] = useState(true);
   const hasChildren = category.children && category.children.length > 0;
+  const isAuthor = auth.currentUser?.uid === category.createdBy;
 
   const handleDelete = () => {
     if (window.confirm(`Удалить категорию "${category.name}"?`)) {
@@ -85,7 +87,7 @@ export const SortableItem: FC<ISortableItemProps> = ({
           </span>
         </div>
 
-        <div className={styles.details}>
+        {isAuthor && <div className={styles.details}>
           <Button
             className={styles.button}
             variant="primary"
@@ -100,7 +102,7 @@ export const SortableItem: FC<ISortableItemProps> = ({
           >
             <DeleteIcon className={styles.icon} />
           </Button>
-        </div>
+        </div>}
       </div>
 
       {hasChildren && isExpanded && (

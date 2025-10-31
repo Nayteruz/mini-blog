@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import { Button } from "@/components/Button";
+import { auth } from "@/configDb";
 import EditIcon from "@assets/icons/penToSquare.svg?react";
 import type {
   ISimpleCategoryListProps,
@@ -32,6 +33,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+  const isAuthor = auth.currentUser?.uid === category.createdBy;
 
   return (
     <div
@@ -54,7 +56,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({
           </button>
           <span className={styles.name}>{category.name}</span>
         </div>
-        <div className={styles.buttons}>
+        {isAuthor && <div className={styles.buttons}>
           <Button
             className={styles.button}
             variant="primary"
@@ -62,7 +64,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({
           >
             <EditIcon className={styles.icon} />
           </Button>
-        </div>
+        </div>}
       </div>
       {category?.children && category?.children?.length > 0 && (
         <SimpleItems

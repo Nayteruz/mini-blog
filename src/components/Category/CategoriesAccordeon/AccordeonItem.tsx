@@ -1,5 +1,5 @@
 import { ArrowToggle } from "@/components/ArrowToggle";
-import { PostCard } from "@/components/PostCard";
+import { PostCard } from "@/components/Post";
 import type { ICategoryTree, IPost } from "@/types";
 import { useState, type FC } from "react";
 import styles from "./AccordeonItem.module.css";

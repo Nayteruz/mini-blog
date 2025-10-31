@@ -4,6 +4,7 @@ import { usePosts } from '@hooks/usePosts';
 import { useCategories } from '@hooks/useCategories';
 import { useStore } from "@/store";
 import { PostForm } from "@/components/Post/PostForm/PostForm";
+import { PAGES } from "@/contants";
 
 export const PostEditForm: FC = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export const PostEditForm: FC = () => {
   useEffect(() => {
     if (post && user && post.author.id !== user.uid) {
       alert('У вас нет прав для редактирования этого поста');
-      navigate('/');
+      navigate(PAGES.MAIN.path);
     }
   }, [post, user, navigate]);
 
@@ -67,7 +68,7 @@ export const PostEditForm: FC = () => {
         categoryPath: selectedCategory.path
       });
 
-      navigate('/');
+      navigate(PAGES.MAIN.path);
     } catch (err) {
       console.error('Error updating post:', err);
       alert('Ошибка при обновлении поста');

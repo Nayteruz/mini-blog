@@ -7,6 +7,7 @@ import { TextEditor } from "@/components/TextEditor/TextEditor";
 import { Button } from "@/components/Button";
 import type { IPostFormProps } from "./types";
 import { useNavigate } from "react-router-dom";
+import { PAGES } from "@/contants";
 
 
 export const PostForm: FC<IPostFormProps> = (props) => {
@@ -45,7 +46,7 @@ export const PostForm: FC<IPostFormProps> = (props) => {
         <TextEditor content={text} setContent={setText} />
       </ListRow>
       <div className={styles.buttons}>
-        <Button type="button" onClick={() => navigate('/')} variant="secondary" disabled={isSubmitting}>
+        <Button type="button" onClick={() => navigate(PAGES.MAIN.path)} variant="secondary" disabled={isSubmitting}>
           Отмена
         </Button>
         <Button type="submit" disabled={isDisabled}>

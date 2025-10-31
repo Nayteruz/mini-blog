@@ -4,6 +4,7 @@ import { auth, provider, signInWithPopup } from '@/configDb';
 import { useStore } from "@/store";
 import styles from "./SignIn.module.css";
 import { Heading } from "@/components/Heading";
+import { PAGES } from "@/contants";
 
 export const SignIn: FC = () => {
   const { setUser } = useStore();
@@ -11,7 +12,7 @@ export const SignIn: FC = () => {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
       setUser(result.user);
-      navigate("/");
+      navigate(PAGES.MAIN.path);
     });
   };
 

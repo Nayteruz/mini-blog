@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { IPost } from "../../types";
+import type { IPost } from "../../../types";
 
 export interface IPostCardProps {
 	post: IPost;

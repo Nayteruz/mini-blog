@@ -3,13 +3,11 @@ import { useCategories } from '@hooks/useCategories';
 import { usePosts } from '@hooks/usePosts';
 import { Spinner } from "@/components/Spinner";
 import { AccordeonItem } from "./AccordeonItem";
+import { Heading } from "@/components/Heading";
 import styles from "./AccordeonList.module.css";
 
-interface IAccordeonListProps {
-  title?: string;
-}
 
-export const AccordeonList: FC<IAccordeonListProps> = ({ title }) => {
+export const AccordeonList: FC = () => {
   const { categoryTree, loading: categoriesLoading, error: categoriesError } = useCategories();
   const { posts, loading: postsLoading, error: postsError } = usePosts();
 
@@ -24,31 +22,27 @@ export const AccordeonList: FC<IAccordeonListProps> = ({ title }) => {
   if (categoriesError || postsError) {
     return (
       <div className={styles.errorMessage}>
-        {categoriesError || postsError}
+        <Heading as="h4" error>{categoriesError || postsError}</Heading>
       </div>
     );
   }
 
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>{title || 'Список категорий'}</h2>
+  if (categoryTree.length === 0) {
+    return (
+      <Heading as="h4" >Список категорий пуст!</Heading>
+    );
+  }
 
-      {categoryTree.length === 0 ? (
-        <div className={styles.emptyState}>
-          Список категорий пуст!
-        </div>
-      ) : (
-        <div className={styles.wrapper}>
-          {categoryTree.map(category => (
-            <AccordeonItem
-              key={category.id}
-              category={category}
-              level={0}
-              posts={posts}
-            />
-          ))}
-        </div>
-      )}
+  return (
+    <div className={styles.AccordeonList}>
+      {categoryTree.map(category => (
+        <AccordeonItem
+          key={category.id}
+          category={category}
+          level={0}
+          posts={posts}
+        />
+      ))}
     </div>
   );
 };

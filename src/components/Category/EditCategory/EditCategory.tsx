@@ -89,14 +89,18 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
             required
           />
         </ListRow>
-        <SelectCategory
+        <ListRow
           label="Новый родитель (необязательно)"
           note="Если не выбрать, категория станет корневой"
-          rootTextSelect="Корневая категория(без родителя)"
-          value={selectedParentId || ''}
-          categories={orderedCategories}
-          onChange={setSelectedParentId}
-        />
+          required
+        >
+          <SelectCategory
+            rootTextSelect="Корневая категория"
+            value={selectedParentId || ''}
+            categories={orderedCategories}
+            onChange={setSelectedParentId}
+          />
+        </ListRow>
 
         {error && (
           <div className="error-message">

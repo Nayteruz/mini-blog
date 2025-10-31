@@ -58,7 +58,6 @@ export const CategoriesList: FC = () => {
 
   return (
     <>
-      <h2 className="categories-title">Управление категориями</h2>
       <AddCategoryForm title="Добавить новую категорию" />
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} list={views} />
     </>

@@ -4,6 +4,8 @@ import { useCategories } from '../hooks/useCategories';
 import { useNavigate } from "react-router-dom";
 import { SearchAndFilter } from "./SearchAndFilter";
 import { PostCard } from "./PostCard";
+import { Heading } from "./Heading";
+import { Button } from "./Button";
 
 
 export const PostsList: FC = () => {
@@ -56,13 +58,8 @@ export const PostsList: FC = () => {
   return (
     <div className="categories-container">
       <div className="posts-header">
-        <h2 className="categories-title">Все посты</h2>
-        <button
-          onClick={() => navigate('/create-post')}
-          className="create-post-button"
-        >
-          + Создать пост
-        </button>
+        <Heading as="h3">Все посты</Heading>
+        <Button onClick={() => navigate('/create-post')}>+ Создать пост</Button>
       </div>
       <SearchAndFilter />
       {posts.length === 0 ? (

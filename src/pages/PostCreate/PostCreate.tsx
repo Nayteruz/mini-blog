@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, type FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "@/configDb";
 import { PostCreateForm } from "@components/Post";
-import { Heading } from "@/components/Heading/Heading";
+import { Heading } from "@/components/Heading";
 import styles from "./styles.module.css";
 
-export const PostCreate = () => {
+export const PostCreate: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {

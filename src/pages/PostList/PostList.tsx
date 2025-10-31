@@ -1,7 +1,7 @@
-import { Heading } from "@/components/Heading/Heading";
+import type { FC } from "react";
+import { Heading } from "@/components/Heading";
 import { PostsList } from "@/components/PostList";
 import styles from "./PostList.module.css";
-import type { FC } from "react";
 
 export const PostList: FC = () => {
 

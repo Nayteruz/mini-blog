@@ -60,14 +60,18 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
             required
           />
         </ListRow>
-        <SelectCategory
-          value={selectedParentId || ''}
-          onChange={setSelectedParentId}
-          categories={orderedCategories}
+        <ListRow
           label="Родительская категория (необязательно)"
           note="Eсли не выбрать, категория будет создана в корне"
-          rootTextSelect="Корневая категория(без родителя)"
-        />
+          required
+        >
+          <SelectCategory
+            value={selectedParentId || ''}
+            onChange={setSelectedParentId}
+            categories={orderedCategories}
+            rootTextSelect="Корневая категория"
+          />
+        </ListRow>
         {error && (
           <div className="error-message">
             {error}

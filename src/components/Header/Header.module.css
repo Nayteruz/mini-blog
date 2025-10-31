@@ -4,6 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	background: #4b45a3;
+	background: var(--color-primary);
 }
 
 .topNav {
@@ -27,13 +28,13 @@
 	border-radius: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	font-size: 14px;
-	background-color: #5d55cc;
+	background-color: var(--color-primary-dark);
 
 	&:hover {
-		background-color: #3d3791;
+		background-color: var(--color-primary-darker);
 	}
 
 	&.active {
-		background-color: #34306f;
+		background-color: var(--color-primary-darker);
 	}
 }

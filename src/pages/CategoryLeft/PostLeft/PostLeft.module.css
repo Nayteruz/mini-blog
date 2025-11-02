@@ -1,0 +1,32 @@
+.PostLeft {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.titleWrapper {
+	display: flex;
+	gap: 10px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	padding-bottom: 5px;
+}
+
+.title {
+	&::first-letter {
+		text-transform: uppercase;
+	}
+	color: var(--main-color);
+}
+
+.arrow {
+	font-size: 20px;
+}
+
+.textWrapper {
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.text {
+	padding: 0;
+}

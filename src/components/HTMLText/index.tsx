@@ -17,7 +17,7 @@ hljs.registerLanguage('html', html);
 hljs.registerLanguage('typescriptreact', typescript); // Регистрируем псевдоним
 hljs.registerLanguage('tsx', typescript); // TSX как TypeScript
 
-export const HTMLText = ({ htmlText }: { htmlText: string }) => {
+export const HTMLText = ({ htmlText, className }: { htmlText: string, className?: string }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const HTMLText = ({ htmlText }: { htmlText: string }) => {
   }, [htmlText]);
 
   return (
-    <p ref={contentRef} className={`prose ${styles.text}`} dangerouslySetInnerHTML={{ __html: htmlText }} />
+    <p ref={contentRef} className={`prose ${styles.text} ${className || ''}`} dangerouslySetInnerHTML={{ __html: htmlText }} />
   );
 
 }

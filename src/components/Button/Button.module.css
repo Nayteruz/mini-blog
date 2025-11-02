@@ -1,52 +1,140 @@
+:root {
+	--padding-sm: 4px 10px;
+	--padding-md: 6px 14px;
+	--padding-lg: 8px 20px;
+}
+
 .Button {
-	background: #3b82f6;
-	color: white;
+	color: var(--color-white);
 	border: none;
-	padding: 5px 10px;
-	border-radius: 5px;
+	border-radius: var(--radius5);
 	cursor: pointer;
-	font-size: 18px;
 	transition: background-color 0.2s;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: var(--font-size-md);
+	padding: var(--padding-md);
 }
 
 /* variants */
 .primary {
-	background: #3b82f6;
+	background: var(--primary-color);
 
 	&:hover {
-		background-color: #2563eb;
+		background-color: var(--primary-hover-color);
+	}
+
+	&:active {
+		background-color: var(--primary-light-color);
 	}
 }
 
 .secondary {
-	background: #ef4444;
+	background: var(--secondary-color);
 
 	&:hover {
-		background-color: #dc2626;
+		background-color: var(--secondary-hover-color);
+	}
+
+	&:active {
+		background-color: var(--secondary-light-color);
 	}
 }
 
-.Button:disabled {
+.success {
+	background: var(--success-color);
+
+	&:hover {
+		background-color: var(--success-hover-color);
+	}
+
+	&:active {
+		background-color: var(--success-light-color);
+	}
+}
+
+.danger {
+	background: var(--danger-color);
+
+	&:hover {
+		background-color: var(--danger-hover-color);
+	}
+
+	&:active {
+		background-color: var(--danger-light-color);
+	}
+}
+
+.warning {
+	background: var(--warning-color);
+
+	&:hover {
+		background-color: var(--warning-hover-color);
+	}
+
+	&:active {
+		background-color: var(--warning-light-color);
+	}
+}
+
+.info {
+	background: var(--info-color);
+
+	&:hover {
+		background-color: var(--info-hover-color);
+	}
+
+	&:active {
+		background-color: var(--info-light-color);
+	}
+}
+
+.purple {
+	background: var(--purple-color);
+
+	&:hover {
+		background-color: var(--purple-hover-color);
+	}
+
+	&:active {
+		background-color: var(--purple-light-color);
+	}
+}
+
+.Button:disabled,
+.disabled {
+	background: var(--disabled-color);
 	cursor: default;
-	background-color: #939393;
+	pointer-events: none;
 	opacity: 0.5;
+
+	&:hover {
+		background-color: var(--disabled-color);
+	}
+
+	&:active {
+		background-color: var(--disabled-color);
+	}
 }
 
 /* sizes */
 
 .small {
-	font-size: 13px;
-	padding: 3px 7px;
+	font-size: var(--font-size-sm);
+	padding: var(--padding-sm);
 }
 
 .medium {
-	padding: 5px 10px;
+	font-size: var(--font-size-md);
+	padding: var(--padding-md);
 }
 
 .large {
-	font-size: 22px;
-	padding: 8px 16px;
+	font-size: var(--font-size-lg);
+	padding: var(--padding-lg);
+}
+
+.square {
+	padding: var(--spacing-sm);
 }

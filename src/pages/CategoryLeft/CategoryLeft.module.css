@@ -1,0 +1,60 @@
+.CategoryLeft {
+	display: grid;
+	grid-template-columns: 250px 1fr;
+	gap: 20px;
+
+	@media all and (max-width: 768px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.categories {
+	padding: 0;
+	position: relative;
+
+	@media all and (max-width: 769px) {
+		/* position: sticky;
+		top: 3px; */
+	}
+}
+
+.button {
+	display: none;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 5px;
+
+	@media all and (max-width: 769px) {
+		display: flex;
+	}
+}
+
+.menu {
+	@media all and (max-width: 769px) {
+		display: none;
+
+		&.open {
+			display: block;
+		}
+	}
+}
+
+.posts {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.notesContent {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	min-width: 0;
+}
+
+.loaderWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 70vh;
+}

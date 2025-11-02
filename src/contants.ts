@@ -11,6 +11,12 @@ export const PAGES: Record<string, IMenuItem> = {
 		path: "/categories",
 		isAuth: true,
 	},
+	CATEGORIES_LEFT: {
+		title: "Посты по категориям",
+		path: "/category/:categoryId",
+		pathOrigin: "/category",
+		isAuth: false,
+	},
 	POST_LIST: {
 		title: "Все заметки",
 		path: "/posts",
@@ -45,6 +51,10 @@ export const DEFAULT_TOP_MENU = [
 		path: PAGES.MAIN.path,
 	},
 	{
+		label: PAGES.CATEGORIES_LEFT.title,
+		path: PAGES.CATEGORIES_LEFT.pathOrigin || "",
+	},
+	{
 		label: PAGES.POST_LIST.title,
 		path: PAGES.POST_LIST.path,
 	},
@@ -58,6 +68,10 @@ export const USER_TOP_MENU = [
 	{
 		label: PAGES.MAIN.title,
 		path: PAGES.MAIN.path,
+	},
+	{
+		label: PAGES.CATEGORIES_LEFT.title,
+		path: PAGES.CATEGORIES_LEFT.pathOrigin || "",
 	},
 	{
 		label: PAGES.CATEGORIES.title,

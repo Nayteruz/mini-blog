@@ -5,3 +5,4 @@ export { NotFoundPage } from "./NotFound/NotFound";
 export { PostEdit } from "./PostEdit/PostEdit";
 export { CategoriesPage } from "./Categories/Categories";
 export { PostList } from "./PostList/PostList";
+export { CategoryLeft } from "./CategoryLeft/CategoryLeft";

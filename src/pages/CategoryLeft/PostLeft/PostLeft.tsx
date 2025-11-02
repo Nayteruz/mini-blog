@@ -12,12 +12,13 @@ interface IPostLeftProps {
 export const PostLeft: FC<IPostLeftProps> = ({ post }) => {
   const { title, text } = post;
   const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
 
   return (
     <div className={styles.PostLeft}>
-      <div className={styles.titleWrapper}>
+      <div className={styles.titleWrapper} onClick={toggle}>
         <Heading as="h3" className={styles.title}>{title}</Heading>
-        <ArrowToggle className={styles.arrow} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+        <ArrowToggle className={styles.arrow} isOpen={isOpen} />
       </div>
       {isOpen && <div className={styles.textWrapper}>
         <HTMLText htmlText={text} className={styles.text} />

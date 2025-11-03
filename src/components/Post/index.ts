@@ -1,4 +1,4 @@
 export { PostEditForm } from "./PostEdit/PostEdit";
 export { PostCreateForm } from "./PostCreate/PostCreate";
-export { PostCard } from "./PostCard";
+export { PostCard } from "./PostCard/PostCard";
 export { PostLeft } from "./PostLeft/PostLeft";

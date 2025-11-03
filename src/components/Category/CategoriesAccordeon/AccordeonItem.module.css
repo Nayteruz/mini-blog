@@ -1,8 +1,10 @@
-.wrapper {
+.AccordeonItem {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 2px;
+	min-width: 0;
+	max-width: 100%;
 }
 
 .header {
@@ -44,11 +46,16 @@
 }
 
 .name {
-	font-size: 1.1rem;
+	font-size: 20px;
+	line-height: 1.25;
 	color: #111827;
 
 	&::first-letter {
 		text-transform: uppercase;
+	}
+
+	@media all and (max-width: 768px) {
+		font-size: 16px;
 	}
 }
 
@@ -62,13 +69,17 @@
 	padding-left: 10px;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 2px;
+	min-width: 0;
+	max-width: 100%;
 }
 
 .categoryPosts {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 2px;
+	min-width: 0;
+	max-width: 100%;
 }
 
 .childCategories {

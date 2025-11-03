@@ -3,6 +3,9 @@
 	color: #374151;
 	white-space: pre-wrap;
 	font-size: 18px;
-	border-top: 1px solid #f3f4f6;
-	padding: 6px 4px;
+	/* padding: 6px 4px; */
+
+	@media all and (max-width: 769px) {
+		font-size: 14px;
+	}
 }

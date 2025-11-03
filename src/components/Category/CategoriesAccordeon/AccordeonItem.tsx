@@ -20,7 +20,7 @@ export const AccordeonItem: FC<IAccordeonItemProps> = ({ category, level, posts 
   const isEmpty = !hasChildren && !hasPosts;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.AccordeonItem}>
       <div
         className={`${styles.header} ${isExpanded ? styles.expanded : ''} ${isEmpty ? styles.empty : ''}`}
         onClick={() => !isEmpty && setIsExpanded(!isExpanded)}

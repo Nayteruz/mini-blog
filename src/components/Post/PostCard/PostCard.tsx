@@ -47,7 +47,7 @@ export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle,
       </div>
       <div className={classes.content}>
         {parts.includes('category') && <div className={styles.category}>Категория: <span>{category}</span></div>}
-        <HTMLText htmlText={post.text} />
+        <HTMLText htmlText={post.text} className={styles.htmlText} />
         {!parts.includes('footer') && <div className={styles.editWrap}>
           <Link className={styles.link} to={`${PAGES.POST_EDIT.pathOrigin}/${post.id}`}>✎</Link>
         </div>}

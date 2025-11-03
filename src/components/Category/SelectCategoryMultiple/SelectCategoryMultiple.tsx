@@ -3,7 +3,6 @@ import { useCategories } from '@hooks/useCategories';
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import styles from "./SelectCategoryMultiple.module.css";
-import './SelectCategoryMultiple.css';
 import { Input } from "@/components/Input";
 import type { ICategory } from "@/types";
 
@@ -47,7 +46,7 @@ export const SelectCategoryMultiple: React.FC<MultiCategorySelectProps> = ({
   // Получаем упорядоченные категории
   const orderedCategories = useMemo(() => {
     return getCategoriesForSelect();
-  }, [categories]);
+  }, [categories, getCategoriesForSelect]);
 
   // Фильтруем категории по поиску
   const filteredCategories = useMemo(() => {

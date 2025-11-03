@@ -1,5 +1,7 @@
 import type { IMenuItem } from "./types";
 
+export const BASE_HOST = "/mini-blog/";
+
 export const PAGES: Record<string, IMenuItem> = {
 	MAIN: {
 		title: "Главная",

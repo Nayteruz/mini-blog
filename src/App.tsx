@@ -5,6 +5,7 @@ import { useAuth } from "./hooks/useAuth";
 import { MantineProvider } from '@mantine/core';
 
 import { createTheme } from '@mantine/core';
+import { BASE_HOST } from "./contants";
 
 const theme = createTheme({});
 
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <MantineProvider theme={theme}>
-      <BrowserRouter basename="/mini-blog/">
+      <BrowserRouter basename={BASE_HOST}>
         <Header />
         <article className="container-pages">
           <div className="content">

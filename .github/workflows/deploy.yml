@@ -29,8 +29,8 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Copy custom 404.html to dist
-        run: cp ./dis/index.html ./dist/404.html
+      - name: Copy index.html to dist as 404.html
+        run: cp ./dist/index.html ./dist/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

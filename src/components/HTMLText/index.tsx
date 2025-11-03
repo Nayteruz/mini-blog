@@ -36,5 +36,4 @@ export const HTMLText = ({ htmlText, className }: { htmlText: string, className?
   return (
     <p ref={contentRef} className={`prose ${styles.text} ${className || ''}`} dangerouslySetInnerHTML={{ __html: htmlText }} />
   );
-
 }

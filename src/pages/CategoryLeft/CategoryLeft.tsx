@@ -16,7 +16,7 @@ export const CategoryLeft: FC = () => {
   const { categoryId } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const selectedCategory = useMemo(() => categories.find(cat => cat.id === categoryId), [categories, categoryId]);
-  const categoryPosts = posts.filter(post => post.categoryId === selectedCategory?.id);
+  const categoryPosts = posts.filter(post => (post.categoryIds || []).includes(selectedCategory?.id || ''));
 
   const closeMenu = () => {
     if (isOpen) {
@@ -50,7 +50,13 @@ export const CategoryLeft: FC = () => {
     <article className={styles.CategoryLeft}>
       <aside className={styles.categories}>
         <Button variant="purple" onClick={toggleOpen} className={styles.button}><MenuIcon />Категории</Button>
-        <CategoryMenu className={`${styles.menu} ${isOpen ? styles.open : ''}`} list={categoryTree} selectedCategory={selectedCategory} posts={posts} onClick={closeMenu} />
+        <CategoryMenu
+          className={`${styles.menu} ${isOpen ? styles.open : ''}`}
+          list={categoryTree}
+          selectedCategory={selectedCategory}
+          posts={posts}
+          onClick={closeMenu}
+        />
       </aside>
       <main className={styles.notesContent}>
         <Heading as="h1">{selectedCategory?.name || 'Категории с постами'}</Heading>

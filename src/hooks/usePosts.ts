@@ -76,7 +76,7 @@ export const usePosts = () => {
 		try {
 			const q = query(
 				collection(db, "posts"),
-				where("categoryPath", "array-contains", categoryId),
+				where("categoryIds", "array-contains", categoryId),
 				orderBy("createdAt", "desc")
 			);
 			const snapshot = await getDocs(q);

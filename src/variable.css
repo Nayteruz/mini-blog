@@ -4,11 +4,18 @@
 	/* Основные брендовые цвета */
 	--white-color: #fff;
 	--black-color: #000;
-	--main-color: #3e4489;
+	--main-color: rgb(62, 68, 137);
 	--main-dark: #323a70;
 	--main-darker: #262a56;
 	--main-light: #5a62b0;
 	--main-lighter: #7a81d2;
+
+	--main-color-5: rgba(62, 68, 137, 0.05);
+	--main-color-10: rgba(62, 68, 137, 0.1);
+	--main-color-20: rgba(62, 68, 137, 0.2);
+	--main-color-40: rgba(62, 68, 137, 0.4);
+	--main-color-60: rgba(62, 68, 137, 0.6);
+	--main-color-80: rgba(62, 68, 137, 0.8);
 
 	/* buttons color */
 	--primary-color: #3e4489;
@@ -32,9 +39,9 @@
 	--warning-hover-color: #a38427;
 	--warning-light-color: #ffce3a;
 
-	--info-color: #2e7e8b;
-	--info-hover-color: #107889;
-	--info-light-color: #3ab9cc;
+	--info-color: #3b82f6;
+	--info-hover-color: #2570e9;
+	--info-light-color: #4e8bee;
 
 	--disabled-color: #6c757d;
 	--disabled-bg: #e9ecef;

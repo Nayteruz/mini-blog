@@ -2,7 +2,7 @@ import type { FC } from "react";
 import styles from "./PostForm.module.css";
 import { ListRow } from "@/components/ListRow/ListRow";
 import { Input } from "@/components/Input";
-import { SelectCategory } from "@/components/Category";
+import { SelectCategoryMultiple } from "@/components/Category";
 import { TextEditor } from "@/components/TextEditor/TextEditor";
 import { Button } from "@/components/Button";
 import type { IPostFormProps } from "./types";
@@ -12,7 +12,7 @@ import { PAGES } from "@/contants";
 
 export const PostForm: FC<IPostFormProps> = (props) => {
   const navigate = useNavigate();
-  const { className, onSubmit, title, setTitle, categories, orderedCategories, categoryId, setCategoryId, text, setText, isSubmitting, isDisabled, sendButtonText = "Отправить" } = props;
+  const { className, onSubmit, title, setTitle, categories, categoryIds, setCategoryIds, text, setText, isSubmitting, isDisabled, sendButtonText = "Отправить" } = props;
 
   return (
     <form onSubmit={onSubmit} className={`${styles.PostForm} ${className || ''}`}>
@@ -32,11 +32,16 @@ export const PostForm: FC<IPostFormProps> = (props) => {
         note={`${categories.length === 0 ? 'Сначала создайте категории в разделе "Управление категориями"' : ''}`}
         required
       >
-        <SelectCategory
-          value={categoryId}
-          onChange={setCategoryId}
+        {/* <SelectCategory
+          value={categoryIds[0]}
+          onChange={setCategoryIds}
           categories={orderedCategories}
           rootTextSelect="Выберите категорию"
+        /> */}
+        <SelectCategoryMultiple
+          value={categoryIds}
+          onChange={setCategoryIds}
+          maxCategories={5}
         />
       </ListRow>
       <ListRow

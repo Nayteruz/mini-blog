@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStore } from "@/store";
 import { auth, signOut } from "@/configDb";
@@ -5,7 +6,7 @@ import { DEFAULT_TOP_MENU, PAGES, USER_TOP_MENU } from "@/contants";
 import { Button } from "@components/Button";
 import MenuIcon from "@assets/icons/barsIcon.svg?react";
 import styles from "./Header.module.css";
-import { useState } from "react";
+
 
 export const Header = () => {
   const { setUser } = useStore();

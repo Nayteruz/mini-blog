@@ -1,0 +1,106 @@
+.SelectCategoryMultiple {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+}
+
+.selectedCategories {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--spacing-xs);
+	min-height: 47px;
+	padding: var(--spacing-sm) 50px var(--spacing-sm) var(--spacing-sm);
+	border: 1px solid var(--main-color-20);
+	border-radius: var(--radius5);
+	background: var(--main-color-5);
+}
+
+.buttonToggle {
+	align-self: start;
+}
+
+.categoryCount {
+	font-size: var(--font-size-sm);
+	color: var(--white-color);
+	font-weight: normal;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: var(--spacing-xs);
+	background-color: var(--main-color-80);
+	border-radius: var(--radius5);
+	pointer-events: none;
+	font-weight: bold;
+}
+
+.CategoriesDropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	margin-top: var(--spacing-xs);
+	background: var(--white-color);
+	border: 1px solid var(--main-color-20);
+	border-radius: var(--radius5);
+	box-shadow: 0 4px 6px var(--main-color-20);
+	z-index: 1000;
+	max-height: 300px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.search {
+	padding: var(--spacing-sm);
+	border-bottom: 1px solid var(--main-color-20);
+	background-color: var(--main-color-5);
+}
+
+.searchInput {
+	background-color: var(--white-color);
+	border-width: 2px;
+	padding: var(--spacing-sm);
+}
+
+.categories {
+	flex: 1;
+	overflow-y: auto;
+	max-height: 200px;
+}
+
+.CategoryOption {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 10px;
+	padding: var(--spacing-sm) var(--spacing-md);
+	cursor: pointer;
+	transition: background-color 0.2s;
+
+	&:hover {
+		background-color: var(--main-color-10);
+	}
+}
+
+.optionText {
+	font-size: var(--font-size-md);
+	color: var(--main-dark);
+}
+
+.notFound {
+	text-align: center;
+	font-style: italic;
+	padding: var(--font-size-sm);
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+	padding: var(--spacing-sm);
+	border-top: 1px solid var(--main-color-20);
+	background: var(--main-color-10);
+}

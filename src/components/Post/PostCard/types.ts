@@ -1,10 +1,10 @@
 import type { CSSProperties } from "react";
-import type { IPost } from "../../../types";
+import type { ICategory, IPost } from "@/types";
 
 export interface IPostCardProps {
 	post: IPost;
 	parts: visibleParts[];
-	category?: string;
+	ownCategories?: ICategory[];
 	isToggle?: boolean;
 	className?: string;
 	style?: CSSProperties;

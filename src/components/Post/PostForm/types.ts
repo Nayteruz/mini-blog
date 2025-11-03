@@ -8,8 +8,8 @@ export interface IPostFormProps {
 	setTitle: (title: string) => void;
 	text: string;
 	setText: (text: string) => void;
-	categoryId: string;
-	setCategoryId: (categoryId: string) => void;
+	categoryIds: string[];
+	setCategoryIds: (categoryIds: string[]) => void;
 	categories: ICategory[];
 	orderedCategories: ICategory[];
 	isSubmitting: boolean;

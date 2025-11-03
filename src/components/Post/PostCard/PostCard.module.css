@@ -1,6 +1,6 @@
 .Card {
 	background: white;
-	border: 1px solid #c2d7ff;
+	border: 2px solid var(--main-color-20);
 	padding: 5px 14px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	display: flex;
@@ -97,7 +97,7 @@
 	width: 15px;
 }
 
-.category {
+.categories {
 	margin-bottom: 10px;
 	font-size: 14px;
 

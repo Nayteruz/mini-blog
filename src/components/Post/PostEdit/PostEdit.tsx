@@ -2,8 +2,8 @@ import React, { useState, useEffect, type FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePosts } from '@hooks/usePosts';
 import { useCategories } from '@hooks/useCategories';
-import { useStore } from "@/store";
 import { PostForm } from "@/components/Post/PostForm/PostForm";
+import { useStore } from "@/store";
 import { PAGES } from "@/contants";
 
 export const PostEditForm: FC = () => {
@@ -15,11 +15,11 @@ export const PostEditForm: FC = () => {
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const orderedCategories = getCategoriesForSelect();
-  const isSendDisabled = !title.trim() || !text.trim() || !categoryId || isSubmitting;
+  const isSendDisabled = !title.trim() || !text.trim() || !categoryIds.length || isSubmitting;
 
   // Находим редактируемый пост
   const post = posts.find(p => p.id === postId);
@@ -28,7 +28,7 @@ export const PostEditForm: FC = () => {
     if (post) {
       setTitle(post.title);
       setText(post.text);
-      setCategoryId(post.categoryId);
+      setCategoryIds(post.categoryIds);
     }
   }, [post]);
 
@@ -48,7 +48,7 @@ export const PostEditForm: FC = () => {
       return;
     }
 
-    if (!title.trim() || !text.trim() || !categoryId) {
+    if (!title.trim() || !text.trim() || !categoryIds.length) {
       alert('Заполните все обязательные поля');
       return;
     }
@@ -56,16 +56,10 @@ export const PostEditForm: FC = () => {
     try {
       setIsSubmitting(true);
 
-      const selectedCategory = categories.find(cat => cat.id === categoryId);
-      if (!selectedCategory) {
-        throw new Error('Категория не найдена');
-      }
-
       await updatePost(postId!, {
         title: title.trim(),
         text: text.trim(),
-        categoryId,
-        categoryPath: selectedCategory.path
+        categoryIds,
       });
 
       navigate(PAGES.MAIN.path);
@@ -100,8 +94,8 @@ export const PostEditForm: FC = () => {
       setTitle={setTitle}
       categories={categories}
       orderedCategories={orderedCategories}
-      categoryId={categoryId}
-      setCategoryId={setCategoryId}
+      categoryIds={categoryIds}
+      setCategoryIds={setCategoryIds}
       text={text}
       setText={setText}
       isSubmitting={isSubmitting}

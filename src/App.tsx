@@ -1,11 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import { Header } from "./components/Header";
+import { Header } from "@components/Header/Header";
 import { Router } from "./Router/Router";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 import { MantineProvider } from '@mantine/core';
-
 import { createTheme } from '@mantine/core';
-import { BASE_HOST } from "./contants";
+import { BASE_HOST } from "@/contants";
 
 const theme = createTheme({});
 
@@ -16,8 +15,8 @@ function App() {
     <MantineProvider theme={theme}>
       <BrowserRouter basename={BASE_HOST}>
         <Header />
-        <article className="container-pages">
-          <div className="content">
+        <article className="pages-main-wrapper">
+          <div className="page-content-wrapper">
             <Router />
           </div>
         </article>

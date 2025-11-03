@@ -13,10 +13,10 @@ export const PostCreateForm: FC = () => {
   const orderedCategories = getCategoriesForSelect();
   const [title, setTitle] = useState("");
   const [text, setText] = useState('Написать заметку...');
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const isSendDisabled = !title.trim() || !text.trim() || !categoryId || isSubmitting;
+  const isSendDisabled = !title.trim() || !text.trim() || !categoryIds.length || isSubmitting;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export const PostCreateForm: FC = () => {
       return;
     }
 
-    if (!title.trim() || !text.trim() || !categoryId) {
+    if (!title.trim() || !text.trim() || !categoryIds.length) {
       alert('Заполните все обязательные поля');
       return;
     }
@@ -34,29 +34,24 @@ export const PostCreateForm: FC = () => {
     try {
       setIsSubmitting(true);
 
-      // Находим выбранную категорию для получения path
-      const selectedCategory = categories.find(cat => cat.id === categoryId);
-      if (!selectedCategory) {
-        throw new Error('Категория не найдена');
-      }
-
       const newPostData = {
         title: title.trim(),
         text: text.trim(),
-        categoryId,
-        categoryPath: selectedCategory.path,
+        categoryIds,
         author: {
           name: auth.currentUser.displayName || "",
           id: auth.currentUser.uid,
         },
       };
 
+      console.log(newPostData);
+
       await createPost(newPostData);
 
       // Очистка формы и переход
       setTitle('');
       setText('');
-      setCategoryId('');
+      setCategoryIds([]);
       navigate(PAGES.MAIN.path);
     } catch (err) {
       console.error('Error creating post:', err);
@@ -73,8 +68,8 @@ export const PostCreateForm: FC = () => {
       setTitle={setTitle}
       categories={categories}
       orderedCategories={orderedCategories}
-      categoryId={categoryId}
-      setCategoryId={setCategoryId}
+      categoryIds={categoryIds}
+      setCategoryIds={setCategoryIds}
       text={text}
       setText={setText}
       isSubmitting={isSubmitting}

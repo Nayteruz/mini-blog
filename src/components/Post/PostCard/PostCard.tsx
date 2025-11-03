@@ -1,18 +1,20 @@
 import { useState, type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "@/configDb";
-import type { IPostCardProps } from "./types";
-import { ArrowToggle } from "../../ArrowToggle";
-import { Button } from "../../Button";
-import { usePosts } from "@hooks/usePosts";
+import { ArrowToggle } from "@components/ArrowToggle";
 import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
 import EditIcon from '@assets/icons/penToSquare.svg?react';
-import styles from './PostCard.module.css';
-import { HTMLText } from "../../HTMLText";
+import { Button } from "@components/Button";
+import { usePosts } from "@hooks/usePosts";
+import { HTMLText } from "@components/HTMLText";
 import { PAGES } from "@/contants";
+import type { IPostCardProps } from "./types";
+import styles from './PostCard.module.css';
+import { OwnCategories } from "../OwnCategories/OwnCategories";
 
 
-export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle, parts, category }) => {
+
+export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle, parts, ownCategories = [] }) => {
   const navigate = useNavigate();
   const { deletePost } = usePosts();
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +40,6 @@ export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle,
     footer: `${styles.cardFooter}${!isToggle ? ` ${styles.open}` : ''}${isToggle && isOpen ? ` ${styles.open}` : ''}`
   };
 
-
   return (
     <div className={classes.wrap} style={style}>
       <div className={styles.cardHeader} onClick={isToggle ? toggleOpen : undefined} style={{ cursor: isToggle ? 'pointer' : 'auto' }}>
@@ -46,7 +47,7 @@ export const PostCard: FC<IPostCardProps> = ({ post, className, style, isToggle,
         {isToggle && <ArrowToggle isOpen={isOpen} className={styles.arrow} />}
       </div>
       <div className={classes.content}>
-        {parts.includes('category') && <div className={styles.category}>Категория: <span>{category}</span></div>}
+        {parts.includes('category') && <OwnCategories categories={ownCategories} label="Категории:" />}
         <HTMLText htmlText={post.text} className={styles.htmlText} />
         {!parts.includes('footer') && <div className={styles.editWrap}>
           <Link className={styles.link} to={`${PAGES.POST_EDIT.pathOrigin}/${post.id}`}>✎</Link>

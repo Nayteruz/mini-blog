@@ -23,7 +23,7 @@ interface ICategoryItemProps {
 const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const children = category?.children || [];
-  const postsCount = posts?.filter(post => post.categoryId === category.id).length || 0;
+  const postsCount = posts?.filter(post => (post.categoryIds || []).includes(category.id)).length || 0;
 
   const toggleOpen = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

@@ -1,0 +1,35 @@
+.PostList {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.loadingContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 60vh;
+}
+
+.listWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.arrow {
+	color: var(--main-color);
+	margin-left: 10px;
+}

@@ -1,11 +1,11 @@
 import { useMemo, useState, type FC } from "react";
 import { Heading } from "@/components/Heading";
 import { useCategories } from "@/hooks/useCategories";
-import { CategoryMenu } from "./CategoryMenu/CategoryMenu";
+import { CategoryMenu } from "@components/Category";
 import { useParams } from "react-router-dom";
 import { Spinner } from "@/components/Spinner";
 import { usePosts } from "@/hooks/usePosts";
-import { PostLeft } from "./PostLeft/PostLeft";
+import { PostLeft } from "@components/Post";
 import { Button } from "@/components/Button";
 import MenuIcon from '@assets/icons/barsIcon.svg?react';
 import styles from "./CategoryLeft.module.css";

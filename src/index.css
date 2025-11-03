@@ -6,6 +6,7 @@
 	min-height: 100vh;
 	font-family: var(--font-family);
 	background-color: var(--white-color);
+	font-size: var(--font-size-md);
 }
 
 .container-pages {

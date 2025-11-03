@@ -31,8 +31,6 @@ const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts })
     setIsOpen(!isOpen);
   }
 
-  console.log(selectedCategory?.id, category.id);
-
   return (
     <li>
       <Link className={`${styles.link} ${selectedCategory?.id === category.id ? styles.active : ''}`} to={`${PAGES.CATEGORIES_LEFT.pathOrigin}/${category.id}`}>

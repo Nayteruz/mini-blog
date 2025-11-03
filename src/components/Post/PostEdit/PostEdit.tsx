@@ -28,7 +28,7 @@ export const PostEditForm: FC = () => {
     if (post) {
       setTitle(post.title);
       setText(post.text);
-      setCategoryIds(post.categoryIds);
+      setCategoryIds(post.categoryIds || []);
     }
   }, [post]);
 

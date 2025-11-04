@@ -1,14 +1,11 @@
 import { type FC } from 'react';
-import { useCategories } from '@hooks/useCategories';
 import { Spinner } from "@/components/Spinner";
 import { SortableItem } from "./SortableItem";
 import { DnDWrapper } from "@/components/DnDWrapper";
 import styles from "./styles.module.css";
 import type { ISortableListProps } from "./types";
 
-export const SortableList: FC<ISortableListProps> = ({ changeEdit, categories, handleDragEnd, isLoading }) => {
-  const { deleteCategory, error } = useCategories();
-
+export const SortableList: FC<ISortableListProps> = ({ changeEdit, categories, handleDragEnd, isLoading, onDelete, error }) => {
   if (error) {
     return (
       <div className="error-message">
@@ -42,7 +39,7 @@ export const SortableList: FC<ISortableListProps> = ({ changeEdit, categories, h
               key={category.id}
               category={category}
               level={0}
-              onDelete={deleteCategory}
+              onDelete={onDelete}
               onEdit={changeEdit}
               handleDragEnd={handleDragEnd}
             />

@@ -97,7 +97,7 @@ export const SortableItem: FC<ISortableItemProps> = ({
           </Button>
           <Button
             className={styles.button}
-            variant="secondary"
+            variant="danger"
             onClick={handleDelete}
           >
             <DeleteIcon className={styles.icon} />

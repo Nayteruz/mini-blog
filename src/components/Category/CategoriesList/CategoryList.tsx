@@ -12,7 +12,7 @@ import { onDragEnd } from "../SortableCategoryList/utils";
 
 
 export const CategoriesList: FC = () => {
-  const { categoryTree, loading, reorderCategories } = useCategories();
+  const { categoryTree, loading, reorderCategories, deleteCategory, error } = useCategories();
   const [activeTab, setActiveTab] = useState<string>('tree');
   const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
@@ -33,8 +33,8 @@ export const CategoriesList: FC = () => {
   }, [loading]);
 
   const views = [
-    { key: 'tree', name: 'Древовидный вид', content: <SortableList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} /> },
-    { key: 'list', name: 'Простой список', content: <SimpleCategoryList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} /> }
+    { key: 'tree', name: 'Древовидный вид', content: <SortableList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} onDelete={deleteCategory} error={error} /> },
+    { key: 'list', name: 'Простой список', content: <SimpleCategoryList categories={categoryTree} isLoading={loading} handleDragEnd={handleDragEnd} changeEdit={setEditingCategory} onDelete={deleteCategory} /> }
   ]
 
   if (loading && !isFirstLoad) {

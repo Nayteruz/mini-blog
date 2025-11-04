@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { Button } from "@/components/Button";
 import { auth } from "@/configDb";
 import EditIcon from "@assets/icons/penToSquare.svg?react";
+import DeleteIcon from "@assets/icons/deleteIcon.svg?react";
 import type {
   ISimpleCategoryListProps,
   ISimpleItemProps,
@@ -19,6 +20,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({
   changeEdit,
   level,
   handleDragEnd,
+  onDelete,
 }) => {
   const {
     attributes,
@@ -34,6 +36,12 @@ const SimpleItem: FC<ISimpleItemProps> = ({
     transition,
   };
   const isAuthor = auth.currentUser?.uid === category.createdBy;
+
+  const handleDelete = () => {
+    if (window.confirm(`Удалить категорию "${category.name}"?`)) {
+      onDelete(category.id);
+    }
+  };
 
   return (
     <div
@@ -60,9 +68,18 @@ const SimpleItem: FC<ISimpleItemProps> = ({
           <Button
             className={styles.button}
             variant="primary"
+            size="small"
             onClick={() => changeEdit(category)}
           >
             <EditIcon className={styles.icon} />
+          </Button>
+          <Button
+            className={styles.button}
+            variant="danger"
+            size="small"
+            onClick={handleDelete}
+          >
+            <DeleteIcon className={styles.icon} />
           </Button>
         </div>}
       </div>
@@ -72,6 +89,7 @@ const SimpleItem: FC<ISimpleItemProps> = ({
           changeEdit={changeEdit}
           level={level + 1}
           handleDragEnd={handleDragEnd}
+          onDelete={onDelete}
         />
       )}
     </div>
@@ -83,6 +101,7 @@ const SimpleItems: FC<ISimpleItemsProps> = ({
   changeEdit,
   level,
   handleDragEnd,
+  onDelete,
 }) => {
   return (
     <DnDWrapper items={categories} onDragEnd={handleDragEnd}>
@@ -94,6 +113,7 @@ const SimpleItems: FC<ISimpleItemsProps> = ({
             changeEdit={changeEdit}
             level={level}
             handleDragEnd={handleDragEnd}
+            onDelete={onDelete}
           />
         ))}
       </div>
@@ -106,6 +126,7 @@ export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({
   categories,
   isLoading,
   handleDragEnd,
+  onDelete
 }) => {
   if (categories.length === 0) {
     return (
@@ -133,6 +154,7 @@ export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({
               changeEdit={changeEdit}
               level={0}
               handleDragEnd={handleDragEnd}
+              onDelete={onDelete}
             />
           ))}
         </div>

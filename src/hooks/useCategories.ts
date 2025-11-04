@@ -61,7 +61,9 @@ export const useCategories = () => {
   };
 
   // Создание новой категории
-  const createCategory = async (params: ICreateCategoryHookArguments) => {
+  const createCategory = async (
+    params: ICreateCategoryHookArguments
+  ): Promise<string> => {
     const { name, parentId, userId } = params;
     try {
       setError(null);

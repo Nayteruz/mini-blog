@@ -14,7 +14,7 @@
 .listWrapper {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-md);
 }
 
 .buttons {

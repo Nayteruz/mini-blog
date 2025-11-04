@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { PAGE_NAMES } from "./contants";
 
 export interface IPost {
   id: string;
@@ -53,3 +54,5 @@ export interface IMenuItem {
   isAuth: boolean;
   pathOrigin?: string;
 }
+
+export type IPageNames = (typeof PAGE_NAMES)[keyof typeof PAGE_NAMES];

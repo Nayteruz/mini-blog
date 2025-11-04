@@ -1,8 +1,21 @@
-import type { IMenuItem } from "./types";
+import type { IMenuItem, IPageNames } from "./types";
 
 export const BASE_HOST = "/mini-blog/";
 
-export const PAGES: Record<string, IMenuItem> = {
+export const PAGE_NAMES = {
+  MAIN: "MAIN",
+  CATEGORIES: "CATEGORIES",
+  CATEGORY_ADD: "CATEGORY_ADD",
+  CATEGORY_EDIT: "CATEGORY_EDIT",
+  CATEGORIES_LEFT: "CATEGORIES_LEFT",
+  POST_LIST: "POST_LIST",
+  POST_CREATE: "POST_CREATE",
+  POST_EDIT: "POST_EDIT",
+  SIGN_IN: "SIGN_IN",
+  SIGN_OUT: "SIGN_OUT",
+} as const;
+
+export const PAGES: Record<IPageNames, IMenuItem> = {
   MAIN: {
     title: "Главная",
     path: "/",
@@ -11,6 +24,16 @@ export const PAGES: Record<string, IMenuItem> = {
   CATEGORIES: {
     title: "Категории",
     path: "/categories",
+    isAuth: true,
+  },
+  CATEGORY_ADD: {
+    title: "Добавить категорию",
+    path: "/category/add",
+    isAuth: true,
+  },
+  CATEGORY_EDIT: {
+    title: "Редактировать категорию",
+    path: "/category/edit/:categoryId",
     isAuth: true,
   },
   CATEGORIES_LEFT: {

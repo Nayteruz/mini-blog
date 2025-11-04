@@ -1,7 +1,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { useCategories } from '@hooks/useCategories';
 import type { DragEndEvent } from "@dnd-kit/core";
-import { AddCategoryForm, EditCategoryForm } from "..";
+import { EditCategoryForm } from "..";
 import { SortableList } from "../SortableCategoryList/SortableList";
 import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
 import type { ICategory } from "@/types";
@@ -9,6 +9,9 @@ import { Spinner } from "@/components/Spinner";
 import { Tabs } from "@/components/Tabs";
 import styles from "./CategoriesList.module.css";
 import { onDragEnd } from "../SortableCategoryList/utils";
+import { useNavigate } from "react-router-dom";
+import { PAGES } from "@/contants";
+import { Button } from "@/components/Button";
 
 
 export const CategoriesList: FC = () => {
@@ -16,6 +19,11 @@ export const CategoriesList: FC = () => {
   const [activeTab, setActiveTab] = useState<string>('tree');
   const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
+  const navigate = useNavigate();
+
+  const onAddCategory = () => {
+    navigate(PAGES.CATEGORY_ADD.path);
+  }
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const newOrder = onDragEnd(event, categoryTree);
@@ -58,7 +66,7 @@ export const CategoriesList: FC = () => {
 
   return (
     <>
-      <AddCategoryForm title="Добавить новую категорию" />
+      <Button className={styles.buttonAdd} onClick={onAddCategory}>Добавить категорию <span>+</span></Button>
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} list={views} />
     </>
   );

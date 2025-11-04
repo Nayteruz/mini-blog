@@ -1,11 +1,11 @@
 .PostForm {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
 .buttons {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
 }

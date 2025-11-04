@@ -1,118 +1,118 @@
 .Card {
-	background: white;
-	border: 2px solid var(--main-color-20);
-	padding: 5px 14px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	min-width: 0;
-	max-width: 100%;
+  background: white;
+  border: 2px solid var(--main-color-20);
+  padding: 5px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .cardHeader {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 
-	& > span {
-		font-size: 18px;
-		font-weight: 500;
-		line-height: 1.25;
-		color: #be79ff;
+  & > span {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #be79ff;
 
-		&::first-letter {
-			text-transform: uppercase;
-		}
+    &::first-letter {
+      text-transform: uppercase;
+    }
 
-		@media all and (max-width: 768px) {
-			font-size: 16px;
-		}
-	}
+    @media all and (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
 }
 
 .cardFooter {
-	display: none;
+  display: none;
 }
 
 .editWrap {
-	text-align: right;
+  text-align: right;
 }
 
 .link {
-	font-size: 18px;
-	font-weight: bold;
-	color: #3b82f6;
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b82f6;
 }
 
 .cardContent {
-	display: none;
-	min-width: 0;
-	overflow: hidden;
-	max-width: 100%;
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .cardPreview {
-	line-height: 1.5;
-	color: #374151;
-	white-space: pre-wrap;
-	font-size: 18px;
-	border-top: 1px solid #f3f4f6;
-	padding: 6px 4px;
+  line-height: 1.5;
+  color: #374151;
+  white-space: pre-wrap;
+  font-size: 18px;
+  border-top: 1px solid #f3f4f6;
+  padding: 6px 4px;
 }
 
 .arrow {
-	color: #3b82f6;
+  color: #3b82f6;
 }
 
 .open {
-	display: block;
+  display: block;
 }
 
 .meta {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
 }
 
 .metaName {
-	color: #6b7280;
-	font-style: italic;
+  color: #6b7280;
+  font-style: italic;
 }
 
 .metaDate {
-	color: #9ca3af;
+  color: #9ca3af;
 }
 
 .buttons {
-	display: flex;
-	flex-direction: row;
-	gap: 15px;
-	justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
 }
 
 .icon {
-	width: 15px;
+  width: 15px;
 }
 
 .categories {
-	margin-bottom: 10px;
-	font-size: 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
 
-	& span {
-		background: #dbeafe;
-		color: #1e40af;
-		padding: 0.25rem 0.5rem;
-		border-radius: 0.25rem;
-	}
+  & span {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
 }
 
 .cardContent .htmlText {
-	font-size: 18px;
+  font-size: 18px;
 
-	@media all and (max-width: 768px) {
-		font-size: 15px;
-	}
+  @media all and (max-width: 768px) {
+    font-size: 15px;
+  }
 }

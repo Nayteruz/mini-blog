@@ -1,5 +1,8 @@
 import type { ICategory, IUpdateCategoryData } from "@/types";
 import type { SetStateAction } from "react";
+import { SORT_TYPE } from "../contants";
+
+export type ISortType = (typeof SORT_TYPE)[keyof typeof SORT_TYPE];
 
 export interface ICreateCategoryHookArguments {
   name: string;

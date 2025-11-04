@@ -27,7 +27,7 @@ export const SelectCategory = <T extends BaseSelect>({ value, categories, onChan
       {emptyText && <option value={emptyValue || ''}>{emptyText}</option>}
       {categories.map(category => (
         <option key={category.id} value={category.id}>
-          {'⇒ '.repeat(category?.depth || 0)} {category.name}
+          {'→ '.repeat(category?.depth || 0)} {category.name}
         </option>
       ))}
     </select>

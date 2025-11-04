@@ -10,7 +10,7 @@ export const PostEditForm: FC = () => {
   const navigate = useNavigate();
   const { postId } = useParams<{ postId: string }>();
   const { posts, updatePost, loading } = usePosts();
-  const { categories, getCategoriesForSelect } = useCategories();
+  const { categories, orderedCategories } = useCategories();
   const { user } = useStore();
 
   const [title, setTitle] = useState('');
@@ -18,7 +18,6 @@ export const PostEditForm: FC = () => {
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const orderedCategories = getCategoriesForSelect();
   const isSendDisabled = !title.trim() || !text.trim() || !categoryIds.length || isSubmitting;
 
   // Находим редактируемый пост

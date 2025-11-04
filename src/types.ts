@@ -29,27 +29,16 @@ export interface ICategory {
   order: number;
 }
 
+export type ICreateCategoryData = Omit<ICategory, "id">;
+export type IUpdateCategoryData = Omit<
+  ICategory,
+  "id" | "createdAt" | "createdBy"
+> & {
+  updatedAt: Date;
+};
+
 export interface ICategoryTree extends ICategory {
   children?: ICategoryTree[];
-}
-
-export interface ICreateCategoryData {
-  name: string;
-  parentId: string | null;
-  path: string[];
-  depth: number;
-  createdAt: any;
-  createdBy: string;
-  order: number;
-}
-
-export interface IUpdateCategoryData {
-  name: string;
-  parentId: string | null;
-  path: string[];
-  depth: number;
-  updatedAt: any;
-  order: number;
 }
 
 export interface ITabItem {

@@ -52,7 +52,7 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
 
     try {
       setIsSubmitting(true);
-      await updateCategory(category.id, categoryName.trim(), selectedParentId);
+      await updateCategory({ categoryId: category.id, name: categoryName.trim(), newParentId: selectedParentId });
       onSuccess();
       alert('Категория успешно обновлена!');
     } catch (err) {

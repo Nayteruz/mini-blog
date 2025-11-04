@@ -9,8 +9,7 @@ import { PAGES } from "@/contants";
 export const PostCreateForm: FC = () => {
   const navigate = useNavigate();
   const { createPost } = usePosts();
-  const { categories, getCategoriesForSelect } = useCategories();
-  const orderedCategories = getCategoriesForSelect();
+  const { categories, orderedCategories } = useCategories();
   const [title, setTitle] = useState("");
   const [text, setText] = useState('Написать заметку...');
   const [categoryIds, setCategoryIds] = useState<string[]>([]);

@@ -16,9 +16,8 @@ import styles from "./PostList.module.css";
 export const PostsList: FC = () => {
   const navigate = useNavigate();
   const { posts, loading, error } = usePosts();
-  const { categories, getCategoriesForSelect } = useCategories();
+  const { categories, orderedCategories } = useCategories();
   const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const orderedCategories = getCategoriesForSelect();
 
   const toggleFilter = () => setIsOpenFilter((prev) => !prev);
 

@@ -13,12 +13,10 @@ interface IAddCategoryProps {
 
 export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
   const { user } = useStore();
-  const { createCategory, loading, error, getCategoriesForSelect } = useCategories();
+  const { createCategory, loading, error, orderedCategories } = useCategories();
   const [categoryName, setCategoryName] = useState('');
   const [selectedParentId, setSelectedParentId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const orderedCategories = getCategoriesForSelect();
 
   const onChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedParentId(e.target.value);
@@ -38,7 +36,7 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
 
     try {
       setIsSubmitting(true);
-      await createCategory(categoryName.trim(), selectedParentId, user?.uid || 'anonimus');
+      await createCategory({ name: categoryName.trim(), parentId: selectedParentId, userId: user?.uid || 'anonimus' });
 
       // Сброс формы после успешного создания
       setCategoryName('');

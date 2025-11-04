@@ -1,5 +1,6 @@
 import { useEffect, useState, type FC } from 'react';
 import { useCategories } from '@hooks/useCategories';
+import type { DragEndEvent } from "@dnd-kit/core";
 import { AddCategoryForm, EditCategoryForm } from "..";
 import { SortableList } from "../SortableCategoryList/SortableList";
 import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
@@ -7,7 +8,6 @@ import type { ICategory } from "@/types";
 import { Spinner } from "@/components/Spinner";
 import { Tabs } from "@/components/Tabs";
 import styles from "./CategoriesList.module.css";
-import type { DragEndEvent } from "@dnd-kit/core";
 import { onDragEnd } from "../SortableCategoryList/utils";
 
 

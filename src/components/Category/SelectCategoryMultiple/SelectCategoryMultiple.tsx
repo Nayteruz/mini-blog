@@ -1,15 +1,17 @@
-import React, { useState, useMemo, type FC } from 'react';
-import { useCategories } from '@hooks/useCategories';
+import React, { useState, useMemo, type FC, type ChangeEvent } from 'react';
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
+import { getOwnCategories } from "@/utils";
 import styles from "./SelectCategoryMultiple.module.css";
 import { Input } from "@/components/Input";
 import type { ICategory } from "@/types";
 
 
-interface MultiCategorySelectProps {
+interface IMultiCategorySelectProps {
   value: string[];
   onChange: (categoryIds: string[]) => void;
+  categories: ICategory[]
+  orderedCategories: ICategory[]
   maxCategories?: number;
 }
 
@@ -34,21 +36,16 @@ const CategoryOption: FC<ICategoryItemProps> = ({ category, selectedCategoryIds,
   );
 }
 
-export const SelectCategoryMultiple: React.FC<MultiCategorySelectProps> = ({
+export const SelectCategoryMultiple: React.FC<IMultiCategorySelectProps> = ({
   value: selectedCategoryIds,
   onChange,
-  maxCategories = 5
+  maxCategories = 5,
+  categories = [],
+  orderedCategories = [],
 }) => {
-  const { categories, getCategoriesForSelect } = useCategories();
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Получаем упорядоченные категории
-  const orderedCategories = useMemo(() => {
-    return getCategoriesForSelect();
-  }, [categories, getCategoriesForSelect]);
-
-  // Фильтруем категории по поиску
   const filteredCategories = useMemo(() => {
     if (!searchTerm.trim()) return orderedCategories;
 
@@ -58,19 +55,18 @@ export const SelectCategoryMultiple: React.FC<MultiCategorySelectProps> = ({
     );
   }, [orderedCategories, searchTerm]);
 
-  // Получаем выбранные категории для отображения
-  const selectedCategories = useMemo(() => {
-    return categories.filter(cat => selectedCategoryIds.includes(cat.id));
-  }, [categories, selectedCategoryIds]);
+  const selectedCategories = useMemo(() => getOwnCategories(categories, selectedCategoryIds), [categories, selectedCategoryIds]);
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  }
 
   const handleCategoryToggle = (categoryId: string) => {
     let newSelectedIds: string[];
 
     if (selectedCategoryIds.includes(categoryId)) {
-      // Убираем категорию
       newSelectedIds = selectedCategoryIds.filter(id => id !== categoryId);
     } else {
-      // Добавляем категорию (проверяем лимит)
       if (selectedCategoryIds.length >= maxCategories) {
         alert(`Можно выбрать не более ${maxCategories} категорий`);
         return;
@@ -108,24 +104,21 @@ export const SelectCategoryMultiple: React.FC<MultiCategorySelectProps> = ({
           <div className={styles.search}>
             <Input
               value={searchTerm}
-              setValue={setSearchTerm}
+              onChange={onChangeSearch}
               placeholder="Поиск категорий..."
               classInput={styles.searchInput}
             />
           </div>
           <div className={styles.categories}>
-            {filteredCategories.length === 0 ? (
-              <Heading as="p" disabled className={styles.notFound}>Категории не найдены</Heading>
-            ) : (
-              filteredCategories.map(category => (
-                <CategoryOption
-                  key={category.id}
-                  category={category}
-                  selectedCategoryIds={selectedCategoryIds}
-                  handleCategoryToggle={handleCategoryToggle}
-                />
-              ))
-            )}
+            {filteredCategories.length === 0 && <Heading as="p" disabled className={styles.notFound}>Категории не найдены</Heading>}
+            {filteredCategories.length > 0 && filteredCategories.map(category => (
+              <CategoryOption
+                key={category.id}
+                category={category}
+                selectedCategoryIds={selectedCategoryIds}
+                handleCategoryToggle={handleCategoryToggle}
+              />
+            ))}
           </div>
           <div className={styles.actions}>
             <Button type="button" variant="danger" size="small" onClick={clearAll}>Очистить все</Button>

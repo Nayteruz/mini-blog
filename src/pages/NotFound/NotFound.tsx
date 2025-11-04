@@ -1,7 +1,7 @@
 import type { FC } from "react";
+import { Link } from "react-router-dom";
 import { Heading } from "@/components/Heading"
 import styles from "./NotFound.module.css"
-import { Link } from "react-router-dom";
 
 export const NotFoundPage: FC = () => {
   return (

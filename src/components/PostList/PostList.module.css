@@ -1,35 +1,37 @@
 .PostList {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .loadingContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
 }
 
 .listWrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .buttons {
-	display: flex;
-	align-items: center;
-	gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .filter {
-	display: flex;
-	align-items: center;
-	gap: 5px;
+  display: flex;
+  align-items: stretch;
 }
 
 .arrow {
-	color: var(--main-color);
-	margin-left: 10px;
+  color: var(--white-color);
+  padding: var(--spacing-sm);
+  background-color: var(--secondary-color);
+  border-radius: 0 var(--radius5) var(--radius5) 0;
+  margin-left: -5px;
 }

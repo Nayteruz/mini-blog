@@ -1,105 +1,127 @@
 /* #560EAD	#512882	#360570	#8643D6	#9B6AD6 https://colorscheme.ru/ */
 
 :root {
-	/* Основные брендовые цвета */
-	--white-color: #fff;
-	--black-color: #000;
-	--main-color: rgb(62, 68, 137);
-	--main-dark: #323a70;
-	--main-darker: #262a56;
-	--main-light: #5a62b0;
-	--main-lighter: #7a81d2;
+  /* Основные брендовые цвета */
+  --white-color: #fff;
+  --black-color: #000;
+  --main-color: rgb(62, 68, 137);
+  --main-dark: #323a70;
+  --main-darker: #262a56;
+  --main-light: #5a62b0;
+  --main-lighter: #7a81d2;
 
-	--main-color-5: rgba(62, 68, 137, 0.05);
-	--main-color-10: rgba(62, 68, 137, 0.1);
-	--main-color-20: rgba(62, 68, 137, 0.2);
-	--main-color-40: rgba(62, 68, 137, 0.4);
-	--main-color-60: rgba(62, 68, 137, 0.6);
-	--main-color-80: rgba(62, 68, 137, 0.8);
+  --main-color-5: rgba(62, 68, 137, 0.05);
+  --main-color-10: rgba(62, 68, 137, 0.1);
+  --main-color-20: rgba(62, 68, 137, 0.2);
+  --main-color-40: rgba(62, 68, 137, 0.4);
+  --main-color-60: rgba(62, 68, 137, 0.6);
+  --main-color-80: rgba(62, 68, 137, 0.8);
 
-	/* buttons color */
-	--primary-color: #3e4489;
-	--primary-hover-color: #323a70;
-	--primary-light-color: #5a62b0;
-	--primary-dark-color: #11174a;
+  /* buttons color */
+  --primary-color: #3e4489;
+  --primary-hover-color: #323a70;
+  --primary-light-color: #5a62b0;
+  --primary-dark-color: #11174a;
 
-	--secondary-color: #587793;
-	--secondary-hover-color: #4b6276;
-	--secondary-light-color: #7095b7;
+  --secondary-color: #587793;
+  --secondary-hover-color: #4b6276;
+  --secondary-light-color: #7095b7;
 
-	--success-color: #28a745;
-	--success-hover-color: #218838;
-	--success-light-color: #34ce57;
+  --success-color: #28a745;
+  --success-hover-color: #218838;
+  --success-light-color: #34ce57;
 
-	--danger-color: #af434d;
-	--danger-hover-color: #c82333;
-	--danger-light-color: #e4606d;
+  --danger-color: #af434d;
+  --danger-hover-color: #c82333;
+  --danger-light-color: #e4606d;
 
-	--warning-color: #d1a626;
-	--warning-hover-color: #a38427;
-	--warning-light-color: #ffce3a;
+  --warning-color: #d1a626;
+  --warning-hover-color: #a38427;
+  --warning-light-color: #ffce3a;
 
-	--info-color: #3b82f6;
-	--info-hover-color: #2570e9;
-	--info-light-color: #4e8bee;
+  --info-color: #3b82f6;
+  --info-hover-color: #2570e9;
+  --info-light-color: #4e8bee;
 
-	--disabled-color: #6c757d;
-	--disabled-bg: #e9ecef;
-	--disabled-text: #6c757d;
+  --disabled-color: #6c757d;
+  --disabled-bg: #e9ecef;
+  --disabled-text: #6c757d;
 
-	--purple-color: #572e8b;
-	--purple-hover-color: #6a3da3;
-	--purple-light-color: #7c3fc9;
-	--purple-dark-color: #3a1568;
+  --purple-color: #572e8b;
+  --purple-hover-color: #6a3da3;
+  --purple-light-color: #7c3fc9;
+  --purple-dark-color: #3a1568;
 
-	--container-max-width: 1200px;
+  --gray-color: #6b7280;
+  --gray-hover-color: #4b5563;
+  --gray-light-color: #888f9e;
+  --gray-dark-color: #555a66;
 
-	/* Акцентные цвета */
-	--color-accent: #6366f1;
-	--color-accent-light: #818cf8;
-	--color-accent-dark: #4f46e5;
+  --container-max-width: 1200px;
 
-	/* Нейтральная палитра */
-	--color-white: #ffffff;
+  /* Акцентные цвета */
+  --color-accent: #6366f1;
+  --color-accent-light: #818cf8;
+  --color-accent-dark: #4f46e5;
 
-	/* Функциональные цвета */
-	--color-success: #10b981;
-	--color-warning: #f59e0b;
-	--color-error: #ef4444;
-	--color-info: #3b82f6;
+  /* Нейтральная палитра */
+  --color-white: #ffffff;
 
-	/* Градиенты */
-	--gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-	--gradient-subtle: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
-	--gradient-ocean: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #0ea5e9 100%);
-	--gradient-sky: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent-light) 100%);
+  /* Функциональные цвета */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
 
-	/* Spacing */
-	--spacing-xs: 4px;
-	--spacing-sm: 8px;
-	--spacing-md: 16px;
-	--spacing-lg: 24px;
-	--spacing-xl: 32px;
+  /* Градиенты */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  --gradient-subtle: linear-gradient(
+    135deg,
+    var(--color-primary-light) 0%,
+    var(--color-primary) 100%
+  );
+  --gradient-ocean: linear-gradient(
+    135deg,
+    #3b82f6 0%,
+    #06b6d4 50%,
+    #0ea5e9 100%
+  );
+  --gradient-sky: linear-gradient(
+    135deg,
+    var(--color-primary-light) 0%,
+    var(--color-accent-light) 100%
+  );
 
-	--radius5: 5px;
-	--radius10: 10px;
-	--radius15: 15px;
-	--radius-full: 100%;
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
 
-	/* Typography */
-	--font-family: "Roboto", sans-serif;
-	--font-size-sm: 14px;
-	--font-size-md: 16px;
-	--font-size-lg: 20px;
-	--font-size-xl: 24px;
-	--text-normal: #333;
+  --radius5: 5px;
+  --radius10: 10px;
+  --radius15: 15px;
+  --radius-full: 100%;
 
-	/* Borders */
-	--border-radius: 8px;
-	--border-radius-lg: 12px;
+  /* Typography */
+  --font-family: "Roboto", sans-serif;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --text-normal: #333;
 
-	/* Shadows */
-	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
-	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  /* Borders */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
 }

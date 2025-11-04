@@ -1,12 +1,15 @@
 .select {
-	width: 100%;
-	padding: 0.5rem;
-	border: 1px solid #d1d5db;
-	border-radius: 0.375rem;
-	background: white;
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--main-color-20);
+  border-radius: var(--radius5);
 
-	&:focus {
-		outline: none;
-		border-color: #3b82f6;
-	}
+  &:active {
+    border-color: var(--main-color-10);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--main-color-40);
+  }
 }

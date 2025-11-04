@@ -6,29 +6,30 @@ import { BASE_HOST } from "./src/contants";
 
 // https://vite.dev/config/
 export default defineConfig({
-	base: BASE_HOST,
-	plugins: [
-		react({
-			babel: {
-				plugins: [["babel-plugin-react-compiler"]],
-			},
-		}),
-		svgr({
-			svgrOptions: {
-				// настройки svgr
-			},
-		}),
-	],
-	resolve: {
-		alias: {
-			"@": resolve(__dirname, "src"),
-			"@components": resolve(__dirname, "src/components"),
-			"@assets": resolve(__dirname, "src/assets"),
-			"@pages": resolve(__dirname, "src/pages"),
-			"@hooks": resolve(__dirname, "src/hooks"),
-			"@store": resolve(__dirname, "src/store"),
-			"@db": resolve(__dirname, "src/configDb"),
-			// добавьте свои алиасы
-		},
-	},
+  base: BASE_HOST,
+  plugins: [
+    react({
+      babel: {
+        plugins: [["babel-plugin-react-compiler"]],
+      },
+    }),
+    svgr({
+      svgrOptions: {
+        // настройки svgr
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+      "@components": resolve(__dirname, "src/components"),
+      "@assets": resolve(__dirname, "src/assets"),
+      "@pages": resolve(__dirname, "src/pages"),
+      "@hooks": resolve(__dirname, "src/hooks"),
+      "@utils": resolve(__dirname, "src/utils"),
+      "@store": resolve(__dirname, "src/store"),
+      "@db": resolve(__dirname, "src/configDb"),
+      // добавьте свои алиасы
+    },
+  },
 });

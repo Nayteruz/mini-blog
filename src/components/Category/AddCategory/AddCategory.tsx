@@ -1,4 +1,4 @@
-import { useState, type FC, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FC, type FormEvent } from 'react';
 import { useCategories } from '@hooks/useCategories';
 import { useStore } from "@store/index";
 import { SelectCategory } from "../SelectCategory/SelectCategory";
@@ -19,6 +19,14 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const orderedCategories = getCategoriesForSelect();
+
+  const onChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedParentId(e.target.value);
+  }
+
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategoryName(e.target.value);
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -55,7 +63,7 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
         >
           <Input
             value={categoryName}
-            setValue={setCategoryName}
+            onChange={onChangeInput}
             placeholder="Название категории..."
             required
           />
@@ -67,9 +75,9 @@ export const AddCategoryForm: FC<IAddCategoryProps> = ({ title }) => {
         >
           <SelectCategory
             value={selectedParentId || ''}
-            onChange={setSelectedParentId}
+            onChange={onChangeSelect}
             categories={orderedCategories}
-            rootTextSelect="Корневая категория"
+            emptyText="Корневая категория"
           />
         </ListRow>
         {error && (

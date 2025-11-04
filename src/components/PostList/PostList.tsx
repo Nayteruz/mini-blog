@@ -8,19 +8,17 @@ import { PAGES } from "@/contants";
 import { PostCard } from "@components/Post";
 import { Heading } from "@components/Heading";
 import { Button } from "@components/Button";
-import type { ICategory } from "@/types";
+import { getOwnCategories } from "@/utils";
 import { ArrowToggle } from "@components/ArrowToggle";
 import styles from "./PostList.module.css";
 
-const getOwnCategories = (categories: ICategory[], categoryIds: string[] = []) => {
-  return categories.filter(cat => categoryIds.includes(cat.id));
-};
 
 export const PostsList: FC = () => {
   const navigate = useNavigate();
   const { posts, loading, error } = usePosts();
-  const { categories } = useCategories();
+  const { categories, getCategoriesForSelect } = useCategories();
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const orderedCategories = getCategoriesForSelect();
 
   const toggleFilter = () => setIsOpenFilter((prev) => !prev);
 
@@ -44,13 +42,13 @@ export const PostsList: FC = () => {
         </div>
         <Button onClick={() => navigate(PAGES.POST_CREATE.path)}>+ Создать пост</Button>
       </div>
-      {isOpenFilter && <SearchAndFilter />}
+      {isOpenFilter && <SearchAndFilter categories={orderedCategories} />}
 
       {posts.length === 0 && <Heading as="h4">Постов пока нет. Будьте первым, кто создаст пост!</Heading>}
 
       <div className={styles.listWrapper}>
         {posts.map(post => (
-          <PostCard key={post.id} post={post} parts={['meta', 'footer', 'header', "category"]} ownCategories={getOwnCategories(categories, post.categoryIds)} />
+          <PostCard key={post.id} post={post} parts={['footer', 'header', "category"]} ownCategories={getOwnCategories(categories, post.categoryIds)} />
         ))}
       </div>
     </div >

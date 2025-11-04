@@ -1,9 +1,9 @@
-import type { FC } from "react";
+import type { ChangeEvent, FC } from "react";
 import styles from "./Input.module.css";
 
 interface IInputProps {
   value: string;
-  setValue: (value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   label?: string;
   note?: string;
@@ -14,7 +14,7 @@ interface IInputProps {
   required?: boolean
 }
 
-export const Input: FC<IInputProps> = ({ label = 'input', classInput, classWrapper, classLabel, classNote, note, value, setValue, placeholder = "", required = false }) => {
+export const Input: FC<IInputProps> = ({ label = 'input', classInput, classWrapper, classLabel, classNote, note, value, onChange, placeholder = "", required = false }) => {
   const classes = {
     wrapper: `${classWrapper || 'input'}`,
     label: `${styles.label} ${classLabel || ''}`,
@@ -33,7 +33,7 @@ export const Input: FC<IInputProps> = ({ label = 'input', classInput, classWrapp
         id={id}
         type="text"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
         placeholder={placeholder}
         className={classes.input}
         required={required}

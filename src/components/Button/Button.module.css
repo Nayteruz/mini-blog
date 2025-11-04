@@ -1,140 +1,152 @@
 :root {
-	--padding-sm: 4px 10px;
-	--padding-md: 6px 14px;
-	--padding-lg: 8px 20px;
+  --padding-sm: 4px 10px;
+  --padding-md: 6px 14px;
+  --padding-lg: 8px 20px;
 }
 
 .Button {
-	color: var(--color-white);
-	border: none;
-	border-radius: var(--radius5);
-	cursor: pointer;
-	transition: background-color 0.2s;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: var(--font-size-md);
-	padding: var(--padding-md);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius5);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-md);
+  padding: var(--padding-md);
 }
 
 /* variants */
 .primary {
-	background: var(--primary-color);
+  background: var(--primary-color);
 
-	&:hover {
-		background-color: var(--primary-hover-color);
-	}
+  &:hover {
+    background-color: var(--primary-hover-color);
+  }
 
-	&:active {
-		background-color: var(--primary-light-color);
-	}
+  &:active {
+    background-color: var(--primary-light-color);
+  }
 }
 
 .secondary {
-	background: var(--secondary-color);
+  background: var(--secondary-color);
 
-	&:hover {
-		background-color: var(--secondary-hover-color);
-	}
+  &:hover {
+    background-color: var(--secondary-hover-color);
+  }
 
-	&:active {
-		background-color: var(--secondary-light-color);
-	}
+  &:active {
+    background-color: var(--secondary-light-color);
+  }
 }
 
 .success {
-	background: var(--success-color);
+  background: var(--success-color);
 
-	&:hover {
-		background-color: var(--success-hover-color);
-	}
+  &:hover {
+    background-color: var(--success-hover-color);
+  }
 
-	&:active {
-		background-color: var(--success-light-color);
-	}
+  &:active {
+    background-color: var(--success-light-color);
+  }
 }
 
 .danger {
-	background: var(--danger-color);
+  background: var(--danger-color);
 
-	&:hover {
-		background-color: var(--danger-hover-color);
-	}
+  &:hover {
+    background-color: var(--danger-hover-color);
+  }
 
-	&:active {
-		background-color: var(--danger-light-color);
-	}
+  &:active {
+    background-color: var(--danger-light-color);
+  }
 }
 
 .warning {
-	background: var(--warning-color);
+  background: var(--warning-color);
 
-	&:hover {
-		background-color: var(--warning-hover-color);
-	}
+  &:hover {
+    background-color: var(--warning-hover-color);
+  }
 
-	&:active {
-		background-color: var(--warning-light-color);
-	}
+  &:active {
+    background-color: var(--warning-light-color);
+  }
 }
 
 .info {
-	background: var(--info-color);
+  background: var(--info-color);
 
-	&:hover {
-		background-color: var(--info-hover-color);
-	}
+  &:hover {
+    background-color: var(--info-hover-color);
+  }
 
-	&:active {
-		background-color: var(--info-light-color);
-	}
+  &:active {
+    background-color: var(--info-light-color);
+  }
 }
 
 .purple {
-	background: var(--purple-color);
+  background: var(--purple-color);
 
-	&:hover {
-		background-color: var(--purple-hover-color);
-	}
+  &:hover {
+    background-color: var(--purple-hover-color);
+  }
 
-	&:active {
-		background-color: var(--purple-light-color);
-	}
+  &:active {
+    background-color: var(--purple-light-color);
+  }
+}
+
+.gray {
+  background: var(--gray-color);
+
+  &:hover {
+    background-color: var(--gray-hover-color);
+  }
+
+  &:active {
+    background-color: var(--gray-light-color);
+  }
 }
 
 .Button:disabled,
 .disabled {
-	background: var(--disabled-color);
-	cursor: default;
-	pointer-events: none;
-	opacity: 0.5;
+  background: var(--disabled-color);
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
 
-	&:hover {
-		background-color: var(--disabled-color);
-	}
+  &:hover {
+    background-color: var(--disabled-color);
+  }
 
-	&:active {
-		background-color: var(--disabled-color);
-	}
+  &:active {
+    background-color: var(--disabled-color);
+  }
 }
 
 /* sizes */
 
 .small {
-	font-size: var(--font-size-sm);
-	padding: var(--padding-sm);
+  font-size: var(--font-size-sm);
+  padding: var(--padding-sm);
 }
 
 .medium {
-	font-size: var(--font-size-md);
-	padding: var(--padding-md);
+  font-size: var(--font-size-md);
+  padding: var(--padding-md);
 }
 
 .large {
-	font-size: var(--font-size-lg);
-	padding: var(--padding-lg);
+  font-size: var(--font-size-lg);
+  padding: var(--padding-lg);
 }
 
 .square {
-	padding: var(--spacing-sm);
+  padding: var(--spacing-sm);
 }

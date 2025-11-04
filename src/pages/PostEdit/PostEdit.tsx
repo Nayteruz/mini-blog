@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 export const PostEdit: FC = () => {
   return (
     <div className={styles.PostEditPage}>
-      <Heading as="h1">Редактировать пост</Heading>
+      <Heading as="h1">Редактировать заметку</Heading>
       <PostEditForm />
     </div >
   );

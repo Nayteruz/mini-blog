@@ -7,7 +7,7 @@ export const PostCreate: FC = () => {
 
   return (
     <div className={styles.PostCreatePage}>
-      <Heading as="h1">Создать новый пост</Heading>
+      <Heading as="h1">Новая заметка</Heading>
       <PostCreateForm />
     </div >
   );

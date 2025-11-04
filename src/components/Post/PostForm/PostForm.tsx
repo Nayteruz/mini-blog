@@ -1,18 +1,22 @@
-import type { FC } from "react";
-import styles from "./PostForm.module.css";
+import type { ChangeEvent, FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { ListRow } from "@/components/ListRow/ListRow";
 import { Input } from "@/components/Input";
 import { SelectCategoryMultiple } from "@/components/Category";
 import { TextEditor } from "@/components/TextEditor/TextEditor";
 import { Button } from "@/components/Button";
-import type { IPostFormProps } from "./types";
-import { useNavigate } from "react-router-dom";
 import { PAGES } from "@/contants";
+import type { IPostFormProps } from "./types";
+import styles from "./PostForm.module.css";
 
 
 export const PostForm: FC<IPostFormProps> = (props) => {
   const navigate = useNavigate();
-  const { className, onSubmit, title, setTitle, categories, categoryIds, setCategoryIds, text, setText, isSubmitting, isDisabled, sendButtonText = "Отправить" } = props;
+  const { className, onSubmit, title, setTitle, categories, orderedCategories, categoryIds, setCategoryIds, text, setText, isSubmitting, isDisabled, sendButtonText = "Отправить" } = props;
+
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  }
 
   return (
     <form onSubmit={onSubmit} className={`${styles.PostForm} ${className || ''}`}>
@@ -22,26 +26,22 @@ export const PostForm: FC<IPostFormProps> = (props) => {
       >
         <Input
           value={title}
-          setValue={setTitle}
+          onChange={onChangeInput}
           placeholder="Название заметки..."
           required
         />
       </ListRow>
       <ListRow
-        label="Категория(если не выбирать то пост будет создан в корневой категории)"
+        label="Категория"
         note={`${categories.length === 0 ? 'Сначала создайте категории в разделе "Управление категориями"' : ''}`}
         required
       >
-        {/* <SelectCategory
-          value={categoryIds[0]}
-          onChange={setCategoryIds}
-          categories={orderedCategories}
-          rootTextSelect="Выберите категорию"
-        /> */}
         <SelectCategoryMultiple
           value={categoryIds}
           onChange={setCategoryIds}
           maxCategories={5}
+          categories={categories}
+          orderedCategories={orderedCategories}
         />
       </ListRow>
       <ListRow

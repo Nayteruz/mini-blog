@@ -1,13 +1,20 @@
 import { type ChangeEvent, type FC } from 'react';
-import { usePosts } from '../../hooks/usePosts';
-import { useCategories } from '../../hooks/useCategories';
-import './index.css';
+import { usePosts } from '@hooks/usePosts';
+import { Input } from "@components/Input";
+import type { ICategory } from "@/types";
+import { Button } from "@/components/Button";
+import { SelectCategory } from "@components/Category";
+import { ListRow } from "@components/ListRow/ListRow";
+import { SORT_OPTIONS } from "./const";
+import { Heading } from "@components/Heading";
+import styles from './SearchAndFilter.module.css';
 
 interface SearchAndFilterProps {
   onFiltersChange?: () => void;
+  categories?: ICategory[];
 }
 
-export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange }) => {
+export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange, categories = [] }) => {
   const {
     searchQuery,
     sortBy,
@@ -18,8 +25,6 @@ export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange }) =
     clearFilters,
     posts
   } = usePosts();
-
-  const { categories } = useCategories();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleSearch(e.target.value);
@@ -39,77 +44,21 @@ export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange }) =
   const hasActiveFilters = searchQuery || sortBy !== 'newest' || selectedCategory !== 'all';
 
   return (
-    <div className="search-filter-panel">
-      <div className="search-section">
-        <div className="search-input-wrapper">
-          <input
-            type="text"
-            placeholder="Поиск по заголовку и тексту..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="search-input"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => handleSearch('')}
-              className="clear-search-button"
-            >
-              ×
-            </button>
-          )}
-        </div>
+    <div className={styles.SearchAndFilter}>
+      <div className={styles.searchWrapper}>
+        <Input placeholder="Поиск по заголовку и тексту..." value={searchQuery} onChange={handleSearchChange} classInput={styles.searchInput} />
+        {searchQuery && <Button variant="gray" size="small" className={styles.clearSearchButton} onClick={() => handleSearch('')}>×</Button>}
       </div>
-
-      <div className="filters-section">
-        <div className="filter-group">
-          <label htmlFor="categoryFilter" className="filter-label">
-            Категория:
-          </label>
-          <select
-            id="categoryFilter"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="filter-select"
-          >
-            <option value="all">Все категории</option>
-            {categories.map(category => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label htmlFor="sortFilter" className="filter-label">
-            Сортировка:
-          </label>
-          <select
-            id="sortFilter"
-            value={sortBy}
-            onChange={onSortChange}
-            className="filter-select"
-          >
-            <option value="newest">Сначала новые</option>
-            <option value="oldest">Сначала старые</option>
-            <option value="title">По заголовку (А-Я)</option>
-          </select>
-        </div>
-
-        {hasActiveFilters && (
-          <button
-            onClick={clearFilters}
-            className="clear-filters-button"
-          >
-            Сбросить фильтры
-          </button>
-        )}
+      <div className={styles.filters}>
+        <ListRow label="Категория">
+          <SelectCategory value={selectedCategory} onChange={handleCategoryChange} categories={categories} className={styles.selectCategory} emptyText="Все категории" emptyValue="all" />
+        </ListRow>
+        <ListRow label="Сортировка">
+          <SelectCategory value={sortBy} onChange={onSortChange} categories={SORT_OPTIONS} className={styles.selectSort} />
+        </ListRow>
+        {hasActiveFilters && <Button variant="gray" className={styles.clearFiltersButton} onClick={clearFilters}>Сбросить фильтры</Button>}
       </div>
-
-      <div className="results-info">
-        Найдено постов: {posts.length}
-        {hasActiveFilters && ' (применены фильтры)'}
-      </div>
+      <Heading as="h6" className={styles.results}>Найдено постов: {posts.length}</Heading>
     </div>
   );
 };

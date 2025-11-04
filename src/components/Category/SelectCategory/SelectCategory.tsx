@@ -1,27 +1,33 @@
-import type { ICategory } from "@/types";
-import type { FC } from "react";
+import type { ChangeEvent } from "react";
 import styles from "./SelectCategory.module.css";
 
-interface ISelectCategoryProps {
-  value: string | null;
-  onChange: (id: string) => void;
-  categories: ICategory[];
-  rootTextSelect?: string;
-  classSelect?: string;
+interface BaseSelect {
+  id: string;
+  name: string;
+  depth?: number;
 }
 
-export const SelectCategory: FC<ISelectCategoryProps> = ({ value, categories, onChange, rootTextSelect = 'Пусто', classSelect }) => {
+interface ISelectCategoryProps<T> {
+  value: string | null;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  categories: T[];
+  emptyText?: string;
+  emptyValue?: string;
+  className?: string;
+}
+
+export const SelectCategory = <T extends BaseSelect>({ value, categories, onChange, emptyText, className, emptyValue }: ISelectCategoryProps<T>) => {
   return (
     <select
       value={value || ''}
-      onChange={(e) => onChange(e.target.value || '')}
-      className={`${styles.select} ${classSelect || ''}`}
+      onChange={onChange}
+      className={`${styles.select} ${className || ''}`}
       disabled={categories.length === 0}
     >
-      <option value="">{rootTextSelect}</option>
+      {emptyText && <option value={emptyValue || ''}>{emptyText}</option>}
       {categories.map(category => (
         <option key={category.id} value={category.id}>
-          {'- '.repeat(category.depth)} {category.name}
+          {'⇒ '.repeat(category?.depth || 0)} {category.name}
         </option>
       ))}
     </select>

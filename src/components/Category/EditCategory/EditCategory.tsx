@@ -1,10 +1,10 @@
-import { useState, type FC, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FC, type FormEvent } from 'react';
 import { useCategories } from '@hooks/useCategories';
 import type { ICategory } from "@/types";
-import './categories.css';
 import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Input } from "@/components/Input";
 import { ListRow } from "@/components/ListRow/ListRow";
+import './categories.css';
 
 interface IEditCategoryProps {
   category: ICategory;
@@ -24,6 +24,14 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
 
   // Получаем упорядоченный список категорий для выбора родителя
   const orderedCategories = categories.filter(cat => cat.id !== category.id); // Исключаем текущую категорию
+
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategoryName(e.target.value);
+  }
+
+  const onChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedParentId(e.target.value);
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -84,7 +92,7 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
         >
           <Input
             value={categoryName}
-            setValue={setCategoryName}
+            onChange={onChangeInput}
             placeholder="Новое название категории..."
             required
           />
@@ -95,10 +103,10 @@ export const EditCategoryForm: FC<IEditCategoryProps> = ({
           required
         >
           <SelectCategory
-            rootTextSelect="Корневая категория"
+            emptyText="Корневая категория"
             value={selectedParentId || ''}
             categories={orderedCategories}
-            onChange={setSelectedParentId}
+            onChange={onChangeSelect}
           />
         </ListRow>
 

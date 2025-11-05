@@ -3,13 +3,13 @@ import { auth } from "@/configDb";
 import { CSS } from "@dnd-kit/utilities";
 import type { ISortableItemProps } from "./types";
 import { useSortable } from "@dnd-kit/sortable";
-import styles from "./styles.module.css";
 import { ArrowToggle } from "@/components/ArrowToggle";
 import { Button } from "@/components/Button";
 import EditIcon from "@assets/icons/penToSquare.svg?react";
 import DeleteIcon from "@assets/icons/deleteIcon.svg?react";
 import ArrowMove from "@assets/icons/arrowUpDown.svg?react";
 import { DnDWrapper } from "@/components/DnDWrapper";
+import styles from "./styles.module.css";
 
 const sizes: Record<number, number> = {
   0: 18,

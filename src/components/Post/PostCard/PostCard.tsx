@@ -1,16 +1,16 @@
 import { useState, type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "@/configDb";
-import { ArrowToggle } from "@components/ArrowToggle";
+import { ArrowToggle } from "@/components/ArrowToggle";
 import DeleteIcon from '@assets/icons/deleteIcon.svg?react';
 import EditIcon from '@assets/icons/penToSquare.svg?react';
-import { Button } from "@components/Button";
+import { Button } from "@/components/Button";
 import { usePosts } from "@hooks/usePosts";
 import { HTMLText } from "@components/HTMLText";
 import { PAGES } from "@/contants";
 import type { IPostCardProps } from "./types";
-import styles from './PostCard.module.css';
 import { OwnCategories } from "../OwnCategories/OwnCategories";
+import styles from './PostCard.module.css';
 
 
 

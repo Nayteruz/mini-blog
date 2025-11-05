@@ -2,7 +2,7 @@ import { useState, type FC } from "react";
 import type { IPost } from "@/types"
 import { Heading } from "@/components/Heading"
 import { HTMLText } from "@/components/HTMLText";
-import { ArrowToggle } from "@/components/ArrowToggle";
+import { ArrowToggle } from "@/components/ArrowToggle/ArrowToggle";
 import styles from "./PostLeft.module.css"
 
 interface IPostLeftProps {

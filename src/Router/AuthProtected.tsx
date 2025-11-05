@@ -1,7 +1,7 @@
-import { PAGES } from "@/contants";
 import { useEffect, useState } from "react";
-import { auth } from "@/configDb";
 import { Outlet, Navigate } from "react-router-dom";
+import { PAGES } from "@/contants";
+import { auth } from "@/configDb";
 import { Spinner } from "@/components/Spinner";
 import styles from "./AuthProtected.module.css";
 

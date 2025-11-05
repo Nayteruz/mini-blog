@@ -1,7 +1,10 @@
 import { type FC } from "react";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "@/components/Button";
 import { auth } from "@/configDb";
 import EditIcon from "@assets/icons/penToSquare.svg?react";
+import ArrowMove from "@assets/icons/arrowUpDown.svg?react";
 import DeleteIcon from "@assets/icons/deleteIcon.svg?react";
 import type {
   ISimpleCategoryListProps,
@@ -9,10 +12,7 @@ import type {
   ISimpleItemsProps,
 } from "./types";
 import { DnDWrapper } from "@/components/DnDWrapper";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { Spinner } from "@/components/Spinner";
-import ArrowMove from "@assets/icons/arrowUpDown.svg?react";
 import styles from "./SimpleCategoryList.module.css";
 
 const SimpleItem: FC<ISimpleItemProps> = ({

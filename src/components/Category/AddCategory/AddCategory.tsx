@@ -3,7 +3,7 @@ import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Button } from "@/components/Button";
 import styles from "./AddCategory.module.css";
 import { Input } from "@/components/Input";
-import { ListRow } from "@/components/ListRow/ListRow";
+import { ListRow } from "@/components/ListRow";
 import type { ICategory } from "@/types";
 import { Heading } from "@/components/Heading";
 import type { ICreateCategoryHookArguments } from "@/hooks/types";

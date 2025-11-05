@@ -1,9 +1,9 @@
 import type { ChangeEvent, FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { ListRow } from "@/components/ListRow/ListRow";
+import { ListRow } from "@/components/ListRow";
 import { Input } from "@/components/Input";
 import { SelectCategoryMultiple } from "@/components/Category";
-import { TextEditor } from "@/components/TextEditor/TextEditor";
+import { TextEditor } from "@/components/TextEditor";
 import { Button } from "@/components/Button";
 import { PAGES } from "@/contants";
 import type { IPostFormProps } from "./types";

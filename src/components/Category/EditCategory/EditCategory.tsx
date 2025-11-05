@@ -3,7 +3,7 @@ import { useCategories } from '@hooks/useCategories';
 import type { ICategory } from "@/types";
 import { SelectCategory } from "../SelectCategory/SelectCategory";
 import { Input } from "@/components/Input";
-import { ListRow } from "@/components/ListRow/ListRow";
+import { ListRow } from "@/components/ListRow";
 import './categories.css';
 
 interface IEditCategoryProps {

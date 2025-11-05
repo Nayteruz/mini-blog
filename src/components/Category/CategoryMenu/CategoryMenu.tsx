@@ -2,7 +2,7 @@ import { useState, type FC, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import type { ICategoryTree, IPost } from "@/types";
 import { PAGES } from "@/contants";
-import { ArrowToggle } from "@/components/ArrowToggle";
+import { ArrowToggle } from "@/components/ArrowToggle/ArrowToggle";
 import styles from "./CategoryMenu.module.css";
 
 

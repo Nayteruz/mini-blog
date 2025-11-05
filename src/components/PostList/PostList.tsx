@@ -1,15 +1,15 @@
 import { useState, type FC } from 'react';
+import { useNavigate } from "react-router-dom";
 import { usePosts } from '@hooks/usePosts';
 import { useCategories } from '@hooks/useCategories';
-import { useNavigate } from "react-router-dom";
 import { SearchAndFilter } from "@components/SearchAndFilter";
-import { Spinner } from "@components/Spinner";
+import { Spinner } from "@/components/Spinner";
 import { PAGES } from "@/contants";
 import { PostCard } from "@components/Post";
 import { Heading } from "@components/Heading";
-import { Button } from "@components/Button";
+import { Button } from "@/components/Button";
 import { getOwnCategories } from "@/utils";
-import { ArrowToggle } from "@components/ArrowToggle";
+import { ArrowToggle } from "@/components/ArrowToggle";
 import styles from "./PostList.module.css";
 
 

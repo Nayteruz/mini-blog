@@ -1,4 +1,4 @@
-import { ArrowToggle } from "@/components/ArrowToggle";
+import { ArrowToggle } from "@/components/ArrowToggle/ArrowToggle";
 import { PostCard } from "@/components/Post";
 import type { ICategoryTree, IPost } from "@/types";
 import { useState, type FC } from "react";

@@ -14,7 +14,8 @@ interface IInputProps {
   required?: boolean
 }
 
-export const Input: FC<IInputProps> = ({ label = 'input', classInput, classWrapper, classLabel, classNote, note, value, onChange, placeholder = "", required = false }) => {
+export const Input: FC<IInputProps> = (props) => {
+  const { label = 'input', classInput, classWrapper, classLabel, classNote, note, value, onChange, placeholder = "", required = false } = props
   const classes = {
     wrapper: `${classWrapper || 'input'}`,
     label: `${styles.label} ${classLabel || ''}`,
@@ -22,7 +23,7 @@ export const Input: FC<IInputProps> = ({ label = 'input', classInput, classWrapp
     note: `${styles.note} ${classNote || ''}`
   };
 
-  const id = `${label?.toLowerCase()}_input`;
+  const id = `input_${Date.now()}`;
 
   return (
     <div className={classes.wrapper}>

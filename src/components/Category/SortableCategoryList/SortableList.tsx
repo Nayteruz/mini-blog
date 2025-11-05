@@ -2,8 +2,8 @@ import { type FC } from 'react';
 import { Spinner } from "@/components/Spinner";
 import { SortableItem } from "./SortableItem";
 import { DnDWrapper } from "@/components/DnDWrapper";
-import styles from "./styles.module.css";
 import type { ISortableListProps } from "./types";
+import styles from "./styles.module.css";
 
 export const SortableList: FC<ISortableListProps> = ({ changeEdit, categories, handleDragEnd, isLoading, onDelete, error }) => {
   if (error) {

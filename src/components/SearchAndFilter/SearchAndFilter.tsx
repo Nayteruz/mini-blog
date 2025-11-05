@@ -4,7 +4,7 @@ import { Input } from "@components/Input";
 import type { ICategory } from "@/types";
 import { Button } from "@/components/Button";
 import { SelectCategory } from "@components/Category";
-import { ListRow } from "@components/ListRow/ListRow";
+import { ListRow } from "@components/ListRow";
 import { SORT_OPTIONS } from "./const";
 import { Heading } from "@components/Heading";
 import styles from './SearchAndFilter.module.css';

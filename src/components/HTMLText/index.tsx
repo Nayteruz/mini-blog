@@ -14,8 +14,8 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('css', css);
 hljs.registerLanguage('html', html);
-hljs.registerLanguage('typescriptreact', typescript); // Регистрируем псевдоним
-hljs.registerLanguage('tsx', typescript); // TSX как TypeScript
+hljs.registerLanguage('typescriptreact', typescript);
+hljs.registerLanguage('tsx', typescript);
 
 export const HTMLText = ({ htmlText, className }: { htmlText: string, className?: string }) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,6 @@ export const HTMLText = ({ htmlText, className }: { htmlText: string, className?
           hljs.highlightElement(block as HTMLElement);
         } catch (error) {
           console.warn('Highlight error:', error);
-          // В случае ошибки просто оставляем как есть
         }
       });
     }

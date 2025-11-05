@@ -1,4 +1,5 @@
 import { useEffect, useState, type FC } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useCategories } from '@hooks/useCategories';
 import type { DragEndEvent } from "@dnd-kit/core";
 import { EditCategoryForm } from "..";
@@ -7,11 +8,10 @@ import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
 import type { ICategory } from "@/types";
 import { Spinner } from "@/components/Spinner";
 import { Tabs } from "@/components/Tabs";
-import styles from "./CategoriesList.module.css";
 import { onDragEnd } from "../SortableCategoryList/utils";
-import { useNavigate } from "react-router-dom";
 import { PAGES } from "@/contants";
 import { Button } from "@/components/Button";
+import styles from "./CategoriesList.module.css";
 
 
 export const CategoriesList: FC = () => {

@@ -96,6 +96,7 @@
 @media all and (min-width: 769px) {
   .MenuCategories {
     position: static;
+    display: block;
   }
   .overlay {
     display: none;

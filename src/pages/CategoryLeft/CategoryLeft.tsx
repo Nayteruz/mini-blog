@@ -1,4 +1,4 @@
-import { useMemo, useState, type FC, type MouseEvent } from "react";
+import { useMemo, useState, type FC } from "react";
 import { Heading } from "@/components/Heading";
 import { useCategories } from "@/hooks/useCategories";
 import { useParams } from "react-router-dom";

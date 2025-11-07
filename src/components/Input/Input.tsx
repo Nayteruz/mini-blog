@@ -5,43 +5,27 @@ interface IInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  label?: string;
-  note?: string;
-  classWrapper?: string;
-  classLabel?: string;
-  classInput?: string;
-  classNote?: string;
-  required?: boolean
+  className?: string;
+  required?: boolean;
 }
 
-export const Input: FC<IInputProps> = (props) => {
-  const { label = 'input', classInput, classWrapper, classLabel, classNote, note, value, onChange, placeholder = "", required = false } = props
-  const classes = {
-    wrapper: `${classWrapper || 'input'}`,
-    label: `${styles.label} ${classLabel || ''}`,
-    input: `${styles.input} ${classInput || ''}`,
-    note: `${styles.note} ${classNote || ''}`
-  };
-
-  const id = `input_${Date.now()}`;
+export const Input: FC<IInputProps> = props => {
+  const {
+    value,
+    onChange,
+    className,
+    placeholder = "",
+    required = false,
+  } = props;
 
   return (
-    <div className={classes.wrapper}>
-      {label && label !== 'input' && <label htmlFor={id} className={classes.label}>
-        {label} {required && <span className={styles.required}>*</span>}
-      </label>}
-      <input
-        id={id}
-        type="text"
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={classes.input}
-        required={required}
-      />
-      {note && <p className={classes.note}>
-        {note}
-      </p>}
-    </div>
-  )
+    <input
+      type='text'
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={`${styles.Input} ${className || ""}`}
+      required={required}
+    />
+  );
 };

@@ -1,0 +1,11 @@
+.PageWrapper {
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-width: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  min-height: 100%;
+}

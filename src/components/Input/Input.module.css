@@ -1,15 +1,15 @@
-.input {
-	width: 100%;
-	padding: var(--spacing-sm);
-	border: 1px solid var(--main-color-20);
-	border-radius: var(--radius5);
+.Input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--main-color-20);
+  border-radius: var(--radius5);
 
-	&:active {
-		border-color: var(--main-color-10);
-	}
+  &:active {
+    border-color: var(--main-color-10);
+  }
 
-	&:focus {
-		outline: none;
-		border-color: var(--main-color-40);
-	}
+  &:focus {
+    outline: none;
+    border-color: var(--main-color-40);
+  }
 }

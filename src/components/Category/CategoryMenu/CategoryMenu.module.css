@@ -1,76 +1,91 @@
 .CategoryMenu {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .menuUl {
-	--menu-space: 1px;
+  --menu-space: 1px;
 
-	padding: 0;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--menu-space);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--menu-space);
 
-	ul {
-		margin-top: var(--menu-space);
-		margin-left: 15px;
-		display: flex;
-		flex-direction: column;
-		gap: var(--menu-space);
+  ul {
+    margin-top: var(--menu-space);
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-space);
 
-		&:not(.isOpen) {
-			display: none;
-		}
-	}
+    @media all and (max-width: 768px) {
+      margin-left: 5px;
+    }
 
-	.isOpen {
-		display: flex;
-	}
+    &:not(.isOpen) {
+      display: none;
+    }
+  }
+
+  .isOpen {
+    display: flex;
+  }
 }
 
 .link {
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 1.1;
-	display: block;
-	padding: 7px 10px;
-	border-radius: 5px;
-	color: var(--white-color);
-	background-color: var(--primary-color);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.1;
+  display: block;
+  padding: 7px 10px;
+  border-radius: var(--radius5);
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 
-	&:hover {
-		background-color: var(--primary-hover-color);
-	}
+  @media all and (max-width: 768px) {
+    border-radius: 0;
+    font-size: 13px;
+  }
 
-	&.active {
-		background-color: var(--primary-dark-color);
-	}
+  &:hover {
+    background-color: var(--primary-hover-color);
+  }
 
-	sup {
-		font-size: 65%;
-		padding-left: 2px;
-		color: rgba(255, 255, 255, 0.4);
-	}
+  &.active {
+    background-color: var(--primary-dark-color);
+  }
+
+  sup {
+    font-size: 65%;
+    padding-left: 2px;
+    color: rgba(255, 255, 255, 0.4);
+  }
 }
 
 .arrow {
-	color: rgba(255, 255, 255, 0.4);
-	font-size: 16px;
-	position: relative;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 16px;
+  position: relative;
 
-	&:before {
-		content: "";
-		display: block;
-		position: absolute;
-		inset: -4px;
-	}
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: -4px;
 
-	&:hover {
-		color: rgba(255, 255, 255, 1);
-	}
+    @media all and (max-width: 769px) {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius5);
+      inset: -6px;
+    }
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
 }

@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-type IButtonSize = "small" | "medium" | "large" | "square";
+type IButtonSize = "small" | "medium" | "large" | "square" | "smallest";
 type IType = "button" | "submit" | "reset";
 type IVariant =
   | "primary"

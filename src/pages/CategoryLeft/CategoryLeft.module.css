@@ -1,60 +1,114 @@
 .CategoryLeft {
-	display: grid;
-	grid-template-columns: 250px 1fr;
-	gap: 20px;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
 
-	@media all and (max-width: 768px) {
-		grid-template-columns: 1fr;
-	}
+  @media all and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .categories {
-	padding: 0;
-	position: relative;
-
-	@media all and (max-width: 769px) {
-		/* position: sticky;
-		top: 3px; */
-	}
+  padding: 0;
+  position: relative;
 }
 
 .button {
-	display: none;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 5px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
 
-	@media all and (max-width: 769px) {
-		display: flex;
-	}
+  @media all and (max-width: 769px) {
+    display: flex;
+  }
 }
 
-.menu {
-	@media all and (max-width: 769px) {
-		display: none;
+/* .menu {
+  @media all and (max-width: 769px) {
+    display: none;
 
-		&.open {
-			display: block;
-		}
-	}
-}
+    &.open {
+      display: block;
+      padding-top: 10px;
+    }
+  }
+} */
 
 .posts {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .notesContent {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
 }
 
 .loaderWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+/* Category menu */
+.MenuCategories {
+  position: fixed;
+  inset: 0;
+  display: none;
+
+  &.openFixed {
+    display: block;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.menuItems {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 11;
+  width: 250px;
+  background-color: var(--white-color);
+  overflow-y: auto;
+  max-height: 100vh;
+  box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: sticky;
+  top: 5px;
+  left: 5px;
+  z-index: 10;
+  line-height: 1.2;
+}
+
+@media all and (min-width: 769px) {
+  .MenuCategories {
+    position: static;
+  }
+  .overlay {
+    display: none;
+  }
+  .closeButton {
+    display: none;
+  }
+  .menuItems {
+    display: block;
+    position: static;
+    width: 100%;
+    max-height: unset;
+    background-color: transparent;
+    box-shadow: none;
+  }
 }

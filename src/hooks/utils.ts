@@ -1,16 +1,10 @@
 import type { ICategory, ICategoryTree, ICreateCategoryData } from "@/types";
-import type {
-  ICreateCategoryDataParams,
-  IUpdateCategoryDataParams,
-  IUpdateCategoryDataResult,
-} from "./types";
+import type { ICreateCategoryDataParams, IUpdateCategoryDataParams, IUpdateCategoryDataResult } from "./types";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "@/configDb";
 import { DB_KEYS } from "./const";
 
-export const createCategoryData = (
-  params: ICreateCategoryDataParams
-): ICreateCategoryData => {
+export const createCategoryData = (params: ICreateCategoryDataParams): ICreateCategoryData => {
   const { categories, name, parentId, userId } = params;
   let path: string[] = [];
   let depth = 0;
@@ -26,8 +20,7 @@ export const createCategoryData = (
   }
 
   const siblings = categories.filter(cat => cat.parentId === parentId);
-  const maxOrder =
-    siblings.length > 0 ? Math.max(...siblings.map(cat => cat.order)) : -1;
+  const maxOrder = siblings.length > 0 ? Math.max(...siblings.map(cat => cat.order)) : -1;
   const newOrder = maxOrder + 1;
 
   return {
@@ -41,11 +34,8 @@ export const createCategoryData = (
   };
 };
 
-export const updateCategoryData = (
-  params: IUpdateCategoryDataParams
-): IUpdateCategoryDataResult => {
-  const { categories, categoryToUpdate, categoryId, name, newParentId } =
-    params;
+export const updateCategoryData = (params: IUpdateCategoryDataParams): IUpdateCategoryDataResult => {
+  const { categories, categoryToUpdate, categoryId, name, newParentId } = params;
 
   let newPath: string[] = [];
   let newDepth = 0;
@@ -76,13 +66,8 @@ export const updateCategoryData = (
   }
 
   // Определяем порядок в новой родительской категории
-  const newSiblings = categories.filter(
-    cat => cat.parentId === newParentId && cat.id !== categoryId
-  );
-  const maxOrder =
-    newSiblings.length > 0
-      ? Math.max(...newSiblings.map(cat => cat.order))
-      : -1;
+  const newSiblings = categories.filter(cat => cat.parentId === newParentId && cat.id !== categoryId);
+  const maxOrder = newSiblings.length > 0 ? Math.max(...newSiblings.map(cat => cat.order)) : -1;
   const newOrder = maxOrder + 1;
 
   // OPTIMISTIC UPDATE: сразу обновляем локальное состояние
@@ -112,18 +97,11 @@ export const updateCategoryData = (
   };
 };
 
-export const getChildCategories = (
-  list: ICategory[],
-  parentId: string | null
-): ICategory[] => {
-  return list
-    .filter(category => category.parentId === parentId)
-    .sort((a, b) => a.order - b.order);
+export const getChildCategories = (list: ICategory[], parentId: string | null): ICategory[] => {
+  return list.filter(category => category.parentId === parentId).sort((a, b) => a.order - b.order);
 };
 
-export const getCategoriesForSelect = (
-  categories: ICategory[]
-): ICategory[] => {
+export const getCategoriesForSelect = (categories: ICategory[]): ICategory[] => {
   const result: ICategory[] = [];
 
   const addCategories = (parentId: string | null, depth: number) => {
@@ -138,10 +116,7 @@ export const getCategoriesForSelect = (
   return result;
 };
 
-export const buildCategoryTree = (
-  list: ICategory[],
-  parentId: string | null = null
-): ICategoryTree[] => {
+export const buildCategoryTree = (list: ICategory[], parentId: string | null = null): ICategoryTree[] => {
   const children = getChildCategories(list, parentId);
   return children.map(category => ({
     ...category,
@@ -149,11 +124,7 @@ export const buildCategoryTree = (
   }));
 };
 
-export const updateChildCategoriesPaths = async (
-  categories: ICategory[],
-  parentId: string,
-  parentPath: string[]
-) => {
+export const updateChildCategoriesPaths = async (categories: ICategory[], parentId: string, parentPath: string[]) => {
   const childCategories = categories.filter(cat => cat.parentId === parentId);
 
   for (const child of childCategories) {
@@ -167,10 +138,7 @@ export const updateChildCategoriesPaths = async (
   }
 };
 
-export const getUpdatedCategories = (
-  categories: ICategory[],
-  reorderedCategories: ICategory[]
-) => {
+export const getUpdatedCategories = (categories: ICategory[], reorderedCategories: ICategory[]) => {
   const newOrderMap = new Map();
   reorderedCategories.forEach((category, index) => {
     newOrderMap.set(category.id, index);

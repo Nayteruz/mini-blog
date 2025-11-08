@@ -22,21 +22,8 @@ const sizes: Record<number, number> = {
   7: 10,
 };
 
-export const SortableItem: FC<ISortableItemProps> = ({
-  category,
-  level,
-  onDelete,
-  onEdit,
-  handleDragEnd,
-}) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: category.id });
+export const SortableItem: FC<ISortableItemProps> = ({ category, level, onDelete, onClickEdit, handleDragEnd }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -54,32 +41,19 @@ export const SortableItem: FC<ISortableItemProps> = ({
   };
 
   const handleEdit = () => {
-    onEdit(category);
+    onClickEdit(category.id);
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className={`${styles.treeNode} ${isDragging ? styles.dragging : ""}`}
-    >
+    <div ref={setNodeRef} style={style} className={`${styles.treeNode} ${isDragging ? styles.dragging : ""}`}>
       <div className={styles.item}>
         <div className={styles.content}>
           {/* Drag Handle */}
-          <button
-            {...attributes}
-            {...listeners}
-            className={styles.dragHandle}
-            title="Перетащите для изменения порядка"
-          >
+          <button {...attributes} {...listeners} className={styles.dragHandle} title='Перетащите для изменения порядка'>
             <ArrowMove className={styles.dragHandleIcon} />
           </button>
           {hasChildren && (
-            <ArrowToggle
-              className={styles.arrow}
-              isOpen={isExpanded}
-              onClick={() => setIsExpanded(!isExpanded)}
-            />
+            <ArrowToggle className={styles.arrow} isOpen={isExpanded} onClick={() => setIsExpanded(!isExpanded)} />
           )}
           {!hasChildren && <div className={styles.spacer}></div>}
           <span className={styles.name} style={{ fontSize: sizes[level] }}>
@@ -87,35 +61,29 @@ export const SortableItem: FC<ISortableItemProps> = ({
           </span>
         </div>
 
-        {isAuthor && <div className={styles.details}>
-          <Button
-            className={styles.button}
-            variant="primary"
-            onClick={handleEdit}
-          >
-            <EditIcon className={styles.icon} />
-          </Button>
-          <Button
-            className={styles.button}
-            variant="danger"
-            onClick={handleDelete}
-          >
-            <DeleteIcon className={styles.icon} />
-          </Button>
-        </div>}
+        {isAuthor && (
+          <div className={styles.details}>
+            <Button className={styles.button} variant='primary' onClick={handleEdit}>
+              <EditIcon className={styles.icon} />
+            </Button>
+            <Button className={styles.button} variant='danger' onClick={handleDelete}>
+              <DeleteIcon className={styles.icon} />
+            </Button>
+          </div>
+        )}
       </div>
 
       {hasChildren && isExpanded && (
         <div className={styles.subList}>
           <DnDWrapper items={category.children!} onDragEnd={handleDragEnd}>
             <div className={styles.subList}>
-              {category.children!.map((category) => (
+              {category.children!.map(category => (
                 <SortableItem
                   key={category.id}
                   category={category}
                   level={level + 1}
                   onDelete={handleDelete}
-                  onEdit={handleEdit}
+                  onClickEdit={onClickEdit}
                   handleDragEnd={handleDragEnd}
                 />
               ))}

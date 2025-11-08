@@ -14,10 +14,7 @@ interface SearchAndFilterProps {
   categories?: ICategory[];
 }
 
-export const SearchAndFilter: FC<SearchAndFilterProps> = ({
-  onFiltersChange,
-  categories = [],
-}) => {
+export const SearchAndFilter: FC<SearchAndFilterProps> = ({ onFiltersChange, categories = [] }) => {
   const {
     searchQuery,
     sortBy,
@@ -44,8 +41,7 @@ export const SearchAndFilter: FC<SearchAndFilterProps> = ({
     onFiltersChange?.();
   };
 
-  const hasActiveFilters =
-    searchQuery || sortBy !== "newest" || selectedCategory !== "all";
+  const hasActiveFilters = searchQuery || sortBy !== "newest" || selectedCategory !== "all";
 
   return (
     <div className={styles.SearchAndFilter}>
@@ -57,12 +53,7 @@ export const SearchAndFilter: FC<SearchAndFilterProps> = ({
           className={styles.searchInput}
         />
         {searchQuery && (
-          <Button
-            variant='gray'
-            size='small'
-            className={styles.clearSearchButton}
-            onClick={() => handleSearch("")}
-          >
+          <Button variant='gray' size='small' className={styles.clearSearchButton} onClick={() => handleSearch("")}>
             ×
           </Button>
         )}
@@ -87,11 +78,7 @@ export const SearchAndFilter: FC<SearchAndFilterProps> = ({
           />
         </ListRow>
         {hasActiveFilters && (
-          <Button
-            variant='gray'
-            className={styles.clearFiltersButton}
-            onClick={clearFilters}
-          >
+          <Button variant='gray' className={styles.clearFiltersButton} onClick={clearFilters}>
             Сбросить фильтры
           </Button>
         )}

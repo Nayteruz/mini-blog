@@ -1,6 +1,6 @@
 export { AccordeonList } from "./CategoriesAccordeon/AccordeonList";
-export { AddCategoryForm } from "./AddCategory/AddCategory";
-export { EditCategoryForm } from "./EditCategory/EditCategory";
+export { CategoryAdd } from "./CategoryAdd/CategoryAdd";
+export { CategoryEdit } from "./CategoryEdit/CategoryEdit";
 export { SortableList } from "./SortableCategoryList/SortableList";
 export { CategoriesList } from "./CategoriesList/CategoryList";
 export { SelectCategory } from "./SelectCategory/SelectCategory";

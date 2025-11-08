@@ -1,8 +1,8 @@
 {
-  "printWidth": 80,
+  "printWidth": 120,
   "jsxSingleQuote": true,
   "bracketSameLine": false,
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "proseWrap": "always"
+  "proseWrap": "preserve"
 }

@@ -2,16 +2,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 
 type IButtonSize = "small" | "medium" | "large" | "square" | "smallest";
 type IType = "button" | "submit" | "reset";
-type IVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "disabled"
-  | "purple"
-  | "gray";
+type IVariant = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "disabled" | "purple" | "gray";
 
 export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;

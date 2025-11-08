@@ -11,21 +11,12 @@ import MenuIcon from "@assets/icons/barsIcon.svg?react";
 import styles from "./CategoryLeft.module.css";
 
 export const CategoryLeft: FC = () => {
-  const {
-    categoryTree,
-    categories,
-    loading: categoriesLoading,
-  } = useCategories();
+  const { categoryTree, categories, loading: categoriesLoading } = useCategories();
   const { posts, loading: postsLoading } = usePosts();
   const { categoryId } = useParams();
   const [isOpen, setIsOpen] = useState(false);
-  const selectedCategory = useMemo(
-    () => categories.find(cat => cat.id === categoryId),
-    [categories, categoryId]
-  );
-  const categoryPosts = posts.filter(post =>
-    (post.categoryIds || []).includes(selectedCategory?.id || "")
-  );
+  const selectedCategory = useMemo(() => categories.find(cat => cat.id === categoryId), [categories, categoryId]);
+  const categoryPosts = posts.filter(post => (post.categoryIds || []).includes(selectedCategory?.id || ""));
 
   const closeMenu = () => {
     if (isOpen) {
@@ -72,9 +63,7 @@ export const CategoryLeft: FC = () => {
         />
       </aside>
       <main className={styles.notesContent}>
-        <Heading as='h1'>
-          {selectedCategory?.name || "Категории с постами"}
-        </Heading>
+        <Heading as='h1'>{selectedCategory?.name || "Категории с постами"}</Heading>
         <div className={styles.posts}>
           {categoryPosts.map(post => (
             <PostLeft key={post.id} post={post} />

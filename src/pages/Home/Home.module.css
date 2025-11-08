@@ -1,7 +1,7 @@
 .HomePage {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	min-width: 0;
-	max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  max-width: 100%;
 }

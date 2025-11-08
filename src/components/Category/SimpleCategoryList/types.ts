@@ -2,7 +2,7 @@ import type { ICategoryTree } from "@/types";
 import type { DragEndEvent } from "@dnd-kit/core";
 
 interface ISimple {
-  changeEdit: (category: ICategoryTree | null) => void;
+  onClickEdit: (categoryId: string) => void;
   handleDragEnd: (event: DragEndEvent) => Promise<void>;
   onDelete: (categoryId: string) => Promise<void>;
 }

@@ -1,22 +1,22 @@
 .AccordeonList {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	min-width: 0;
-	max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .errorMessage {
-	background: #fef2f2;
-	border: 1px solid #fecaca;
-	padding: 10px 20px;
-	border-radius: 5px;
-	margin-bottom: 20px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .loadingContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
 }

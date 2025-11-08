@@ -1,4 +1,4 @@
-.AddCategoryForm {
+.CategoryEditPage {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);

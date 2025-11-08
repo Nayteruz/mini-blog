@@ -12,32 +12,15 @@ interface IMenuCategoryProps {
   closeMenu: () => void;
 }
 
-export const MenuCategories: FC<IMenuCategoryProps> = ({
-  isOpen,
-  list,
-  selectedCategory,
-  posts,
-  closeMenu,
-}) => {
+export const MenuCategories: FC<IMenuCategoryProps> = ({ isOpen, list, selectedCategory, posts, closeMenu }) => {
   return (
-    <div
-      className={`${styles.MenuCategories} ${isOpen ? styles.openFixed : ""}`}
-    >
+    <div className={`${styles.MenuCategories} ${isOpen ? styles.openFixed : ""}`}>
       <div className={styles.overlay} onClick={closeMenu}></div>
       <div className={styles.menuItems}>
-        <Button
-          variant='danger'
-          size='smallest'
-          onClick={closeMenu}
-          className={styles.closeButton}
-        >
+        <Button variant='danger' size='smallest' onClick={closeMenu} className={styles.closeButton}>
           ×
         </Button>
-        <CategoryMenu
-          list={list}
-          selectedCategory={selectedCategory}
-          posts={posts}
-        />
+        <CategoryMenu list={list} selectedCategory={selectedCategory} posts={posts} />
       </div>
     </div>
   );

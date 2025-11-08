@@ -6,30 +6,13 @@ import { auth } from "@/configDb";
 import EditIcon from "@assets/icons/penToSquare.svg?react";
 import ArrowMove from "@assets/icons/arrowUpDown.svg?react";
 import DeleteIcon from "@assets/icons/deleteIcon.svg?react";
-import type {
-  ISimpleCategoryListProps,
-  ISimpleItemProps,
-  ISimpleItemsProps,
-} from "./types";
+import type { ISimpleCategoryListProps, ISimpleItemProps, ISimpleItemsProps } from "./types";
 import { DnDWrapper } from "@/components/DnDWrapper";
 import { Spinner } from "@/components/Spinner";
 import styles from "./SimpleCategoryList.module.css";
 
-const SimpleItem: FC<ISimpleItemProps> = ({
-  category,
-  changeEdit,
-  level,
-  handleDragEnd,
-  onDelete,
-}) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: category.id });
+const SimpleItem: FC<ISimpleItemProps> = ({ category, onClickEdit, level, handleDragEnd, onDelete }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: category.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -44,49 +27,29 @@ const SimpleItem: FC<ISimpleItemProps> = ({
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className={`${styles.simpleItemRef} ${isDragging ? styles.dragging : ""}`}
-    >
-      <div
-        style={{ marginLeft: `${level * 15}px` }}
-        className={`${styles.simpleItem}`}
-      >
+    <div ref={setNodeRef} style={style} className={`${styles.simpleItemRef} ${isDragging ? styles.dragging : ""}`}>
+      <div style={{ marginLeft: `${level * 15}px` }} className={`${styles.simpleItem}`}>
         <div className={styles.info}>
-          <button
-            {...attributes}
-            {...listeners}
-            className={styles.dragHandle}
-            title="Перетащите для изменения порядка"
-          >
+          <button {...attributes} {...listeners} className={styles.dragHandle} title='Перетащите для изменения порядка'>
             <ArrowMove className={styles.dragHandleIcon} />
           </button>
           <span className={styles.name}>{category.name}</span>
         </div>
-        {isAuthor && <div className={styles.buttons}>
-          <Button
-            className={styles.button}
-            variant="primary"
-            size="small"
-            onClick={() => changeEdit(category)}
-          >
-            <EditIcon className={styles.icon} />
-          </Button>
-          <Button
-            className={styles.button}
-            variant="danger"
-            size="small"
-            onClick={handleDelete}
-          >
-            <DeleteIcon className={styles.icon} />
-          </Button>
-        </div>}
+        {isAuthor && (
+          <div className={styles.buttons}>
+            <Button className={styles.button} variant='primary' size='small' onClick={() => onClickEdit(category.id)}>
+              <EditIcon className={styles.icon} />
+            </Button>
+            <Button className={styles.button} variant='danger' size='small' onClick={handleDelete}>
+              <DeleteIcon className={styles.icon} />
+            </Button>
+          </div>
+        )}
       </div>
       {category?.children && category?.children?.length > 0 && (
         <SimpleItems
           categories={category.children}
-          changeEdit={changeEdit}
+          onClickEdit={onClickEdit}
           level={level + 1}
           handleDragEnd={handleDragEnd}
           onDelete={onDelete}
@@ -96,21 +59,15 @@ const SimpleItem: FC<ISimpleItemProps> = ({
   );
 };
 
-const SimpleItems: FC<ISimpleItemsProps> = ({
-  categories,
-  changeEdit,
-  level,
-  handleDragEnd,
-  onDelete,
-}) => {
+const SimpleItems: FC<ISimpleItemsProps> = ({ categories, onClickEdit, level, handleDragEnd, onDelete }) => {
   return (
     <DnDWrapper items={categories} onDragEnd={handleDragEnd}>
       <div className={styles.list}>
-        {categories.map((category) => (
+        {categories.map(category => (
           <SimpleItem
             key={category.id}
             category={category}
-            changeEdit={changeEdit}
+            onClickEdit={onClickEdit}
             level={level}
             handleDragEnd={handleDragEnd}
             onDelete={onDelete}
@@ -122,11 +79,11 @@ const SimpleItems: FC<ISimpleItemsProps> = ({
 };
 
 export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({
-  changeEdit,
+  onClickEdit,
   categories,
   isLoading,
   handleDragEnd,
-  onDelete
+  onDelete,
 }) => {
   if (categories.length === 0) {
     return (
@@ -147,11 +104,11 @@ export const SimpleCategoryList: FC<ISimpleCategoryListProps> = ({
               <Spinner />
             </div>
           )}
-          {categories.map((category) => (
+          {categories.map(category => (
             <SimpleItem
               key={category.id}
               category={category}
-              changeEdit={changeEdit}
+              onClickEdit={onClickEdit}
               level={0}
               handleDragEnd={handleDragEnd}
               onDelete={onDelete}

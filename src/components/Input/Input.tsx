@@ -10,13 +10,7 @@ interface IInputProps {
 }
 
 export const Input: FC<IInputProps> = props => {
-  const {
-    value,
-    onChange,
-    className,
-    placeholder = "",
-    required = false,
-  } = props;
+  const { value, onChange, className, placeholder = "", required = false } = props;
 
   return (
     <input

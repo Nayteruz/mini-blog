@@ -6,7 +6,7 @@ import { Heading } from "@/components/Heading";
 export const CategoriesPage: FC = () => {
   return (
     <div className={styles.CategoriesPage}>
-      <Heading as="h1">Список категорий</Heading>
+      <Heading as='h1'>Список категорий</Heading>
       <CategoriesList />
     </div>
   );

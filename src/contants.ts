@@ -34,6 +34,7 @@ export const PAGES: Record<IPageNames, IMenuItem> = {
   CATEGORY_EDIT: {
     title: "Редактировать категорию",
     path: "/category/edit/:categoryId",
+    pathOrigin: "/category/edit",
     isAuth: true,
   },
   CATEGORIES_LEFT: {

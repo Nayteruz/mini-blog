@@ -1,7 +1,7 @@
-import React, { useState, useEffect, type FC } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { usePosts } from '@hooks/usePosts';
-import { useCategories } from '@hooks/useCategories';
+import React, { useState, useEffect, type FC } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { usePosts } from "@hooks/usePosts";
+import { useCategories } from "@hooks/useCategories";
 import { PostForm } from "@/components/Post/PostForm/PostForm";
 import { useStore } from "@/store";
 import { PAGES } from "@/contants";
@@ -13,8 +13,8 @@ export const PostEditForm: FC = () => {
   const { categories, orderedCategories } = useCategories();
   const { user } = useStore();
 
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -34,7 +34,7 @@ export const PostEditForm: FC = () => {
   // Проверяем права на редактирование
   useEffect(() => {
     if (post && user && post.author.id !== user.uid) {
-      alert('У вас нет прав для редактирования этого поста');
+      alert("У вас нет прав для редактирования этого поста");
       navigate(PAGES.MAIN.path);
     }
   }, [post, user, navigate]);
@@ -43,12 +43,12 @@ export const PostEditForm: FC = () => {
     e.preventDefault();
 
     if (!user || !post) {
-      alert('Ошибка доступа');
+      alert("Ошибка доступа");
       return;
     }
 
     if (!title.trim() || !text.trim() || !categoryIds.length) {
-      alert('Заполните все обязательные поля');
+      alert("Заполните все обязательные поля");
       return;
     }
 
@@ -63,8 +63,8 @@ export const PostEditForm: FC = () => {
 
       navigate(PAGES.MAIN.path);
     } catch (err) {
-      console.error('Error updating post:', err);
-      alert('Ошибка при обновлении поста');
+      console.error("Error updating post:", err);
+      alert("Ошибка при обновлении поста");
     } finally {
       setIsSubmitting(false);
     }
@@ -72,18 +72,14 @@ export const PostEditForm: FC = () => {
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-text">Загрузка...</div>
+      <div className='loading-container'>
+        <div className='loading-text'>Загрузка...</div>
       </div>
     );
   }
 
   if (!post) {
-    return (
-      <div className="error-message">
-        Пост не найден
-      </div>
-    );
+    return <div className='error-message'>Пост не найден</div>;
   }
 
   return (
@@ -99,7 +95,7 @@ export const PostEditForm: FC = () => {
       setText={setText}
       isSubmitting={isSubmitting}
       isDisabled={isSendDisabled}
-      sendButtonText="Редактировать заметку"
+      sendButtonText='Редактировать заметку'
     />
   );
 };

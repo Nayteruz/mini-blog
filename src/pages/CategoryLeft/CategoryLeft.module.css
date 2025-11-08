@@ -24,17 +24,6 @@
   }
 }
 
-/* .menu {
-  @media all and (max-width: 769px) {
-    display: none;
-
-    &.open {
-      display: block;
-      padding-top: 10px;
-    }
-  }
-} */
-
 .posts {
   display: flex;
   flex-direction: column;

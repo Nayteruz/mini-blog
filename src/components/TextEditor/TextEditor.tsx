@@ -1,60 +1,58 @@
-import { type FC } from 'react'
-import { RichTextEditor, Link } from '@mantine/tiptap';
-import { useEditor } from '@tiptap/react';
-import Highlight from '@tiptap/extension-highlight';
-import StarterKit from '@tiptap/starter-kit';
-import TextAlign from '@tiptap/extension-text-align';
-import Superscript from '@tiptap/extension-superscript';
-import SubScript from '@tiptap/extension-subscript';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import { common, createLowlight } from 'lowlight'
-import '@mantine/core/styles.css';
-import '@mantine/tiptap/styles.css';
-import javascript from 'highlight.js/lib/languages/javascript';
-import typescript from 'highlight.js/lib/languages/typescript';
-import css from 'highlight.js/lib/languages/css';
-import html from 'highlight.js/lib/languages/xml';
+import { type FC } from "react";
+import { RichTextEditor, Link } from "@mantine/tiptap";
+import { useEditor } from "@tiptap/react";
+import Highlight from "@tiptap/extension-highlight";
+import StarterKit from "@tiptap/starter-kit";
+import TextAlign from "@tiptap/extension-text-align";
+import Superscript from "@tiptap/extension-superscript";
+import SubScript from "@tiptap/extension-subscript";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import { common, createLowlight } from "lowlight";
+import "@mantine/core/styles.css";
+import "@mantine/tiptap/styles.css";
+import javascript from "highlight.js/lib/languages/javascript";
+import typescript from "highlight.js/lib/languages/typescript";
+import css from "highlight.js/lib/languages/css";
+import html from "highlight.js/lib/languages/xml";
 
 interface ITextEditorProps {
   content: string;
   setContent: (content: string) => void;
 }
 
-const lowlight = createLowlight(common)
+const lowlight = createLowlight(common);
 
-lowlight.register('javascript', javascript)
-lowlight.register('typescript', typescript);
-lowlight.register('css', css);
-lowlight.register('html', html);
-lowlight.register('typescriptreact', typescript); // Регистрируем псевдоним
-lowlight.register('tsx', typescript); // TSX как TypeScript
-
+lowlight.register("javascript", javascript);
+lowlight.register("typescript", typescript);
+lowlight.register("css", css);
+lowlight.register("html", html);
+lowlight.register("typescriptreact", typescript); // Регистрируем псевдоним
+lowlight.register("tsx", typescript); // TSX как TypeScript
 
 export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
-
   const editor = useEditor({
     shouldRerenderOnTransaction: true,
     extensions: [
-      StarterKit.configure({ link: false, codeBlock: false, }),
+      StarterKit.configure({ link: false, codeBlock: false }),
       Link,
       Superscript,
       SubScript,
       Highlight,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
       CodeBlockLowlight.configure({
         lowlight,
-        defaultLanguage: 'plaintext',
+        defaultLanguage: "plaintext",
       }),
     ],
     content,
     onUpdate: ({ editor }) => {
       setContent(editor.getHTML());
-    }
+    },
   });
 
   return (
     <RichTextEditor editor={editor}>
-      <RichTextEditor.Toolbar sticky stickyOffset="var(--docs-header-height)">
+      <RichTextEditor.Toolbar sticky stickyOffset='var(--docs-header-height)'>
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />
           <RichTextEditor.Italic />

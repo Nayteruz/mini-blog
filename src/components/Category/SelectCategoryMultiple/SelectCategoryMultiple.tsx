@@ -20,11 +20,7 @@ interface ICategoryItemProps {
   handleCategoryToggle: (categoryId: string) => void;
 }
 
-const CategoryOption: FC<ICategoryItemProps> = ({
-  category,
-  selectedCategoryIds,
-  handleCategoryToggle,
-}) => {
+const CategoryOption: FC<ICategoryItemProps> = ({ category, selectedCategoryIds, handleCategoryToggle }) => {
   return (
     <label key={category.id} className={styles.CategoryOption}>
       <input
@@ -53,9 +49,7 @@ export const SelectCategoryMultiple: React.FC<IMultiCategorySelectProps> = ({
     if (!searchTerm.trim()) return orderedCategories;
 
     const term = searchTerm.toLowerCase();
-    return orderedCategories.filter(category =>
-      category.name.toLowerCase().includes(term)
-    );
+    return orderedCategories.filter(category => category.name.toLowerCase().includes(term));
   }, [orderedCategories, searchTerm]);
 
   const selectedCategories = useMemo(
@@ -96,11 +90,7 @@ export const SelectCategoryMultiple: React.FC<IMultiCategorySelectProps> = ({
     <div className={styles.SelectCategoryMultiple}>
       <div className={styles.selectedCategories}>
         {selectedCategories.map(category => (
-          <Button
-            size='small'
-            variant='secondary'
-            onClick={() => removeCategory(category.id)}
-          >
+          <Button size='small' variant='secondary' onClick={() => removeCategory(category.id)}>
             {category.name} ×
           </Button>
         ))}
@@ -148,12 +138,7 @@ export const SelectCategoryMultiple: React.FC<IMultiCategorySelectProps> = ({
               ))}
           </div>
           <div className={styles.actions}>
-            <Button
-              type='button'
-              variant='danger'
-              size='small'
-              onClick={clearAll}
-            >
+            <Button type='button' variant='danger' size='small' onClick={clearAll}>
               Очистить все
             </Button>
             <Button

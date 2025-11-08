@@ -22,47 +22,38 @@ export const AccordeonItem: FC<IAccordeonItemProps> = ({ category, level, posts 
   return (
     <div className={styles.AccordeonItem}>
       <div
-        className={`${styles.header} ${isExpanded ? styles.expanded : ''} ${isEmpty ? styles.empty : ''}`}
+        className={`${styles.header} ${isExpanded ? styles.expanded : ""} ${isEmpty ? styles.empty : ""}`}
         onClick={() => !isEmpty && setIsExpanded(!isExpanded)}
       >
         <div className={styles.title}>
           <span className={styles.name}>{category.name}</span>
-          <span className={styles.count}>
-            {`(${categoryPosts.length} постов)`}
-          </span>
+          <span className={styles.count}>{`(${categoryPosts.length} постов)`}</span>
         </div>
 
-        {!isEmpty && (
-          <ArrowToggle isOpen={isExpanded} />
-        )}
+        {!isEmpty && <ArrowToggle isOpen={isExpanded} />}
       </div>
 
-      {
-        isExpanded && (
-          <div className={styles.categoryContent}>
-            {/* Посты этой категории */}
-            {hasPosts && (
-              <div className={styles.categoryPosts}>
-                {categoryPosts.map(post => <PostCard key={post.id} post={post} parts={['header', 'footer']} isToggle />)}
-              </div>
-            )}
+      {isExpanded && (
+        <div className={styles.categoryContent}>
+          {/* Посты этой категории */}
+          {hasPosts && (
+            <div className={styles.categoryPosts}>
+              {categoryPosts.map(post => (
+                <PostCard key={post.id} post={post} parts={["header", "footer"]} isToggle />
+              ))}
+            </div>
+          )}
 
-            {/* Дочерние категории */}
-            {hasChildren && (
-              <>
-                {childCategories.map(childCategory => (
-                  <AccordeonItem
-                    key={childCategory.id}
-                    category={childCategory}
-                    level={level + 1}
-                    posts={posts}
-                  />
-                ))}
-              </>
-            )}
-          </div>
-        )
-      }
-    </div >
+          {/* Дочерние категории */}
+          {hasChildren && (
+            <>
+              {childCategories.map(childCategory => (
+                <AccordeonItem key={childCategory.id} category={childCategory} level={level + 1} posts={posts} />
+              ))}
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 };

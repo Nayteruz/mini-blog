@@ -7,10 +7,9 @@ import { Button } from "@/components/Button";
 import MenuIcon from "@assets/icons/barsIcon.svg?react";
 import styles from "./Header.module.css";
 
-
 export const Header = () => {
   const { setUser } = useStore();
-  const isAuth = useStore((state) => state.getIsAuth());
+  const isAuth = useStore(state => state.getIsAuth());
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -34,18 +33,26 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.topNav}>
-        <ul className={isOpen ? styles.open : ''} onClick={closeMenu}>
-          {navList.map((item) => (
+        <ul className={isOpen ? styles.open : ""} onClick={closeMenu}>
+          {navList.map(item => (
             <li key={item.path}>
-              <Link className={`${styles.link} ${location.pathname === item.path && styles.active}`} to={item.path}>{item.label}</Link>
+              <Link className={`${styles.link} ${location.pathname === item.path && styles.active}`} to={item.path}>
+                {item.label}
+              </Link>
             </li>
           ))}
-          {isAuth && <li>
-            <button className={styles.link} onClick={signOutUser}>{PAGES.SIGN_OUT.title}</button>
-          </li>}
+          {isAuth && (
+            <li>
+              <button className={styles.link} onClick={signOutUser}>
+                {PAGES.SIGN_OUT.title}
+              </button>
+            </li>
+          )}
         </ul>
-        <Button variant="purple" className={styles.burger} onClick={() => setIsOpen((prev) => !prev)}><MenuIcon /></Button>
+        <Button variant='purple' className={styles.burger} onClick={() => setIsOpen(prev => !prev)}>
+          <MenuIcon />
+        </Button>
       </nav>
-    </header >
+    </header>
   );
 };

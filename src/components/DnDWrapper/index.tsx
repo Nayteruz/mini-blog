@@ -1,11 +1,21 @@
 import type { ReactNode } from "react";
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent, MeasuringStrategy, DragOverlay } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  MeasuringStrategy,
+  DragOverlay,
+} from "@dnd-kit/core";
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 interface IDnDWrapperProps<T> {
-  children: ReactNode
-  onDragEnd: (event: DragEndEvent) => void
-  items: T[]
+  children: ReactNode;
+  onDragEnd: (event: DragEndEvent) => void;
+  items: T[];
 }
 
 const restrictToVerticalAxis = ({ transform }: any) => {
@@ -46,5 +56,5 @@ export const DnDWrapper = <T extends { id: string }>({ children, onDragEnd, item
       </SortableContext>
       <DragOverlay />
     </DndContext>
-  )
+  );
 };

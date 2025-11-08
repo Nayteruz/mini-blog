@@ -6,3 +6,5 @@ export { PostEdit } from "./PostEdit/PostEdit";
 export { CategoriesPage } from "./Categories/Categories";
 export { PostList } from "./PostList/PostList";
 export { CategoryLeft } from "./CategoryLeft/CategoryLeft";
+export { CategoryAddPage } from "./CategoryAdd/CategoryAdd";
+export { CategoryEditPage } from "./CategoryEdit/CategoryEditPage";

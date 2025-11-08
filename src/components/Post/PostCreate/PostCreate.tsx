@@ -11,7 +11,7 @@ export const PostCreateForm: FC = () => {
   const { createPost } = usePosts();
   const { categories, orderedCategories } = useCategories();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState('Написать заметку...');
+  const [text, setText] = useState("Написать заметку...");
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -21,12 +21,12 @@ export const PostCreateForm: FC = () => {
     e.preventDefault();
 
     if (!auth.currentUser) {
-      alert('Вы должны быть авторизованы для создания постов');
+      alert("Вы должны быть авторизованы для создания постов");
       return;
     }
 
     if (!title.trim() || !text.trim() || !categoryIds.length) {
-      alert('Заполните все обязательные поля');
+      alert("Заполните все обязательные поля");
       return;
     }
 
@@ -48,13 +48,13 @@ export const PostCreateForm: FC = () => {
       await createPost(newPostData);
 
       // Очистка формы и переход
-      setTitle('');
-      setText('');
+      setTitle("");
+      setText("");
       setCategoryIds([]);
       navigate(PAGES.MAIN.path);
     } catch (err) {
-      console.error('Error creating post:', err);
-      alert('Ошибка при создании поста');
+      console.error("Error creating post:", err);
+      alert("Ошибка при создании поста");
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +73,7 @@ export const PostCreateForm: FC = () => {
       setText={setText}
       isSubmitting={isSubmitting}
       isDisabled={isSendDisabled}
-      sendButtonText="Создать заметку"
+      sendButtonText='Создать заметку'
     />
   );
-}
+};

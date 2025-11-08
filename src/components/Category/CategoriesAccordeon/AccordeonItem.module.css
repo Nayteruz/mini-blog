@@ -1,87 +1,87 @@
 .AccordeonItem {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	min-width: 0;
-	max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 5px 14px;
-	cursor: pointer;
-	transition: background-color 0.2s;
-	user-select: none;
-	border: 1px solid #c2d7ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+  border: 1px solid #c2d7ff;
 
-	&:hover {
-		border-color: #adc4f0;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	}
+  &:hover {
+    border-color: #adc4f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .expanded {
-	border-color: #96b1e3;
+  border-color: #96b1e3;
 }
 
 .empty {
-	cursor: default;
-	opacity: 0.5;
-	border: 1px solid #c2d7ff;
+  cursor: default;
+  opacity: 0.5;
+  border: 1px solid #c2d7ff;
 
-	&:hover {
-		border: 1px solid #c2d7ff;
-		box-shadow: none;
-	}
+  &:hover {
+    border: 1px solid #c2d7ff;
+    box-shadow: none;
+  }
 }
 
 .title {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
 }
 
 .name {
-	font-size: 20px;
-	line-height: 1.25;
-	color: #111827;
+  font-size: 20px;
+  line-height: 1.25;
+  color: #111827;
 
-	&::first-letter {
-		text-transform: uppercase;
-	}
+  &::first-letter {
+    text-transform: uppercase;
+  }
 
-	@media all and (max-width: 768px) {
-		font-size: 16px;
-	}
+  @media all and (max-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .count {
-	font-size: 0.9rem;
-	color: #6b7280;
-	font-weight: normal;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: normal;
 }
 
 .categoryContent {
-	padding-left: 10px;
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	min-width: 0;
-	max-width: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .categoryPosts {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	min-width: 0;
-	max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .childCategories {
-	border-top: 0px solid #f3f4f6;
+  border-top: 0px solid #f3f4f6;
 }

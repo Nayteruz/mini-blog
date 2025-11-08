@@ -1,40 +1,40 @@
 .PostLeft {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .titleWrapper {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-	padding-bottom: 5px;
-	cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
+  cursor: pointer;
 }
 
 .title {
-	&::first-letter {
-		text-transform: uppercase;
-	}
-	color: var(--main-color);
+  &::first-letter {
+    text-transform: uppercase;
+  }
+  color: var(--main-color);
 }
 
 .arrow {
-	font-size: 20px;
-	color: var(--purple-color);
+  font-size: 20px;
+  color: var(--purple-color);
 
-	@media all and (max-width: 769px) {
-		font-size: 14px;
-	}
+  @media all and (max-width: 769px) {
+    font-size: 14px;
+  }
 }
 
 .textWrapper {
-	max-width: 100%;
-	overflow: hidden;
-	padding-top: 1px;
+  max-width: 100%;
+  overflow: hidden;
+  padding-top: 1px;
 }
 
 .text {
-	padding: 0;
+  padding: 0;
 }

@@ -1,21 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  doc,
-  deleteDoc,
-  query,
-  orderBy,
-  writeBatch,
-} from "firebase/firestore";
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, writeBatch } from "firebase/firestore";
 import { db } from "@/configDb";
 import type { ICategory, ICategoryTree } from "../types";
-import type {
-  ICreateCategoryHookArguments,
-  IUpdateCategoryHookArguments,
-} from "./types";
+import type { ICreateCategoryHookArguments, IUpdateCategoryHookArguments } from "./types";
 import { DB_KEYS } from "./const";
 import {
   buildCategoryTree,
@@ -40,10 +27,7 @@ export const useCategories = () => {
       setLoading(true);
       setError(null);
 
-      const q = query(
-        collection(db, DB_KEYS.CATEGORIES),
-        orderBy(DB_KEYS.DEPTH)
-      );
+      const q = query(collection(db, DB_KEYS.CATEGORIES), orderBy(DB_KEYS.DEPTH));
       const querySnapshot = await getDocs(q);
 
       const categoriesData = querySnapshot.docs.map(doc => ({
@@ -61,9 +45,7 @@ export const useCategories = () => {
   };
 
   // Создание новой категории
-  const createCategory = async (
-    params: ICreateCategoryHookArguments
-  ): Promise<string> => {
+  const createCategory = async (params: ICreateCategoryHookArguments): Promise<string> => {
     const { name, parentId, userId } = params;
     try {
       setError(null);
@@ -75,10 +57,7 @@ export const useCategories = () => {
         userId,
       });
 
-      const docRef = await addDoc(
-        collection(db, DB_KEYS.CATEGORIES),
-        newCategoryData
-      );
+      const docRef = await addDoc(collection(db, DB_KEYS.CATEGORIES), newCategoryData);
 
       // Обновляем path с ID новой категории
       await updateDoc(doc(db, DB_KEYS.CATEGORIES, docRef.id), {
@@ -100,13 +79,9 @@ export const useCategories = () => {
       setError(null);
 
       // Проверяем, есть ли дочерние категории
-      const childCategories = categories.filter(
-        cat => cat.parentId === categoryId
-      );
+      const childCategories = categories.filter(cat => cat.parentId === categoryId);
       if (childCategories.length > 0) {
-        throw new Error(
-          "Нельзя удалить категорию с дочерними элементами. Сначала удалите все подкатегории."
-        );
+        throw new Error("Нельзя удалить категорию с дочерними элементами. Сначала удалите все подкатегории.");
       }
 
       // Удаляем категорию
@@ -116,9 +91,7 @@ export const useCategories = () => {
       await loadCategories();
     } catch (err) {
       console.error("Error deleting category:", err);
-      setError(
-        err instanceof Error ? err.message : "Ошибка удаления категории"
-      );
+      setError(err instanceof Error ? err.message : "Ошибка удаления категории");
       throw err;
     }
   };
@@ -170,10 +143,7 @@ export const useCategories = () => {
   const reorderCategories = async (reorderedCategories: ICategory[]) => {
     const originalCategories = [...categories];
 
-    const updatedCategories = getUpdatedCategories(
-      categories,
-      reorderedCategories
-    );
+    const updatedCategories = getUpdatedCategories(categories, reorderedCategories);
 
     setCategoryTree(buildCategoryTree(updatedCategories, null));
 
@@ -207,10 +177,7 @@ export const useCategories = () => {
     setCategoryTree(buildCategoryTree(categories, null));
   }, [categories]);
 
-  const orderedCategories = useMemo(
-    () => getCategoriesForSelect(categories),
-    [categories]
-  );
+  const orderedCategories = useMemo(() => getCategoriesForSelect(categories), [categories]);
 
   useEffect(() => {
     loadCategories();

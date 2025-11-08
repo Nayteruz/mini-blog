@@ -1,15 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  where,
-  updateDoc,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, where, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import type { ICreatePostData, IPost, IUpdatePostData } from "../types";
 import { db } from "@/configDb";
 import { useStore } from "@/store";
@@ -21,13 +11,7 @@ export const usePosts = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Получаем действия из store
-  const {
-    setAllPosts,
-    setSearchQuery,
-    setSortBy,
-    setSelectedCategory,
-    clearFilters,
-  } = useStore();
+  const { setAllPosts, setSearchQuery, setSortBy, setSelectedCategory, clearFilters } = useStore();
   const store = useStore();
 
   // Загрузка всех постов
@@ -36,10 +20,7 @@ export const usePosts = () => {
       setLoading(true);
       setError(null);
 
-      const q = query(
-        collection(db, DB_KEYS.POSTS),
-        orderBy("createdAt", "desc")
-      );
+      const q = query(collection(db, DB_KEYS.POSTS), orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
 
       const postsData = querySnapshot.docs.map(doc => ({

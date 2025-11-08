@@ -4,11 +4,10 @@ import { Heading } from "@/components/Heading";
 import styles from "./styles.module.css";
 
 export const PostCreate: FC = () => {
-
   return (
     <div className={styles.PostCreatePage}>
-      <Heading as="h1">Новая заметка</Heading>
+      <Heading as='h1'>Новая заметка</Heading>
       <PostCreateForm />
-    </div >
+    </div>
   );
 };

@@ -3,6 +3,8 @@ import { useCategories } from "@hooks/useCategories";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryForm } from "../CategoryForm/CategoryForm";
 import { PAGES } from "@/contants";
+import { Heading } from "@/components/Heading";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export const CategoryEdit: FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -33,6 +35,10 @@ export const CategoryEdit: FC = () => {
       throw new Error(`Error creating category: ${errorMessage}`);
     }
   };
+
+  if (!selectedCategory) {
+    return <ErrorMessage title='Категория не найдена или не существует' />;
+  }
 
   return (
     <CategoryForm

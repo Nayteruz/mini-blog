@@ -5,6 +5,9 @@ import { useCategories } from "@hooks/useCategories";
 import { PostForm } from "@/components/Post/PostForm/PostForm";
 import { useStore } from "@/store";
 import { PAGES } from "@/contants";
+import { ErrorMessage } from "@/components/ErrorMessage";
+import { Spinner } from "@/components/Spinner";
+import styles from "./PostEdit.module.css";
 
 export const PostEditForm: FC = () => {
   const navigate = useNavigate();
@@ -72,14 +75,14 @@ export const PostEditForm: FC = () => {
 
   if (loading) {
     return (
-      <div className='loading-container'>
-        <div className='loading-text'>Загрузка...</div>
+      <div className={styles.loadingContainer}>
+        <Spinner />
       </div>
     );
   }
 
   if (!post) {
-    return <div className='error-message'>Пост не найден</div>;
+    return <ErrorMessage title='Пост не найден' />;
   }
 
   return (

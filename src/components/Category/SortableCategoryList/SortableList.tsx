@@ -4,6 +4,7 @@ import { SortableItem } from "./SortableItem";
 import { DnDWrapper } from "@/components/DnDWrapper";
 import type { ISortableListProps } from "./types";
 import styles from "./styles.module.css";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export const SortableList: FC<ISortableListProps> = ({
   onClickEdit,
@@ -14,7 +15,7 @@ export const SortableList: FC<ISortableListProps> = ({
   error,
 }) => {
   if (error) {
-    return <div className='error-message'>{error}</div>;
+    return <ErrorMessage title={error} />;
   }
 
   if (categories.length === 0) {

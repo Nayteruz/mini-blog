@@ -1,10 +1,10 @@
 import type { FC } from "react";
-import type { ITabItem } from "@/types";
+import type { ITabItem, IVievType } from "@/types";
 import styles from "./Tabs.module.css";
 
 interface ITabsProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeTab: IVievType;
+  setActiveTab: (tab: IVievType) => void;
   list: ITabItem[];
 }
 

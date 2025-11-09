@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { PAGE_NAMES } from "./contants";
+import type { PAGE_NAMES, VIEW_TYPE } from "./contants";
 
 export interface IPost {
   id: string;
@@ -40,7 +40,7 @@ export interface ICategoryTree extends ICategory {
 }
 
 export interface ITabItem {
-  key: string;
+  key: IVievType;
   name: string;
   content: ReactNode;
 }
@@ -53,3 +53,5 @@ export interface IMenuItem {
 }
 
 export type IPageNames = (typeof PAGE_NAMES)[keyof typeof PAGE_NAMES];
+
+export type IVievType = (typeof VIEW_TYPE)[keyof typeof VIEW_TYPE];

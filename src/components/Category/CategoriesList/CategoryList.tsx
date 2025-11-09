@@ -7,13 +7,14 @@ import { SimpleCategoryList } from "../SimpleCategoryList/SimpleCategoryList";
 import { Spinner } from "@/components/Spinner";
 import { Tabs } from "@/components/Tabs";
 import { onDragEnd } from "../SortableCategoryList/utils";
-import { PAGES } from "@/contants";
+import { PAGES, VIEW_TYPE } from "@/contants";
 import { Button } from "@/components/Button";
 import styles from "./CategoriesList.module.css";
+import type { IVievType } from "@/types";
 
 export const CategoriesList: FC = () => {
   const { categoryTree, loading, reorderCategories, deleteCategory, error } = useCategories();
-  const [activeTab, setActiveTab] = useState<string>("tree");
+  const [activeTab, setActiveTab] = useState<IVievType>(VIEW_TYPE.LIST);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
   const navigate = useNavigate();
 
@@ -42,7 +43,20 @@ export const CategoriesList: FC = () => {
 
   const views = [
     {
-      key: "tree",
+      key: VIEW_TYPE.LIST,
+      name: "Простой список",
+      content: (
+        <SimpleCategoryList
+          categories={categoryTree}
+          isLoading={loading}
+          handleDragEnd={handleDragEnd}
+          onClickEdit={onClickEdit}
+          onDelete={deleteCategory}
+        />
+      ),
+    },
+    {
+      key: VIEW_TYPE.TREE,
       name: "Древовидный вид",
       content: (
         <SortableList
@@ -52,19 +66,6 @@ export const CategoriesList: FC = () => {
           onClickEdit={onClickEdit}
           onDelete={deleteCategory}
           error={error}
-        />
-      ),
-    },
-    {
-      key: "list",
-      name: "Простой список",
-      content: (
-        <SimpleCategoryList
-          categories={categoryTree}
-          isLoading={loading}
-          handleDragEnd={handleDragEnd}
-          onClickEdit={onClickEdit}
-          onDelete={deleteCategory}
         />
       ),
     },

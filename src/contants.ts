@@ -118,3 +118,8 @@ export const SORT_TYPE = {
   OLDEST: "oldest",
   TITLE: "title",
 } as const;
+
+export const VIEW_TYPE = {
+  LIST: "list",
+  TREE: "tree",
+} as const;

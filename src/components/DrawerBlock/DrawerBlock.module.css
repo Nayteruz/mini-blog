@@ -1,0 +1,23 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.left {
+    justify-content: flex-start;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+.content {
+  width: var(--drawer-width, 250px);
+}

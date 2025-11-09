@@ -31,10 +31,7 @@ export interface ICategory {
 }
 
 export type ICreateCategoryData = Omit<ICategory, "id">;
-export type IUpdateCategoryData = Omit<
-  ICategory,
-  "id" | "createdAt" | "createdBy"
-> & {
+export type IUpdateCategoryData = Omit<ICategory, "id" | "createdAt" | "createdBy"> & {
   updatedAt: Date;
 };
 

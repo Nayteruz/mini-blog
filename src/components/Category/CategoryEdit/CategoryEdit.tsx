@@ -3,7 +3,6 @@ import { useCategories } from "@hooks/useCategories";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryForm } from "../CategoryForm/CategoryForm";
 import { PAGES } from "@/contants";
-import { Heading } from "@/components/Heading";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export const CategoryEdit: FC = () => {

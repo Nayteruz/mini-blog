@@ -7,20 +7,20 @@ import styles from "./CategoryMenu.module.css";
 
 interface ICategoryMenuProps {
   list: ICategoryTree[];
-  selectedCategory?: ICategoryTree;
   posts: IPost[];
   onClick?: () => void;
   className?: string;
+  selectedPath: string[];
 }
 
 interface ICategoryItemProps {
   category: ICategoryTree;
-  selectedCategory?: ICategoryTree;
   posts: IPost[];
+  selectedPath: string[];
 }
 
-const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ItemMenu: FC<ICategoryItemProps> = ({ category, posts, selectedPath }) => {
+  const [isOpen, setIsOpen] = useState(selectedPath.includes(category.id));
   const children = category?.children || [];
   const postsCount = posts?.filter(post => (post.categoryIds || []).includes(category.id)).length || 0;
 
@@ -33,7 +33,7 @@ const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts })
   return (
     <li>
       <Link
-        className={`${styles.link} ${selectedCategory?.id === category.id ? styles.active : ""}`}
+        className={`${styles.link} ${selectedPath.includes(category.id) ? styles.active : ""}`}
         to={`${PAGES.CATEGORIES_LEFT.pathOrigin}/${category.id}`}
       >
         <span>
@@ -45,7 +45,7 @@ const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts })
       {children.length > 0 && (
         <ul className={isOpen ? styles.isOpen : ""}>
           {children?.map(item => (
-            <ItemMenu key={item.id} category={item} selectedCategory={selectedCategory} posts={posts} />
+            <ItemMenu key={item.id} category={item} posts={posts} selectedPath={selectedPath} />
           ))}
         </ul>
       )}
@@ -53,12 +53,12 @@ const ItemMenu: FC<ICategoryItemProps> = ({ category, selectedCategory, posts })
   );
 };
 
-export const CategoryMenu: FC<ICategoryMenuProps> = ({ list, selectedCategory, posts, onClick, className }) => {
+export const CategoryMenu: FC<ICategoryMenuProps> = ({ list, posts, onClick, className, selectedPath }) => {
   return (
     <nav className={`${styles.CategoryMenu} ${className || ""}`}>
       <ul className={styles.menuUl} onClick={onClick}>
         {list.map(item => (
-          <ItemMenu key={item.id} category={item} selectedCategory={selectedCategory} posts={posts} />
+          <ItemMenu key={item.id} category={item} posts={posts} selectedPath={selectedPath} />
         ))}
       </ul>
     </nav>

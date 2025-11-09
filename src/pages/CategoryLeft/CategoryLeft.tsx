@@ -1,4 +1,4 @@
-import { useMemo, useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { Heading } from "@/components/Heading";
 import { useCategories } from "@/hooks/useCategories";
 import { useParams } from "react-router-dom";
@@ -6,17 +6,20 @@ import { Spinner } from "@/components/Spinner";
 import { usePosts } from "@/hooks/usePosts";
 import { PostLeft } from "@components/Post";
 import { Button } from "@/components/Button";
-import { MenuCategories } from "./MenuCategories";
 import MenuIcon from "@assets/icons/barsIcon.svg?react";
+import { CategoryMenu } from "@/components/Category";
+import { DrawerBlock } from "@/components/DrawerBlock";
 import styles from "./CategoryLeft.module.css";
+import { getSelectedPath } from "@/utils";
 
 export const CategoryLeft: FC = () => {
   const { categoryTree, categories, loading: categoriesLoading } = useCategories();
   const { posts, loading: postsLoading } = usePosts();
   const { categoryId } = useParams();
   const [isOpen, setIsOpen] = useState(false);
-  const selectedCategory = useMemo(() => categories.find(cat => cat.id === categoryId), [categories, categoryId]);
+  const selectedCategory = categories.find(cat => cat.id === categoryId);
   const categoryPosts = posts.filter(post => (post.categoryIds || []).includes(selectedCategory?.id || ""));
+  const selectedPath = getSelectedPath(categories, selectedCategory?.id || "");
 
   const closeMenu = () => {
     if (isOpen) {
@@ -49,18 +52,15 @@ export const CategoryLeft: FC = () => {
 
   return (
     <article className={styles.CategoryLeft}>
+      <DrawerBlock anchor='right' isOpen={isOpen} onClose={closeMenu}>
+        <CategoryMenu list={categoryTree} posts={posts} selectedPath={selectedPath} />
+      </DrawerBlock>
       <aside className={styles.categories}>
         <Button variant='purple' onClick={toggleOpen} className={styles.button}>
           <MenuIcon />
           Категории
         </Button>
-        <MenuCategories
-          list={categoryTree}
-          selectedCategory={selectedCategory}
-          posts={posts}
-          isOpen={isOpen}
-          closeMenu={closeMenu}
-        />
+        <CategoryMenu list={categoryTree} posts={posts} className={styles.categoriesLeft} selectedPath={selectedPath} />
       </aside>
       <main className={styles.notesContent}>
         <Heading as='h1'>{selectedCategory?.name || "Категории с постами"}</Heading>

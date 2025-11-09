@@ -9,11 +9,11 @@ interface IErrorMessageProps {
 
 export const ErrorMessage: FC<IErrorMessageProps> = ({ children, title }) => {
   return (
-    <p className={styles.ErrorMessage}>
+    <div className={styles.ErrorMessage}>
       <Heading as='h3' error>
         {title}
       </Heading>
       {children}
-    </p>
+    </div>
   );
 };

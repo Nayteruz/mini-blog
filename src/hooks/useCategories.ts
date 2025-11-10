@@ -127,6 +127,8 @@ export const useCategories = () => {
         throw new Error("Категория не найдена");
       }
 
+      console.log(name);
+
       const { updateData, newPath, updatedCategories } = updateCategoryData({
         categories,
         categoryToUpdate,

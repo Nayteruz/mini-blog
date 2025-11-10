@@ -1,5 +1,16 @@
-import { useState, useEffect, useMemo } from "react";
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, orderBy, writeBatch } from "firebase/firestore";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+  query,
+  orderBy,
+  writeBatch,
+  where,
+} from "firebase/firestore";
 import { db } from "@/configDb";
 import type { ICategory, ICategoryTree } from "../types";
 import type { ICreateCategoryHookArguments, IUpdateCategoryHookArguments } from "./types";
@@ -13,8 +24,10 @@ import {
   updateCategoryData,
   updateChildCategoriesPaths,
 } from "./utils";
+import { useStore } from "@/store";
 
 export const useCategories = () => {
+  const { user } = useStore();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [categoryTree, setCategoryTree] = useState<ICategoryTree[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,12 +35,16 @@ export const useCategories = () => {
   const [isReordering, setIsReordering] = useState(false);
 
   // Загрузка всех категорий
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const q = query(collection(db, DB_KEYS.CATEGORIES), orderBy(DB_KEYS.DEPTH));
+      const q = query(
+        collection(db, DB_KEYS.CATEGORIES),
+        where("createdBy", "==", user?.uid || "anonimous"),
+        orderBy(DB_KEYS.DEPTH)
+      );
       const querySnapshot = await getDocs(q);
 
       const categoriesData = querySnapshot.docs.map(doc => ({
@@ -42,7 +59,7 @@ export const useCategories = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.uid]);
 
   // Создание новой категории
   const createCategory = async (params: ICreateCategoryHookArguments): Promise<string> => {
@@ -181,14 +198,13 @@ export const useCategories = () => {
 
   useEffect(() => {
     loadCategories();
-  }, []);
+  }, [loadCategories]);
 
   return {
     categories,
     orderedCategories,
     loading,
     error,
-    refreshCategories: loadCategories,
     createCategory,
     deleteCategory,
     getChildCategories,

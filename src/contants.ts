@@ -123,3 +123,5 @@ export const VIEW_TYPE = {
   LIST: "list",
   TREE: "tree",
 } as const;
+
+export const ALL = "all";

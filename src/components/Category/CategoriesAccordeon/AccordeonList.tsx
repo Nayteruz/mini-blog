@@ -5,6 +5,7 @@ import { Spinner } from "@/components/Spinner";
 import { AccordeonItem } from "./AccordeonItem";
 import { Heading } from "@/components/Heading";
 import styles from "./AccordeonList.module.css";
+import { ErrorMessage } from "@/components/ErrorMessage";
 
 export const AccordeonList: FC = () => {
   const { categoryTree, loading: categoriesLoading, error: categoriesError } = useCategories();
@@ -19,13 +20,7 @@ export const AccordeonList: FC = () => {
   }
 
   if (categoriesError || postsError) {
-    return (
-      <div className={styles.errorMessage}>
-        <Heading as='h4' error>
-          {categoriesError || postsError}
-        </Heading>
-      </div>
-    );
+    return <ErrorMessage title={categoriesError || postsError || ""} />;
   }
 
   if (categoryTree.length === 0) {

@@ -11,7 +11,7 @@ export const usePosts = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Получаем действия из store
-  const { setAllPosts, setSearchQuery, setSortBy, setSelectedCategory, clearFilters } = useStore();
+  const { setAllPosts, setSearchQuery, setSortBy, setSelectedCategory, clearFilters, user } = useStore();
   const store = useStore();
 
   // Загрузка всех постов
@@ -20,23 +20,30 @@ export const usePosts = () => {
       setLoading(true);
       setError(null);
 
-      const q = query(collection(db, DB_KEYS.POSTS), orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
+      if (user?.uid) {
+        const q = query(
+          collection(db, DB_KEYS.POSTS),
+          where("author.id", "==", user.uid),
+          orderBy("createdAt", "desc")
+        );
+        const querySnapshot = await getDocs(q);
 
-      const postsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as IPost[];
+        const postsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as IPost[];
 
-      // Сохраняем посты в store
-      setAllPosts(postsData);
+        setAllPosts(postsData);
+      } else {
+        setAllPosts([]);
+      }
     } catch (err) {
       console.error("Error loading posts:", err);
       setError("Ошибка загрузки постов");
     } finally {
       setLoading(false);
     }
-  }, [setAllPosts]);
+  }, [setAllPosts, user?.uid]);
 
   // Создание нового поста
   const createPost = async (postData: Omit<ICreatePostData, "createdAt">) => {
@@ -76,16 +83,21 @@ export const usePosts = () => {
   // Получение постов по категории
   const getPostsByCategory = async (categoryId: string) => {
     try {
-      const q = query(
-        collection(db, DB_KEYS.POSTS),
-        where(DB_KEYS.CATEGORY_IDS, "array-contains", categoryId),
-        orderBy("createdAt", "desc")
-      );
-      const snapshot = await getDocs(q);
-      return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as IPost[];
+      if (user?.uid) {
+        const q = query(
+          collection(db, DB_KEYS.POSTS),
+          where(DB_KEYS.CATEGORY_IDS, "array-contains", categoryId),
+          where("author.id", "==", user.uid),
+          orderBy("createdAt", "desc")
+        );
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as IPost[];
+      } else {
+        return [];
+      }
     } catch (err) {
       console.error("Error loading posts by category:", err);
       throw err;

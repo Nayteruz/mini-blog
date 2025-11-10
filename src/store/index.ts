@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { auth } from "@/configDb";
 import { type User } from "firebase/auth";
-import type { IPost } from "../types";
+import type { IPost, ISortType } from "@/types";
+import { ALL, SORT_TYPE } from "@/contants";
 
 interface Store {
   user: User | null;
@@ -16,14 +17,14 @@ interface Store {
 
   // Фильтры
   searchQuery: string;
-  sortBy: "newest" | "oldest" | "title";
+  sortBy: ISortType;
   selectedCategory: string;
 
   // Действия
   setAllPosts: (posts: IPost[]) => void;
   setFilteredPosts: (posts: IPost[]) => void;
   setSearchQuery: (query: string) => void;
-  setSortBy: (sort: "newest" | "oldest" | "title") => void;
+  setSortBy: (sort: ISortType) => void;
   setSelectedCategory: (categoryId: string) => void;
   clearFilters: () => void;
 
@@ -36,8 +37,8 @@ export const useStore = create<Store>((set, get) => ({
   filteredPosts: [],
   allPosts: [],
   searchQuery: "",
-  sortBy: "newest",
-  selectedCategory: "all",
+  sortBy: SORT_TYPE.NEVEST,
+  selectedCategory: ALL,
   setUser: user => set({ user }),
   clearUser: () => set({ user: null }),
   getUserName: () => get().user?.displayName || "",
@@ -68,8 +69,8 @@ export const useStore = create<Store>((set, get) => ({
   clearFilters: () => {
     set({
       searchQuery: "",
-      sortBy: "newest",
-      selectedCategory: "all",
+      sortBy: SORT_TYPE.NEVEST,
+      selectedCategory: ALL,
     });
     get().applyFilters();
   },
@@ -84,36 +85,32 @@ export const useStore = create<Store>((set, get) => ({
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
       result = result.filter(
-        post =>
-          post.title.toLowerCase().includes(query) ||
-          post.text.toLowerCase().includes(query)
+        post => post.title.toLowerCase().includes(query) || post.text.toLowerCase().includes(query)
       );
     }
 
     // Фильтрация по категории
     if (selectedCategory !== "all") {
-      result = result.filter(post =>
-        (post.categoryIds || []).includes(selectedCategory)
-      );
+      result = result.filter(post => (post.categoryIds || []).includes(selectedCategory));
     }
 
     // Сортировка
     switch (sortBy) {
-      case "newest":
+      case SORT_TYPE.NEVEST:
         result.sort((a, b) => {
           const dateA = a.createdAt?.toDate?.() || new Date(0);
           const dateB = b.createdAt?.toDate?.() || new Date(0);
           return dateB.getTime() - dateA.getTime();
         });
         break;
-      case "oldest":
+      case SORT_TYPE.OLDEST:
         result.sort((a, b) => {
           const dateA = a.createdAt?.toDate?.() || new Date(0);
           const dateB = b.createdAt?.toDate?.() || new Date(0);
           return dateA.getTime() - dateB.getTime();
         });
         break;
-      case "title":
+      case SORT_TYPE.TITLE:
         result.sort((a, b) => a.title.localeCompare(b.title));
         break;
     }

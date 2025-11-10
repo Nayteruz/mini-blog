@@ -11,7 +11,7 @@ interface IAccordeonItemProps {
 }
 
 export const AccordeonItem: FC<IAccordeonItemProps> = ({ category, level, posts }) => {
-  const [isExpanded, setIsExpanded] = useState(level === 0); // Корневые категории раскрыты по умолчанию
+  const [isExpanded, setIsExpanded] = useState(level === 0);
   const childCategories = category?.children || [];
   const categoryPosts = posts.filter(post => (post.categoryIds || []).includes(category.id));
 

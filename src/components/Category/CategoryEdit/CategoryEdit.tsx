@@ -25,7 +25,7 @@ export const CategoryEdit: FC = () => {
     try {
       await updateCategory({
         categoryId: selectedCategory.id,
-        name,
+        name: clearName,
         newParentId: parentId || null,
       });
       navigate(PAGES.CATEGORIES.path);

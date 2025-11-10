@@ -25,7 +25,7 @@ export const createCategoryData = (params: ICreateCategoryDataParams): ICreateCa
 
   return {
     name,
-    parentId,
+    parentId: parentId || null,
     path,
     depth,
     order: newOrder,

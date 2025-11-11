@@ -3,6 +3,7 @@ import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
 import Highlight from "@tiptap/extension-highlight";
 import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
 import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
@@ -37,6 +38,17 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
       Link,
       Superscript,
       SubScript,
+      Image.configure({
+        allowBase64: true,
+        inline: true,
+        resize: {
+          enabled: true,
+          alwaysPreserveAspectRatio: true,
+          directions: ["top", "bottom", "left", "right"],
+          minWidth: 50,
+          minHeight: 50,
+        },
+      }),
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       CodeBlockLowlight.configure({

@@ -110,9 +110,9 @@
 }
 
 .cardContent .htmlText {
-  font-size: 18px;
+  font-size: var(--font-size-md);
 
   @media all and (max-width: 768px) {
-    font-size: 15px;
+    font-size: var(--font-size-sm);
   }
 }

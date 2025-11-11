@@ -15,6 +15,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
 import css from "highlight.js/lib/languages/css";
 import html from "highlight.js/lib/languages/xml";
+import { ImageUploadButton } from "@components/ImageUpload/ImageUpload";
 
 interface ITextEditorProps {
   content: string;
@@ -41,6 +42,9 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
       Image.configure({
         allowBase64: true,
         inline: true,
+        HTMLAttributes: {
+          class: "embedded-image",
+        },
         resize: {
           enabled: true,
           alwaysPreserveAspectRatio: true,
@@ -100,6 +104,9 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
           <RichTextEditor.AlignCenter />
           <RichTextEditor.AlignJustify />
           <RichTextEditor.AlignRight />
+        </RichTextEditor.ControlsGroup>
+        <RichTextEditor.ControlsGroup>
+          <ImageUploadButton editor={editor} />
         </RichTextEditor.ControlsGroup>
       </RichTextEditor.Toolbar>
 

@@ -43,8 +43,6 @@ export const PostCreateForm: FC = () => {
         },
       };
 
-      console.log(newPostData);
-
       await createPost(newPostData);
 
       // Очистка формы и переход

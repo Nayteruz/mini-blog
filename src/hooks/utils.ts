@@ -164,3 +164,39 @@ export const getUpdatedCategories = (categories: ICategory[], reorderedCategorie
       return a.order - b.order;
     });
 };
+
+// Утилиты для работы с Base64 изображениями
+
+// Проверка размера Base64 строки
+export const getBase64Size = (base64String: string): number => {
+  // Убираем префикс "data:image/..."
+  const base64 = base64String.split(",")[1];
+  // Base64 занимает ~4/3 от исходного размера
+  return (base64.length * 3) / 4;
+};
+
+// Оптимизация Base64 строки
+export const optimizeBase64Image = (base64String: string, maxSizeKB = 500): string => {
+  const sizeKB = getBase64Size(base64String) / 1024;
+
+  if (sizeKB <= maxSizeKB) {
+    return base64String;
+  }
+
+  console.warn(`Base64 изображение большое: ${Math.round(sizeKB)}KB`);
+  return base64String; // В реальном приложении можно добавить сжатие
+};
+
+// Получение информации об изображении
+export const getImageInfo = (base64String: string) => {
+  return new Promise<{ width: number; height: number }>(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      resolve({
+        width: img.width,
+        height: img.height,
+      });
+    };
+    img.src = base64String;
+  });
+};

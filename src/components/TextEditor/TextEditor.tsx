@@ -42,13 +42,9 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
       Image.configure({
         allowBase64: true,
         inline: true,
-        HTMLAttributes: {
-          class: "embedded-image",
-        },
         resize: {
           enabled: true,
           alwaysPreserveAspectRatio: true,
-          directions: ["top", "bottom", "left", "right"],
           minWidth: 50,
           minHeight: 50,
         },

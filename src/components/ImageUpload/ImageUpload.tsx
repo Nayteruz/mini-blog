@@ -2,7 +2,6 @@ import { useRef, type ChangeEvent, type FC } from "react";
 import { useBase64Image } from "@hooks/useBase64Image";
 import ImageIcon from "@assets/icons/imageIcon.svg?react";
 import ClockIcon from "@assets/icons/clockIcon.svg?react";
-import "./styles.css";
 import styles from "./ImageUpload.module.css";
 
 interface ImageUploadButtonProps {

@@ -98,8 +98,8 @@
 }
 
 .arrow {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  color: var(--color-info);
 }
 
 .spacer {

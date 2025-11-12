@@ -7,6 +7,7 @@
 .titleWrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 5px;
@@ -21,11 +22,10 @@
 }
 
 .arrow {
-  font-size: 20px;
   color: var(--purple-color);
 
   @media all and (max-width: 769px) {
-    font-size: 14px;
+    width: 14px;
   }
 }
 

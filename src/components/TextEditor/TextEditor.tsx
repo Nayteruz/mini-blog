@@ -16,6 +16,7 @@ import typescript from "highlight.js/lib/languages/typescript";
 import css from "highlight.js/lib/languages/css";
 import html from "highlight.js/lib/languages/xml";
 import { ImageUploadButton } from "@components/ImageUpload/ImageUpload";
+import "./TextEditor.css";
 
 interface ITextEditorProps {
   content: string;
@@ -63,7 +64,7 @@ export const TextEditor: FC<ITextEditorProps> = ({ content, setContent }) => {
   });
 
   return (
-    <RichTextEditor editor={editor}>
+    <RichTextEditor editor={editor} className='proseEditor'>
       <RichTextEditor.Toolbar sticky stickyOffset='var(--docs-header-height)'>
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Bold />

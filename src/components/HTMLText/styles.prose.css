@@ -1,5 +1,5 @@
 .prose {
-  line-height: 1.3;
+  line-height: 1.1;
   color: #333;
 
   @media all and (max-width: 769px) {
@@ -90,7 +90,7 @@
 
 .prose pre code {
   background: none;
-  padding: 0;
+  padding: 1px;
 }
 
 /* Стили для подсветки синтаксиса (если используете) */
@@ -143,6 +143,10 @@
 }
 
 .tiptap {
+  pre code {
+    tab-size: 2;
+  }
+
   p[style="text-align: center;"] {
     [data-node="image"] {
       justify-content: center !important;

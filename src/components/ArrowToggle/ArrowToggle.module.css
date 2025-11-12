@@ -1,6 +1,13 @@
 .arrow {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: var(--font-size-md);
   transition: transform 0.2s;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 20px;
 }

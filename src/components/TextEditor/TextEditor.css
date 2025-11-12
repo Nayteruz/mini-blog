@@ -1,0 +1,10 @@
+.proseEditor {
+  pre {
+    background-color: #222;
+    color: #fff;
+
+    code {
+      tab-size: 2;
+    }
+  }
+}

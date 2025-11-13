@@ -72,6 +72,7 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
+  --color-text: #333;
 
   /* Градиенты */
   --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
@@ -96,6 +97,7 @@
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
+  --font-size-mg: 18px;
   --font-size-lg: 20px;
   --font-size-xl: 24px;
   --text-normal: #333;

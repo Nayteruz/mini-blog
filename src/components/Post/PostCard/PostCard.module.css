@@ -1,6 +1,6 @@
 .Card {
   background: white;
-  border: 2px solid var(--main-color-20);
+  border: 1px solid var(--main-color-20);
   padding: 5px 14px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -17,17 +17,17 @@
   gap: 10px;
 
   & > span {
-    font-size: 18px;
+    font-size: var(--font-size-mg);
     font-weight: 500;
     line-height: 1.25;
-    color: #be79ff;
+    color: var(--color-info);
 
     &::first-letter {
       text-transform: uppercase;
     }
 
     @media all and (max-width: 768px) {
-      font-size: 16px;
+      font-size: var(--font-size-md);
     }
   }
 }

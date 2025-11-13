@@ -46,22 +46,22 @@
 }
 
 .name {
-  font-size: 20px;
+  font-size: var(--font-size-lg);
   line-height: 1.25;
-  color: #111827;
+  color: var(--color-text);
 
   &::first-letter {
     text-transform: uppercase;
   }
 
   @media all and (max-width: 768px) {
-    font-size: 16px;
+    font-size: var(--font-size-md);
   }
 }
 
 .count {
-  font-size: 0.9rem;
-  color: #6b7280;
+  font-size: var(--font-size-xs);
+  color: var(--gray-light-color);
   font-weight: normal;
 }
 
@@ -80,8 +80,4 @@
   gap: 2px;
   min-width: 0;
   max-width: 100%;
-}
-
-.childCategories {
-  border-top: 0px solid #f3f4f6;
 }
